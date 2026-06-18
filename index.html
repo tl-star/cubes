@@ -78,6 +78,7 @@
             <select class="lang-select" id="langSwitcher" onchange="changeLanguage()">
                 <option value="en">English</option>
                 <option value="ur">Urdu (اردو)</option>
+                <option value="ar">Arabic (العربية)</option>
             </select>
         </div>
     </header>
@@ -142,6 +143,18 @@
                 labelPhone: "واٹس ایپ نمبر",
                 labelAddress: "مکمل ڈیلیوری ایڈریس",
                 btnConfirm: "آرڈر بھیجیں"
+            },
+            ar: {
+                bannerTitle: "مجموعة العطور التراثية",
+                bannerDesc: "استكشف أرقى العطور في العالم. آمن صحياً، وطارد للبعوض.",
+                sectionTitle: "منتجاتنا الفاخرة",
+                btnText: "🛒 اطلب الآن (الدفع عند الاستلام)",
+                reviewsText: "آراء العملاء:",
+                modalTitle: "أكمل طلبك",
+                labelName: "الاسم الكامل",
+                labelPhone: "رقم الواتساب",
+                labelAddress: "عنوان التوصيل بالكامل",
+                btnConfirm: "تأكيد وإرسال الطلب"
             }
         };
 
@@ -167,8 +180,8 @@
             let revs = document.getElementsByClassName("rev-text-span");
             for(let i = 0; i < revs.length; i++){ revs[i].innerText = t.reviewsText; }
 
-            // Change RTL / LTR Direction
-            if(lang === 'ur') {
+            // Change RTL / LTR Direction (Arbic aur Urdu dono ke liye)
+            if(lang === 'ur' || lang === 'ar') {
                 document.body.style.direction = "rtl";
                 document.getElementById("form-box-direction").style.direction = "rtl";
                 document.body.style.fontFamily = "'Amiri', 'Playfair Display', serif"; 
