@@ -5,291 +5,216 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scented Briquette | Official Store</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&display=swap');
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         :root {
-            --bg-dark: #0f172a; /* Dark Slate (inspired by logo) */
-            --gold: #d4af37; /* Luxury Gold (inspired by logo) */
-            --text-light: #f8fafc;
-            --accent-maroon: #5b1e2b; /* Heritage Maroon accent */
-            --green: #25D366; /* Standard WhatsApp Green */
+            --bg-dark: #0A1128; /* Thoda aur dark kiya hai taake text ubhar kar aaye */
+            --gold: #FFD700; /* Ekdum Bright Gold */
+            --text-light: #ffffff; /* Pure White text */
+            --green: #25D366; 
         }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; direction: ltr; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; }
 
         /* Store Header */
-        header { 
-            background: #fff; /* header white for logo contrast */
-            padding: 15px 50px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            border-bottom: 2px solid var(--gold);
-        }
-        
-        .logo { max-height: 50px; } /* Adjust your logo placeholder size */
-        
+        header { background: #ffffff; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); }
+        .logo-container { display: flex; align-items: center; gap: 15px; }
+        .logo-img { max-height: 60px; width: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .logo-text { color: #0A1128; font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
         .header-actions { display: flex; gap: 15px; align-items: center; }
-        .lang-select { 
-            padding: 8px 12px; 
-            border-radius: 5px; 
-            border: 1px solid var(--gold); 
-            outline: none; 
-            cursor: pointer; 
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--gold);
-        }
-        .cart-icon { font-size: 20px; cursor: pointer; color: #333; display: flex; align-items: center; gap: 5px; }
+        .lang-select { padding: 8px; border-radius: 5px; border: 1px solid var(--gold); background: #0A1128; color: var(--gold); font-weight: 600; cursor: pointer; }
 
-        /* Store Banner */
-        .store-banner { 
-            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
-            color: var(--gold); 
-            text-align: center; 
-            padding: 70px 20px; 
-            border-bottom: 3px solid var(--gold);
-        }
-        .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 48px; margin-bottom: 10px; }
-        .store-banner p { font-size: 18px; max-width: 700px; margin: 0 auto; opacity: 0.9; line-height: 1.6; }
+        /* Banner */
+        .store-banner { padding: 70px 20px; border-bottom: 2px solid var(--gold); background: linear-gradient(to bottom, #111D4A, #0A1128); }
+        .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--gold); text-shadow: 2px 2px 5px rgba(0,0,0,0.8); margin-bottom: 15px; }
+        .store-banner p { font-size: 18px; color: #E0E0E0; max-width: 700px; margin: 0 auto; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
 
-        /* Store Section */
-        .container { max-width: 1200px; margin: 60px auto; padding: 0 20px; text-align: left; }
-        .section-title { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 32px; 
-            font-weight: 700; 
-            margin-bottom: 30px; 
-            border-bottom: 3px solid var(--gold); 
-            display: inline-block; 
-            padding-bottom: 10px;
-            color: var(--gold);
-        }
+        /* Products Section */
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; text-align: left; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 10px; margin-bottom: 40px; text-shadow: 2px 2px 5px rgba(0,0,0,0.8); }
 
-        /* Product Grid */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
-        .product-card { 
-            background: rgba(255, 255, 255, 0.05); 
-            border-radius: 12px; 
-            overflow: hidden; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
-            transition: transform 0.3s ease; 
-            position: relative; 
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            text-align: center;
-        }
-        .product-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        
-        .badge { position: absolute; top: 10px; left: 10px; background: #e53935; color: white; padding: 5px 12px; font-size: 12px; font-weight: 700; border-radius: 4px; z-index: 10; }
-        .img-area { width: 100%; height: 240px; background: #1e293b; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 14px; font-style: italic;}
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .product-card { background: #111D4A; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.5); position: relative; text-align: center; }
+        .img-area { width: 100%; height: 250px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; }
         .product-info { padding: 25px; }
-        
-        .product-title { font-family: 'Montserrat', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--text-light); }
-        .product-desc { font-size: 14px; color: #cbd5e1; margin-bottom: 18px; line-height: 1.5; height: 40px;}
+        .product-title { font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+        .product-desc { font-size: 15px; color: #FFFFFF; margin-bottom: 15px; line-height: 1.5; }
+        .pricing del { color: #A0AABF; font-size: 18px; margin-right: 10px; }
+        .pricing .new-price { color: var(--gold); font-size: 28px; font-weight: 700; }
 
-        /* Pricing Format (Strikethrough and New Price on same line) */
-        .pricing { margin-bottom: 20px; }
-        .pricing del { color: #999; font-size: 18px; margin-right: 12px; font-weight: 400;}
-        .pricing .new-price { color: var(--gold); font-size: 26px; font-weight: 700; }
-
-        /* Buy Now (COD) Button */
-        .buy-now-btn { 
-            width: 100%; 
-            padding: 15px; 
-            background: var(--green); 
-            color: white; 
-            border: none; 
-            border-radius: 30px; 
-            font-size: 18px; 
-            font-weight: 600; 
-            cursor: pointer; 
-            transition: 0.3s; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            gap: 10px; 
-            text-decoration: none; 
-            font-family: 'Amiri', serif;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-        }
+        .buy-now-btn { display: block; width: 100%; padding: 15px; margin-top: 20px; background: var(--green); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
         .buy-now-btn:hover { background: #1ebe57; }
 
-        /* Trust Badges (Inspired by Templates) */
-        .trust-section { background-color: #1e293b; padding: 60px 20px; margin-top: 60px; text-align: center; border-top: 3px solid var(--gold); }
-        .trust-title { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); margin-bottom: 40px; }
-        .trust-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
-        .trust-item { flex: 1; min-width: 280px; padding: 25px; border-left: 3px solid var(--gold); text-align: left;}
-        .trust-item h4 { color: var(--gold); margin-bottom: 10px; font-family: 'Montserrat', serif; font-size: 18px;}
-        .trust-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6;}
-        
+        /* Reviews Section inside Product Card */
+        .reviews-section { background: rgba(0,0,0,0.2); padding: 15px; margin-top: 20px; border-radius: 8px; text-align: left; }
+        .review-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 10px; }
+        .review-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .stars { color: var(--gold); font-size: 14px; margin-bottom: 5px; }
+        .review-text { font-size: 13px; color: #E0E0E0; font-style: italic; }
+        .reviewer-name { font-size: 12px; color: #A0AABF; font-weight: bold; margin-top: 5px; }
+
+        /* Custom Order Form Modal (Google Form style) */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; }
+        .order-form-box { background: #ffffff; color: #000; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; text-align: left; position: relative; }
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #333; font-weight: bold; }
+        .order-form-box h3 { color: #0A1128; margin-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 24px; }
+        .order-summary { background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 14px; font-weight: 600; color: #d32f2f; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 5px; color: #333; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Montserrat', sans-serif; }
+        .submit-order-btn { width: 100%; background: var(--green); color: white; border: none; padding: 15px; font-size: 18px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <a href="index.html">
-                <img src="Gemini_Generated_Image_9fj28q9fj28q9fj2.png" alt="Scented Briquette Logo" style="max-height: 70px; width: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);">
-            </a>
-            <div style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 1px;">
-                SCENTED BRIQUETTE
-            </div>
+        <div class="logo-container">
+            <img src="cube1.png" alt="Scented Briquette Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/60?text=LOGO'">
+            <div class="logo-text">SCENTED BRIQUETTE</div>
         </div>
-
         <div class="header-actions">
-            <select class="lang-select" id="langSwitcher" onchange="changeLanguage()">
-                <option value="en">English (Default)</option>
-                <option value="ur">Urdu (اردو)</option>
-                <option value="ar">Arabic (العربية)</option>
-                <option value="tr">Turkish (Türkçe)</option>
+            <select class="lang-select">
+                <option value="en">English</option>
+                <option value="ur">Urdu</option>
             </select>
-            <div class="cart-icon">🛒 <span id="cart-text">Cart</span></div>
         </div>
     </header>
 
     <div class="store-banner">
-        <h1 id="banner-title">Heritage Fragrance Collection</h1>
-        <p id="banner-desc">Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
+        <h1>Heritage Fragrance Collection</h1>
+        <p>Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
     </div>
 
-    <div class="container product-section">
-        <div class="section-title" id="section-title">Our Premium Products</div>
-        
-        <div class="product-grid">
-            <div class="product-card">
-                <div class="badge" id="badge-sale1">Sale!</div>
-                <div class="img-area">[Box Image]</div>
-                <div class="product-info">
-                    <div class="product-title" id="prod1-title">Scented Briquette (12 Pcs Box)</div>
-                    <div class="product-desc" id="prod1-desc">Oud, Musk, Motia, Loban & Signature Scents.</div>
-                    <div class="pricing">
-                        <del>Rs. <span id="old-price-box">1500</span></del> 
-                        <span class="new-price">Rs. <span id="price-box">1000</span></span>
-                    </div>
-                    <a href="#" class="buy-now-btn" onclick="orderWhatsApp('Scented Briquette 12 Pcs Box', 'price-box')">🛍️ <span class="btn-text">Buy Now (COD)</span></a>
-                </div>
+    <div class="container">
+        <div class="section-title">Our Premium Products</div>
+        <div class="product-grid" id="product-list">
             </div>
-
-            <div class="product-card">
-                <div class="img-area">[Device Image]</div>
-                <div class="product-info">
-                    <div class="product-title" id="prod2-title">Electrical Device Warmer</div>
-                    <div class="product-desc" id="prod2-desc">Premium electrical burner for a consistent aroma.</div>
-                    <div class="pricing">
-                        <del>Rs. <span id="old-price-device">3000</span></del> 
-                        <span class="new-price">Rs. <span id="price-device">2000</span></span>
-                    </div>
-                    <a href="#" class="buy-now-btn" onclick="orderWhatsApp('Electrical Device', 'price-device')">🛍️ <span class="btn-text">Buy Now (COD)</span></a>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <div class="trust-section">
-        <div class="trust-title">Why Choose Us?</div>
-        <div class="trust-grid">
-            <div class="trust-item">
-                <h4 id="t1-title">Health Approved</h4>
-                <p id="t1-desc">Made according to health standards, perfect safe for humans.</p>
+    <div class="modal-overlay" id="orderModal">
+        <div class="order-form-box">
+            <span class="close-btn" onclick="closeForm()">&times;</span>
+            <h3>Complete Your Order</h3>
+            <div class="order-summary" id="modal-summary">Product Name - Rs. 1000</div>
+            
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="cust-name" placeholder="Enter your name" required>
             </div>
-            <div class="trust-item">
-                <h4 id="t2-title">Mosquito Repellent</h4>
-                <p id="t2-desc">Khushboo k sath, makhi aur machar ka asardaar khatma.</p>
+            <div class="form-group">
+                <label>WhatsApp Number</label>
+                <input type="tel" id="cust-phone" placeholder="03XXXXXXXXX" required>
             </div>
-            <div class="trust-item">
-                <h4 id="t3-title">Oriental Luxury Scents</h4>
-                <p id="t3-desc">Dunya bhar ki nayab aur behtareen khushbuyat.</p>
+            <div class="form-group">
+                <label>Complete Delivery Address</label>
+                <textarea id="cust-address" rows="3" placeholder="House#, Street, Area, City" required></textarea>
             </div>
+            
+            <button class="submit-order-btn" onclick="sendOrderToWhatsApp()">Confirm & Send Order</button>
         </div>
     </div>
 
     <script>
-        // Load Prices from Local Storage (Admin Panel Integration)
-        document.addEventListener("DOMContentLoaded", () => {
-            let savedBoxPrice = localStorage.getItem("price_box");
-            let savedDevicePrice = localStorage.getItem("price_device");
+        // Default Products & Reviews (Agar admin ne kuch nahi add kiya)
+        let defaultProducts = [
+            {
+                id: 1,
+                name: "Scented Briquette (12 Pcs Box)",
+                desc: "Oud, Musk, Motia, Loban & Signature Scents. 100% Safe.",
+                oldPrice: 1500,
+                price: 1000,
+                img: "[Box Image]",
+                reviews: [
+                    { name: "Ali Ahmed", rating: "★★★★★", text: "Bohot pyari khushboo hai, poora ghar mehak gaya." },
+                    { name: "Sana Tariq", rating: "★★★★★", text: "Machar bhi waqai bhaag gaye, best product!" }
+                ]
+            },
+            {
+                id: 2,
+                name: "Electrical Device Warmer",
+                desc: "Premium electrical burner for a consistent, smoke-free aroma.",
+                oldPrice: 3000,
+                price: 2000,
+                img: "[Device Image]",
+                reviews: [
+                    { name: "Usman Khan", rating: "★★★★☆", text: "Quality bohot achi hai aur safe hai use karne mein." }
+                ]
+            }
+        ];
+
+        let selectedProduct = "";
+        let selectedPrice = "";
+
+        // Load Products from Local Storage OR use defaults
+        function loadProducts() {
+            let storedProducts = JSON.parse(localStorage.getItem("store_items"));
+            let productsToRender = (storedProducts && storedProducts.length > 0) ? storedProducts : defaultProducts;
             
-            if(savedBoxPrice) document.getElementById("price-box").innerText = savedBoxPrice;
-            if(savedDevicePrice) document.getElementById("price-device").innerText = savedDevicePrice;
-        });
+            let html = "";
+            productsToRender.forEach(p => {
+                // Generate Reviews HTML
+                let reviewsHtml = "";
+                if(p.reviews && p.reviews.length > 0) {
+                    p.reviews.forEach(r => {
+                        reviewsHtml += `<div class="review-item"><div class="stars">${r.rating}</div><div class="review-text">"${r.text}"</div><div class="reviewer-name">- ${r.name}</div></div>`;
+                    });
+                } else {
+                    reviewsHtml = `<div class="review-text">No reviews yet. Be the first to order!</div>`;
+                }
 
-        // WhatsApp Order Function
-        function orderWhatsApp(productName, priceElementId) {
-            let price = document.getElementById(priceElementId).innerText;
-            let number = "923162260608";
-            let msg = `Hello, I want to order: ${productName} (Discount Price: Rs.${price}). I need this via Cash on Delivery.`;
-            let url = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
-            window.open(url, '_blank');
+                html += `
+                <div class="product-card">
+                    <div class="img-area">${p.img}</div>
+                    <div class="product-info">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-desc">${p.desc}</div>
+                        <div class="pricing">
+                            <del>Rs. ${p.oldPrice}</del> 
+                            <span class="new-price">Rs. ${p.price}</span>
+                        </div>
+                        <button class="buy-now-btn" onclick="openForm('${p.name}', ${p.price})">🛒 Buy Now (COD)</button>
+                        
+                        <div class="reviews-section">
+                            <strong style="color:var(--gold); font-size:14px; margin-bottom:8px; display:block;">Customer Reviews:</strong>
+                            ${reviewsHtml}
+                        </div>
+                    </div>
+                </div>`;
+            });
+            document.getElementById("product-list").innerHTML = html;
         }
 
-        // Translation Dictionary (Urdu example provided)
-        const translations = {
-            en: {
-                cart: "Cart", banner_title: "Heritage Fragrance Collection", banner_desc: "Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.",
-                section_title: "Our Premium Products", badge_sale: "Sale!", prod1_title: "Scented Briquette (12 Pcs Box)", prod1_desc: "Oud, Musk, Motia, Loban & Signature Scents.",
-                prod2_title: "Electrical Device Warmer", prod2_desc: "Premium electrical burner for a consistent aroma.", btn_text: "Buy Now (COD)",
-                t1_title: "Health Approved", t1_desc: "Made according to health standards, perfect safe for humans.", t2_title: "Mosquito Repellent", t2_desc: "Khushboo k sath, makhi aur machar ka asardaar khatma.", t3_title: "Oriental Luxury Scents", t3_desc: "Dunya bhar ki nayab aur behtareen khushbuyat."
-            },
-            ur: {
-                cart: "کارٹ", banner_title: "نایاب خوشبوؤں کا مجموعہ", banner_desc: "دنیا کی بہترین خوشبوئیں۔ حفظان صحت کے اصولوں کے مطابق اور مچھروں سے نجات۔",
-                section_title: "ہماری بہترین مصنوعات", badge_sale: "سیل!", prod1_title: "سینٹڈ بریکیٹ باکس (12 پیس)", prod1_desc: "عود، مشک، موتیا، لوبان میں دستیاب۔",
-                prod2_title: "الیکٹریکل ڈیوائس", prod2_desc: "بغیر دھوئیں کے خوشبو پھیلانے والی مشین۔", btn_text: "ابھی آرڈر کریں (COD)",
-                t1_title: "حفظان صحت کے مطابق", t1_desc: "انسانی زندگی کے لیے 100٪ محفوظ۔", t2_title: "مچھروں سے نجات", t2_desc: "خوشبو کے ساتھ مکھی مچھر کا خاتمہ۔", t3_title: "روایتی نایاب خوشبوئیں", t3_desc: "دنیا بھر کی نایاب اور بہترین خوشبوؤں میں دستیاب۔"
-            },
-            ar: {
-                cart: "عربة التسوق", banner_title: "مجموعة العطور الفاخرة", banner_desc: "استكشف أرقى العطور في العالم. آمن صحياً وطارد للبعوض.",
-                section_title: "منتجاتنا الفاخرة", badge_sale: "تخفيض!", prod1_title: "صندوق الفحم المعطر (12 قطعة)", prod1_desc: "متوفر بالعود، المسك، واللبان.",
-                prod2_title: "جهاز التسخين الكهربائي", prod2_desc: "جهاز كهربائي لتجربة عطر بدون دخان.", btn_text: "اطلب الآن (COD)",
-                t1_title: "معتمد صحياً", t1_desc: "آمن تماماً على حياة الإنسان.", t2_title: "طارد للبعوض", t2_desc: "يقضي على البعوض مع نشر العطر.", t3_title: "عطور شرقية فاخرة", t3_desc: "أندر العطور حول العالم."
-            },
-            tr: {
-                cart: "Sepet", banner_title: "Geleneksel Parfüm Koleksiyonu", banner_desc: "Dünyanın en iyi kokularını keşfedin. Sağlığa zararsız ve sivrisinek kovucu.",
-                section_title: "Premium Ürünlerimiz", badge_sale: "İndirim!", prod1_title: "Kokulu Briket Kutusu (12 Adet)", prod1_desc: "Ud, Misk ve İmza kokularıyla.",
-                prod2_title: "Elektrikli Isıtıcı", prod2_desc: "Dumansız koku için elektrikli brülör.", btn_text: "Şimdi Al (COD)",
-                t1_title: "Sağlık Onaylı", t1_desc: "İnsan sağlığı için %100 güvenli.", t2_title: "Sivrisinek Kovucu", t2_desc: "Koku yayarken sivrisinekleri kovar.", t3_title: "Küresel Lüks Kokular", t3_desc: "Dünyanın en eşsiz kokuları."
-            }
-        };
-
-        // Language Switcher Logic
-        function changeLanguage() {
-            let lang = document.getElementById("langSwitcher").value;
-            let t = translations[lang];
-
-            document.getElementById("cart-text").innerText = t.cart;
-            document.getElementById("banner-title").innerText = t.banner_title;
-            document.getElementById("banner-desc").innerText = t.banner_desc;
-            document.getElementById("section-title").innerText = t.section_title;
-            document.getElementById("badge-sale1").innerText = t.badge_sale;
-            document.getElementById("prod1-title").innerText = t.prod1_title;
-            document.getElementById("prod1-desc").innerText = t.prod1_desc;
-            document.getElementById("prod2-title").innerText = t.prod2_title;
-            document.getElementById("prod2-desc").innerText = t.prod2_desc;
-            document.getElementById("t1-title").innerText = t.t1_title;
-            document.getElementById("t1-desc").innerText = t.t1_desc;
-            document.getElementById("t2-title").innerText = t.t2_title;
-            document.getElementById("t2-desc").innerText = t.t2_desc;
-            document.getElementById("t3-title").innerText = t.t3_title;
-            document.getElementById("t3-desc").innerText = t.t3_desc;
-
-            let btns = document.getElementsByClassName("btn-text");
-            for(let i=0; i<btns.length; i++){ btns[i].innerText = t.btn_text; }
-
-            // Change Text Direction for Arabic/Urdu and typography
-            if(lang === 'ur' || lang === 'ar') {
-                document.body.style.direction = "rtl";
-                document.body.style.fontFamily = "'Amiri', serif"; // Switch to Oriental serif
-            } else {
-                document.body.style.direction = "ltr";
-                document.body.style.fontFamily = "'Montserrat', sans-serif";
-            }
+        // Form Logic
+        function openForm(name, price) {
+            selectedProduct = name;
+            selectedPrice = price;
+            document.getElementById("modal-summary").innerText = `${name} - Total: Rs. ${price}`;
+            document.getElementById("orderModal").style.display = "flex";
         }
+
+        function closeForm() {
+            document.getElementById("orderModal").style.display = "none";
+        }
+
+        function sendOrderToWhatsApp() {
+            let name = document.getElementById("cust-name").value;
+            let phone = document.getElementById("cust-phone").value;
+            let address = document.getElementById("cust-address").value;
+            
+            if(!name || !phone || !address) {
+                alert("Please fill all details to complete the order.");
+                return;
+            }
+
+            let msg = `*NEW COD ORDER* 📦\n\n*Product:* ${selectedProduct}\n*Total Price:* Rs. ${selectedPrice}\n\n*Customer Details:*\n*Name:* ${name}\n*Phone:* ${phone}\n*Address:* ${address}`;
+            let whatsappNum = "923162260608";
+            window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`, '_blank');
+            closeForm();
+        }
+
+        window.onload = loadProducts;
     </script>
 </body>
 </html>
