@@ -3,264 +3,293 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scented Briquette | Heritage Collection</title>
+    <title>Scented Briquette | Official Store</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         
         :root {
-            --maroon: #5b1e2b; /* Deep Heritage Maroon */
-            --gold: #cda434; /* Classic Gold */
-            --cream: #fefae0; /* Soft Cream */
-            --dark: #2d2424;
+            --bg-dark: #0f172a; /* Dark Slate (inspired by logo) */
+            --gold: #d4af37; /* Luxury Gold (inspired by logo) */
+            --text-light: #f8fafc;
+            --accent-maroon: #5b1e2b; /* Heritage Maroon accent */
+            --green: #25D366; /* Standard WhatsApp Green */
         }
 
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--cream);
-            color: var(--dark);
-        }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; direction: ltr; }
 
-        header {
-            background-color: var(--maroon);
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Store Header */
+        header { 
+            background: #fff; /* header white for logo contrast */
+            padding: 15px 50px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .logo { max-height: 50px; } /* Adjust your logo placeholder size */
+        
+        .header-actions { display: flex; gap: 15px; align-items: center; }
+        .lang-select { 
+            padding: 8px 12px; 
+            border-radius: 5px; 
+            border: 1px solid var(--gold); 
+            outline: none; 
+            cursor: pointer; 
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--gold);
+        }
+        .cart-icon { font-size: 20px; cursor: pointer; color: #333; display: flex; align-items: center; gap: 5px; }
+
+        /* Store Banner */
+        .store-banner { 
+            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+            color: var(--gold); 
+            text-align: center; 
+            padding: 70px 20px; 
             border-bottom: 3px solid var(--gold);
         }
+        .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 48px; margin-bottom: 10px; }
+        .store-banner p { font-size: 18px; max-width: 700px; margin: 0 auto; opacity: 0.9; line-height: 1.6; }
 
-        .logo {
-            font-family: 'Amiri', serif;
-            font-size: 28px;
-            font-weight: 700;
+        /* Store Section */
+        .container { max-width: 1200px; margin: 60px auto; padding: 0 20px; text-align: left; }
+        .section-title { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 32px; 
+            font-weight: 700; 
+            margin-bottom: 30px; 
+            border-bottom: 3px solid var(--gold); 
+            display: inline-block; 
+            padding-bottom: 10px;
             color: var(--gold);
-            letter-spacing: 1px;
         }
 
-        .lang-select {
-            padding: 8px 15px;
-            background-color: transparent;
-            color: var(--cream);
-            border: 1px solid var(--gold);
-            border-radius: 5px;
-            font-family: 'Poppins', sans-serif;
-            cursor: pointer;
-        }
-
-        .lang-select option {
-            color: var(--dark);
-        }
-
-        .oriental-pattern {
-            background-image: radial-gradient(var(--gold) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.1;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .hero-section {
-            position: relative;
+        /* Product Grid */
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .product-card { 
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 12px; 
+            overflow: hidden; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            transition: transform 0.3s ease; 
+            position: relative; 
+            border: 1px solid rgba(212, 175, 55, 0.2);
             text-align: center;
-            padding: 70px 20px;
-            max-width: 900px;
-            margin: 0 auto;
         }
+        .product-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        
+        .badge { position: absolute; top: 10px; left: 10px; background: #e53935; color: white; padding: 5px 12px; font-size: 12px; font-weight: 700; border-radius: 4px; z-index: 10; }
+        .img-area { width: 100%; height: 240px; background: #1e293b; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 14px; font-style: italic;}
+        .product-info { padding: 25px; }
+        
+        .product-title { font-family: 'Montserrat', serif; font-size: 20px; font-weight: 600; margin-bottom: 8px; color: var(--text-light); }
+        .product-desc { font-size: 14px; color: #cbd5e1; margin-bottom: 18px; line-height: 1.5; height: 40px;}
 
-        .hero-section h1 {
-            font-family: 'Amiri', serif;
-            font-size: 46px;
-            color: var(--maroon);
-            margin-bottom: 15px;
-        }
+        /* Pricing Format (Strikethrough and New Price on same line) */
+        .pricing { margin-bottom: 20px; }
+        .pricing del { color: #999; font-size: 18px; margin-right: 12px; font-weight: 400;}
+        .pricing .new-price { color: var(--gold); font-size: 26px; font-weight: 700; }
 
-        .hero-section p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--dark);
-            margin-bottom: 40px;
-        }
-
-        .product-showcase {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-
-        .product-box {
-            background: #fff;
-            border: 2px solid var(--gold);
-            border-radius: 10px;
-            padding: 25px;
-            width: 300px;
-            box-shadow: 0 8px 20px rgba(91, 30, 43, 0.15);
-            position: relative;
-        }
-
-        .product-box::before {
-            content: "✨";
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 24px;
-            background: var(--cream);
-            padding: 0 10px;
-        }
-
-        .img-area {
-            width: 100%;
-            height: 180px;
-            background-color: #f5eedc;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            margin-bottom: 20px;
-        }
-
-        .title {
-            font-family: 'Amiri', serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--maroon);
-            margin-bottom: 10px;
-        }
-
-        .price-tag {
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--maroon);
-            margin: 15px 0;
-        }
-
-        .price-tag del {
-            color: #999;
-            font-size: 16px;
-            margin-right: 10px;
-        }
-
-        .btn-whatsapp {
-            display: inline-block;
-            background-color: var(--maroon);
-            color: var(--gold);
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 40px;
-            border: 2px solid var(--gold);
-            transition: all 0.3s;
+        /* Buy Now (COD) Button */
+        .buy-now-btn { 
+            width: 100%; 
+            padding: 15px; 
+            background: var(--green); 
+            color: white; 
+            border: none; 
+            border-radius: 30px; 
+            font-size: 18px; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: 0.3s; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 10px; 
+            text-decoration: none; 
             font-family: 'Amiri', serif;
             letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
+        .buy-now-btn:hover { background: #1ebe57; }
 
-        .btn-whatsapp:hover {
-            background-color: var(--gold);
-            color: var(--maroon);
-        }
-
-        .features-banner {
-            background-color: var(--maroon);
-            color: var(--cream);
-            padding: 40px 20px;
-            margin-top: 50px;
-            text-align: center;
-            border-top: 3px solid var(--gold);
-        }
-
-        .features-banner h3 {
-            font-family: 'Amiri', serif;
-            font-size: 32px;
-            color: var(--gold);
-            margin-bottom: 30px;
-        }
-
-        .feature-list {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .f-item {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .f-item h4 {
-            color: var(--gold);
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
+        /* Trust Badges (Inspired by Templates) */
+        .trust-section { background-color: #1e293b; padding: 60px 20px; margin-top: 60px; text-align: center; border-top: 3px solid var(--gold); }
+        .trust-title { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); margin-bottom: 40px; }
+        .trust-grid { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; max-width: 1000px; margin: 0 auto; }
+        .trust-item { flex: 1; min-width: 280px; padding: 25px; border-left: 3px solid var(--gold); text-align: left;}
+        .trust-item h4 { color: var(--gold); margin-bottom: 10px; font-family: 'Montserrat', serif; font-size: 18px;}
+        .trust-item p { font-size: 14px; color: #cbd5e1; line-height: 1.6;}
+        
     </style>
 </head>
 <body>
 
-    <div class="oriental-pattern"></div>
-
     <header>
-        <div class="logo">SCENTED BRIQUETTE</div>
-        <select class="lang-select">
-            <option value="en">English</option>
-            <option value="ur">Urdu (اردو)</option>
-            <option value="ar">Arabic (العربية)</option>
-            <option value="tr">Turkish (Türkçe)</option>
-        </select>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <a href="index.html">
+                <img src="Gemini_Generated_Image_9fj28q9fj28q9fj2.png" alt="Scented Briquette Logo" style="max-height: 70px; width: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);">
+            </a>
+            <div style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; letter-spacing: 1px;">
+                SCENTED BRIQUETTE
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <select class="lang-select" id="langSwitcher" onchange="changeLanguage()">
+                <option value="en">English (Default)</option>
+                <option value="ur">Urdu (اردو)</option>
+                <option value="ar">Arabic (العربية)</option>
+                <option value="tr">Turkish (Türkçe)</option>
+            </select>
+            <div class="cart-icon">🛒 <span id="cart-text">Cart</span></div>
+        </div>
     </header>
 
-    <div class="hero-section">
-        <h1>Riwayati Khushboo, Jadded Andaaz</h1>
-        <p>Hifzan-e-sahat ke usulon ke mutabik tayar karda dunya bhar ki nayab khushboyat. Ek aisi khushboo jo na sirf mahol ko mehkaye, balkay makhi aur machar ka bhi khatma kare. Insani zindagi ke liye 100% mehfooz.</p>
+    <div class="store-banner">
+        <h1 id="banner-title">Heritage Fragrance Collection</h1>
+        <p id="banner-desc">Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
+    </div>
 
-        <div class="product-showcase">
-            <div class="product-box">
+    <div class="container product-section">
+        <div class="section-title" id="section-title">Our Premium Products</div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="badge" id="badge-sale1">Sale!</div>
                 <div class="img-area">[Box Image]</div>
-                <div class="title">12-Piece Box</div>
-                <p style="font-size: 14px; color: #555;">Oud, Musk, Motia, Loban & Signature Scents.</p>
-                <div class="price-tag"><del>Rs. 1500</del> Rs. 1000</div>
+                <div class="product-info">
+                    <div class="product-title" id="prod1-title">Scented Briquette (12 Pcs Box)</div>
+                    <div class="product-desc" id="prod1-desc">Oud, Musk, Motia, Loban & Signature Scents.</div>
+                    <div class="pricing">
+                        <del>Rs. <span id="old-price-box">1500</span></del> 
+                        <span class="new-price">Rs. <span id="price-box">1000</span></span>
+                    </div>
+                    <a href="#" class="buy-now-btn" onclick="orderWhatsApp('Scented Briquette 12 Pcs Box', 'price-box')">🛍️ <span class="btn-text">Buy Now (COD)</span></a>
+                </div>
             </div>
 
-            <div class="product-box">
+            <div class="product-card">
                 <div class="img-area">[Device Image]</div>
-                <div class="title">Electrical Device</div>
-                <p style="font-size: 14px; color: #555;">Safe & modern electrical warmer.</p>
-                <div class="price-tag"><del>Rs. 3000</del> Rs. 2000</div>
-            </div>
-        </div>
-
-        <a href="https://wa.me/923162260608?text=Hello,%20I%20want%20to%20order%20Scented%20Briquette%20via%20Cash%20on%20Delivery." class="btn-whatsapp" target="_blank">
-            Cash on Delivery (Order Now)
-        </a>
-    </div>
-
-    <div class="features-banner">
-        <h3>Khasoosi Fawaid</h3>
-        <div class="feature-list">
-            <div class="f-item">
-                <h4>🌿 Hifzan-e-Sahat</h4>
-                <p>Insani sehat ke liye mukammal mehfooz aur behtareen.</p>
-            </div>
-            <div class="f-item">
-                <h4>🛡️ Machar Se Nijaat</h4>
-                <p>Khushboo ke sath sath makhi machar ka khatma.</p>
-            </div>
-            <div class="f-item">
-                <h4>✨ Nayab Khushbuyat</h4>
-                <p>Aala iqsam ki khushbuon mein dastiyab.</p>
+                <div class="product-info">
+                    <div class="product-title" id="prod2-title">Electrical Device Warmer</div>
+                    <div class="product-desc" id="prod2-desc">Premium electrical burner for a consistent aroma.</div>
+                    <div class="pricing">
+                        <del>Rs. <span id="old-price-device">3000</span></del> 
+                        <span class="new-price">Rs. <span id="price-device">2000</span></span>
+                    </div>
+                    <a href="#" class="buy-now-btn" onclick="orderWhatsApp('Electrical Device', 'price-device')">🛍️ <span class="btn-text">Buy Now (COD)</span></a>
+                </div>
             </div>
         </div>
     </div>
 
+    <div class="trust-section">
+        <div class="trust-title">Why Choose Us?</div>
+        <div class="trust-grid">
+            <div class="trust-item">
+                <h4 id="t1-title">Health Approved</h4>
+                <p id="t1-desc">Made according to health standards, perfect safe for humans.</p>
+            </div>
+            <div class="trust-item">
+                <h4 id="t2-title">Mosquito Repellent</h4>
+                <p id="t2-desc">Khushboo k sath, makhi aur machar ka asardaar khatma.</p>
+            </div>
+            <div class="trust-item">
+                <h4 id="t3-title">Oriental Luxury Scents</h4>
+                <p id="t3-desc">Dunya bhar ki nayab aur behtareen khushbuyat.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load Prices from Local Storage (Admin Panel Integration)
+        document.addEventListener("DOMContentLoaded", () => {
+            let savedBoxPrice = localStorage.getItem("price_box");
+            let savedDevicePrice = localStorage.getItem("price_device");
+            
+            if(savedBoxPrice) document.getElementById("price-box").innerText = savedBoxPrice;
+            if(savedDevicePrice) document.getElementById("price-device").innerText = savedDevicePrice;
+        });
+
+        // WhatsApp Order Function
+        function orderWhatsApp(productName, priceElementId) {
+            let price = document.getElementById(priceElementId).innerText;
+            let number = "923162260608";
+            let msg = `Hello, I want to order: ${productName} (Discount Price: Rs.${price}). I need this via Cash on Delivery.`;
+            let url = `https://wa.me/${number}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // Translation Dictionary (Urdu example provided)
+        const translations = {
+            en: {
+                cart: "Cart", banner_title: "Heritage Fragrance Collection", banner_desc: "Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.",
+                section_title: "Our Premium Products", badge_sale: "Sale!", prod1_title: "Scented Briquette (12 Pcs Box)", prod1_desc: "Oud, Musk, Motia, Loban & Signature Scents.",
+                prod2_title: "Electrical Device Warmer", prod2_desc: "Premium electrical burner for a consistent aroma.", btn_text: "Buy Now (COD)",
+                t1_title: "Health Approved", t1_desc: "Made according to health standards, perfect safe for humans.", t2_title: "Mosquito Repellent", t2_desc: "Khushboo k sath, makhi aur machar ka asardaar khatma.", t3_title: "Oriental Luxury Scents", t3_desc: "Dunya bhar ki nayab aur behtareen khushbuyat."
+            },
+            ur: {
+                cart: "کارٹ", banner_title: "نایاب خوشبوؤں کا مجموعہ", banner_desc: "دنیا کی بہترین خوشبوئیں۔ حفظان صحت کے اصولوں کے مطابق اور مچھروں سے نجات۔",
+                section_title: "ہماری بہترین مصنوعات", badge_sale: "سیل!", prod1_title: "سینٹڈ بریکیٹ باکس (12 پیس)", prod1_desc: "عود، مشک، موتیا، لوبان میں دستیاب۔",
+                prod2_title: "الیکٹریکل ڈیوائس", prod2_desc: "بغیر دھوئیں کے خوشبو پھیلانے والی مشین۔", btn_text: "ابھی آرڈر کریں (COD)",
+                t1_title: "حفظان صحت کے مطابق", t1_desc: "انسانی زندگی کے لیے 100٪ محفوظ۔", t2_title: "مچھروں سے نجات", t2_desc: "خوشبو کے ساتھ مکھی مچھر کا خاتمہ۔", t3_title: "روایتی نایاب خوشبوئیں", t3_desc: "دنیا بھر کی نایاب اور بہترین خوشبوؤں میں دستیاب۔"
+            },
+            ar: {
+                cart: "عربة التسوق", banner_title: "مجموعة العطور الفاخرة", banner_desc: "استكشف أرقى العطور في العالم. آمن صحياً وطارد للبعوض.",
+                section_title: "منتجاتنا الفاخرة", badge_sale: "تخفيض!", prod1_title: "صندوق الفحم المعطر (12 قطعة)", prod1_desc: "متوفر بالعود، المسك، واللبان.",
+                prod2_title: "جهاز التسخين الكهربائي", prod2_desc: "جهاز كهربائي لتجربة عطر بدون دخان.", btn_text: "اطلب الآن (COD)",
+                t1_title: "معتمد صحياً", t1_desc: "آمن تماماً على حياة الإنسان.", t2_title: "طارد للبعوض", t2_desc: "يقضي على البعوض مع نشر العطر.", t3_title: "عطور شرقية فاخرة", t3_desc: "أندر العطور حول العالم."
+            },
+            tr: {
+                cart: "Sepet", banner_title: "Geleneksel Parfüm Koleksiyonu", banner_desc: "Dünyanın en iyi kokularını keşfedin. Sağlığa zararsız ve sivrisinek kovucu.",
+                section_title: "Premium Ürünlerimiz", badge_sale: "İndirim!", prod1_title: "Kokulu Briket Kutusu (12 Adet)", prod1_desc: "Ud, Misk ve İmza kokularıyla.",
+                prod2_title: "Elektrikli Isıtıcı", prod2_desc: "Dumansız koku için elektrikli brülör.", btn_text: "Şimdi Al (COD)",
+                t1_title: "Sağlık Onaylı", t1_desc: "İnsan sağlığı için %100 güvenli.", t2_title: "Sivrisinek Kovucu", t2_desc: "Koku yayarken sivrisinekleri kovar.", t3_title: "Küresel Lüks Kokular", t3_desc: "Dünyanın en eşsiz kokuları."
+            }
+        };
+
+        // Language Switcher Logic
+        function changeLanguage() {
+            let lang = document.getElementById("langSwitcher").value;
+            let t = translations[lang];
+
+            document.getElementById("cart-text").innerText = t.cart;
+            document.getElementById("banner-title").innerText = t.banner_title;
+            document.getElementById("banner-desc").innerText = t.banner_desc;
+            document.getElementById("section-title").innerText = t.section_title;
+            document.getElementById("badge-sale1").innerText = t.badge_sale;
+            document.getElementById("prod1-title").innerText = t.prod1_title;
+            document.getElementById("prod1-desc").innerText = t.prod1_desc;
+            document.getElementById("prod2-title").innerText = t.prod2_title;
+            document.getElementById("prod2-desc").innerText = t.prod2_desc;
+            document.getElementById("t1-title").innerText = t.t1_title;
+            document.getElementById("t1-desc").innerText = t.t1_desc;
+            document.getElementById("t2-title").innerText = t.t2_title;
+            document.getElementById("t2-desc").innerText = t.t2_desc;
+            document.getElementById("t3-title").innerText = t.t3_title;
+            document.getElementById("t3-desc").innerText = t.t3_desc;
+
+            let btns = document.getElementsByClassName("btn-text");
+            for(let i=0; i<btns.length; i++){ btns[i].innerText = t.btn_text; }
+
+            // Change Text Direction for Arabic/Urdu and typography
+            if(lang === 'ur' || lang === 'ar') {
+                document.body.style.direction = "rtl";
+                document.body.style.fontFamily = "'Amiri', serif"; // Switch to Oriental serif
+            } else {
+                document.body.style.direction = "ltr";
+                document.body.style.fontFamily = "'Montserrat', sans-serif";
+            }
+        }
+    </script>
 </body>
 </html>
