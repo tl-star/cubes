@@ -5,18 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scented Briquette | Official Store</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         :root {
-            --bg-dark: #0A1128; /* Thoda aur dark kiya hai taake text ubhar kar aaye */
-            --gold: #FFD700; /* Ekdum Bright Gold */
-            --text-light: #ffffff; /* Pure White text */
+            --bg-dark: #0A1128; 
+            --gold: #FFD700; 
+            --text-light: #ffffff; 
             --green: #25D366; 
         }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; transition: all 0.3s ease; }
 
         /* Store Header */
         header { background: #ffffff; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); }
@@ -55,9 +55,9 @@
         .review-text { font-size: 13px; color: #E0E0E0; font-style: italic; }
         .reviewer-name { font-size: 12px; color: #A0AABF; font-weight: bold; margin-top: 5px; }
 
-        /* Custom Order Form Modal (Google Form style) */
+        /* Custom Order Form Modal */
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; }
-        .order-form-box { background: #ffffff; color: #000; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; text-align: left; position: relative; }
+        .order-form-box { background: #ffffff; color: #000; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; text-align: left; position: relative; direction: ltr; }
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #333; font-weight: bold; }
         .order-form-box h3 { color: #0A1128; margin-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 24px; }
         .order-summary { background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 14px; font-weight: 600; color: #d32f2f; }
@@ -71,73 +71,127 @@
 
     <header>
         <div class="logo-container">
-            <img src="cube1.png" alt="Scented Briquette Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/60?text=LOGO'">
+            <img src="cub1.png" alt="Scented Briquette Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/60?text=LOGO'">
             <div class="logo-text">SCENTED BRIQUETTE</div>
         </div>
         <div class="header-actions">
-            <select class="lang-select">
+            <select class="lang-select" id="langSwitcher" onchange="changeLanguage()">
                 <option value="en">English</option>
-                <option value="ur">Urdu</option>
+                <option value="ur">Urdu (اردو)</option>
             </select>
         </div>
     </header>
 
     <div class="store-banner">
-        <h1>Heritage Fragrance Collection</h1>
-        <p>Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
+        <h1 id="banner-title">Heritage Fragrance Collection</h1>
+        <p id="banner-desc">Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
     </div>
 
     <div class="container">
-        <div class="section-title">Our Premium Products</div>
+        <div class="section-title" id="section-title">Our Premium Products</div>
         <div class="product-grid" id="product-list">
             </div>
     </div>
 
     <div class="modal-overlay" id="orderModal">
-        <div class="order-form-box">
+        <div class="order-form-box" id="form-box-direction">
             <span class="close-btn" onclick="closeForm()">&times;</span>
-            <h3>Complete Your Order</h3>
+            <h3 id="modal-title">Complete Your Order</h3>
             <div class="order-summary" id="modal-summary">Product Name - Rs. 1000</div>
             
             <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="cust-name" placeholder="Enter your name" required>
+                <label id="label-name">Full Name</label>
+                <input type="text" id="cust-name" required>
             </div>
             <div class="form-group">
-                <label>WhatsApp Number</label>
+                <label id="label-phone">WhatsApp Number</label>
                 <input type="tel" id="cust-phone" placeholder="03XXXXXXXXX" required>
             </div>
             <div class="form-group">
-                <label>Complete Delivery Address</label>
-                <textarea id="cust-address" rows="3" placeholder="House#, Street, Area, City" required></textarea>
+                <label id="label-address">Complete Delivery Address</label>
+                <textarea id="cust-address" rows="3" required></textarea>
             </div>
             
-            <button class="submit-order-btn" onclick="sendOrderToWhatsApp()">Confirm & Send Order</button>
+            <button class="submit-order-btn" id="btn-confirm" onclick="sendOrderToWhatsApp()">Confirm & Send Order</button>
         </div>
     </div>
 
     <script>
-        // Default Products & Reviews (Agar admin ne kuch nahi add kiya)
+        // 1. Language Translations Dictionary
+        const translations = {
+            en: {
+                bannerTitle: "Heritage Fragrance Collection",
+                bannerDesc: "Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.",
+                sectionTitle: "Our Premium Products",
+                btnText: "🛒 Buy Now (COD)",
+                reviewsText: "Customer Reviews:",
+                modalTitle: "Complete Your Order",
+                labelName: "Full Name",
+                labelPhone: "WhatsApp Number",
+                labelAddress: "Complete Delivery Address",
+                btnConfirm: "Confirm & Send Order"
+            },
+            ur: {
+                bannerTitle: "نایاب خوشبوؤں کا مجموعہ",
+                bannerDesc: "دنیا کی بہترین خوشبوئیں۔ حفظان صحت کے اصولوں کے مطابق اور مچھروں سے نجات۔",
+                sectionTitle: "ہماری بہترین مصنوعات",
+                btnText: "🛒 ابھی آرڈر کریں (COD)",
+                reviewsText: "گاہکوں کے تبصرے:",
+                modalTitle: "اپنا آرڈر مکمل کریں",
+                labelName: "پورا نام",
+                labelPhone: "واٹس ایپ نمبر",
+                labelAddress: "مکمل ڈیلیوری ایڈریس",
+                btnConfirm: "آرڈر بھیجیں"
+            }
+        };
+
+        // 2. Language Change Function
+        function changeLanguage() {
+            let lang = document.getElementById("langSwitcher").value;
+            let t = translations[lang];
+
+            // Change UI Text
+            document.getElementById("banner-title").innerText = t.bannerTitle;
+            document.getElementById("banner-desc").innerText = t.bannerDesc;
+            document.getElementById("section-title").innerText = t.sectionTitle;
+            document.getElementById("modal-title").innerText = t.modalTitle;
+            document.getElementById("label-name").innerText = t.labelName;
+            document.getElementById("label-phone").innerText = t.labelPhone;
+            document.getElementById("label-address").innerText = t.labelAddress;
+            document.getElementById("btn-confirm").innerText = t.btnConfirm;
+
+            // Change Buttons & Review Headings dynamically inside products
+            let btns = document.getElementsByClassName("btn-text-span");
+            for(let i = 0; i < btns.length; i++){ btns[i].innerText = t.btnText; }
+            
+            let revs = document.getElementsByClassName("rev-text-span");
+            for(let i = 0; i < revs.length; i++){ revs[i].innerText = t.reviewsText; }
+
+            // Change RTL / LTR Direction
+            if(lang === 'ur') {
+                document.body.style.direction = "rtl";
+                document.getElementById("form-box-direction").style.direction = "rtl";
+                document.body.style.fontFamily = "'Amiri', 'Playfair Display', serif"; 
+            } else {
+                document.body.style.direction = "ltr";
+                document.getElementById("form-box-direction").style.direction = "ltr";
+                document.body.style.fontFamily = "'Montserrat', sans-serif";
+            }
+        }
+
+        // 3. Load Products & Reviews
         let defaultProducts = [
             {
-                id: 1,
-                name: "Scented Briquette (12 Pcs Box)",
-                desc: "Oud, Musk, Motia, Loban & Signature Scents. 100% Safe.",
-                oldPrice: 1500,
-                price: 1000,
-                img: "[Box Image]",
+                id: 1, name: "Scented Briquette (12 Pcs Box)", desc: "Oud, Musk, Motia, Loban & Signature Scents. 100% Safe.",
+                oldPrice: 1500, price: 1000, img: "[Box Image]",
                 reviews: [
                     { name: "Ali Ahmed", rating: "★★★★★", text: "Bohot pyari khushboo hai, poora ghar mehak gaya." },
                     { name: "Sana Tariq", rating: "★★★★★", text: "Machar bhi waqai bhaag gaye, best product!" }
                 ]
             },
             {
-                id: 2,
-                name: "Electrical Device Warmer",
-                desc: "Premium electrical burner for a consistent, smoke-free aroma.",
-                oldPrice: 3000,
-                price: 2000,
-                img: "[Device Image]",
+                id: 2, name: "Electrical Device Warmer", desc: "Premium electrical burner for a consistent, smoke-free aroma.",
+                oldPrice: 3000, price: 2000, img: "[Device Image]",
                 reviews: [
                     { name: "Usman Khan", rating: "★★★★☆", text: "Quality bohot achi hai aur safe hai use karne mein." }
                 ]
@@ -147,14 +201,13 @@
         let selectedProduct = "";
         let selectedPrice = "";
 
-        // Load Products from Local Storage OR use defaults
         function loadProducts() {
             let storedProducts = JSON.parse(localStorage.getItem("store_items"));
             let productsToRender = (storedProducts && storedProducts.length > 0) ? storedProducts : defaultProducts;
-            
+            let currentLang = document.getElementById("langSwitcher").value;
             let html = "";
+            
             productsToRender.forEach(p => {
-                // Generate Reviews HTML
                 let reviewsHtml = "";
                 if(p.reviews && p.reviews.length > 0) {
                     p.reviews.forEach(r => {
@@ -174,10 +227,12 @@
                             <del>Rs. ${p.oldPrice}</del> 
                             <span class="new-price">Rs. ${p.price}</span>
                         </div>
-                        <button class="buy-now-btn" onclick="openForm('${p.name}', ${p.price})">🛒 Buy Now (COD)</button>
+                        <button class="buy-now-btn" onclick="openForm('${p.name}', ${p.price})">
+                            <span class="btn-text-span">${translations[currentLang].btnText}</span>
+                        </button>
                         
                         <div class="reviews-section">
-                            <strong style="color:var(--gold); font-size:14px; margin-bottom:8px; display:block;">Customer Reviews:</strong>
+                            <strong class="rev-text-span" style="color:var(--gold); font-size:14px; margin-bottom:8px; display:block;">${translations[currentLang].reviewsText}</strong>
                             ${reviewsHtml}
                         </div>
                     </div>
@@ -186,7 +241,7 @@
             document.getElementById("product-list").innerHTML = html;
         }
 
-        // Form Logic
+        // 4. Form Logic
         function openForm(name, price) {
             selectedProduct = name;
             selectedPrice = price;
