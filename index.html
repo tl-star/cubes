@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scented Briquette | Heritage Collection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        :root {
+            --maroon: #5b1e2b; /* Deep Heritage Maroon */
+            --gold: #cda434; /* Classic Gold */
+            --cream: #fefae0; /* Soft Cream */
+            --dark: #2d2424;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--cream);
+            color: var(--dark);
+        }
+
+        header {
+            background-color: var(--maroon);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid var(--gold);
+        }
+
+        .logo {
+            font-family: 'Amiri', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .lang-select {
+            padding: 8px 15px;
+            background-color: transparent;
+            color: var(--cream);
+            border: 1px solid var(--gold);
+            border-radius: 5px;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+        }
+
+        .lang-select option {
+            color: var(--dark);
+        }
+
+        .oriental-pattern {
+            background-image: radial-gradient(var(--gold) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-section {
+            position: relative;
+            text-align: center;
+            padding: 70px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-section h1 {
+            font-family: 'Amiri', serif;
+            font-size: 46px;
+            color: var(--maroon);
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--dark);
+            margin-bottom: 40px;
+        }
+
+        .product-showcase {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .product-box {
+            background: #fff;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 25px;
+            width: 300px;
+            box-shadow: 0 8px 20px rgba(91, 30, 43, 0.15);
+            position: relative;
+        }
+
+        .product-box::before {
+            content: "✨";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            background: var(--cream);
+            padding: 0 10px;
+        }
+
+        .img-area {
+            width: 100%;
+            height: 180px;
+            background-color: #f5eedc;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-family: 'Amiri', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--maroon);
+            margin-bottom: 10px;
+        }
+
+        .price-tag {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--maroon);
+            margin: 15px 0;
+        }
+
+        .price-tag del {
+            color: #999;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: var(--maroon);
+            color: var(--gold);
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 40px;
+            border: 2px solid var(--gold);
+            transition: all 0.3s;
+            font-family: 'Amiri', serif;
+            letter-spacing: 1px;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: var(--gold);
+            color: var(--maroon);
+        }
+
+        .features-banner {
+            background-color: var(--maroon);
+            color: var(--cream);
+            padding: 40px 20px;
+            margin-top: 50px;
+            text-align: center;
+            border-top: 3px solid var(--gold);
+        }
+
+        .features-banner h3 {
+            font-family: 'Amiri', serif;
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 30px;
+        }
+
+        .feature-list {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .f-item {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .f-item h4 {
+            color: var(--gold);
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="oriental-pattern"></div>
+
+    <header>
+        <div class="logo">SCENTED BRIQUETTE</div>
+        <select class="lang-select">
+            <option value="en">English</option>
+            <option value="ur">Urdu (اردو)</option>
+            <option value="ar">Arabic (العربية)</option>
+            <option value="tr">Turkish (Türkçe)</option>
+        </select>
+    </header>
+
+    <div class="hero-section">
+        <h1>Riwayati Khushboo, Jadded Andaaz</h1>
+        <p>Hifzan-e-sahat ke usulon ke mutabik tayar karda dunya bhar ki nayab khushboyat. Ek aisi khushboo jo na sirf mahol ko mehkaye, balkay makhi aur machar ka bhi khatma kare. Insani zindagi ke liye 100% mehfooz.</p>
+
+        <div class="product-showcase">
+            <div class="product-box">
+                <div class="img-area">[Box Image]</div>
+                <div class="title">12-Piece Box</div>
+                <p style="font-size: 14px; color: #555;">Oud, Musk, Motia, Loban & Signature Scents.</p>
+                <div class="price-tag"><del>Rs. 1500</del> Rs. 1000</div>
+            </div>
+
+            <div class="product-box">
+                <div class="img-area">[Device Image]</div>
+                <div class="title">Electrical Device</div>
+                <p style="font-size: 14px; color: #555;">Safe & modern electrical warmer.</p>
+                <div class="price-tag"><del>Rs. 3000</del> Rs. 2000</div>
+            </div>
+        </div>
+
+        <a href="https://wa.me/923162260608?text=Hello,%20I%20want%20to%20order%20Scented%20Briquette%20via%20Cash%20on%20Delivery." class="btn-whatsapp" target="_blank">
+            Cash on Delivery (Order Now)
+        </a>
+    </div>
+
+    <div class="features-banner">
+        <h3>Khasoosi Fawaid</h3>
+        <div class="feature-list">
+            <div class="f-item">
+                <h4>🌿 Hifzan-e-Sahat</h4>
+                <p>Insani sehat ke liye mukammal mehfooz aur behtareen.</p>
+            </div>
+            <div class="f-item">
+                <h4>🛡️ Machar Se Nijaat</h4>
+                <p>Khushboo ke sath sath makhi machar ka khatma.</p>
+            </div>
+            <div class="f-item">
+                <h4>✨ Nayab Khushbuyat</h4>
+                <p>Aala iqsam ki khushbuon mein dastiyab.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
