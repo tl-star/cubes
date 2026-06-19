@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Scented Briquette | Official Store</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
@@ -16,55 +16,77 @@
             --green: #25D366; 
         }
 
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; transition: all 0.3s ease; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; transition: all 0.3s ease; overflow-x: hidden; }
 
         /* Store Header */
-        header { background: #ffffff; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); }
-        .logo-container { display: flex; align-items: center; gap: 15px; }
-        .logo-img { max-height: 60px; width: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-        .logo-text { color: #0A1128; font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; letter-spacing: 1px; }
-        .header-actions { display: flex; gap: 15px; align-items: center; }
-        .lang-select { padding: 8px; border-radius: 5px; border: 1px solid var(--gold); background: #0A1128; color: var(--gold); font-weight: 600; cursor: pointer; }
+        header { background: #ffffff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); flex-wrap: wrap; }
+        .logo-container { display: flex; align-items: center; gap: 10px; }
+        .logo-img { max-height: 50px; width: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .logo-text { color: #0A1128; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; letter-spacing: 1px; }
+        .header-actions { display: flex; gap: 15px; align-items: center; margin-top: 5px; }
+        .lang-select { padding: 6px 10px; border-radius: 5px; border: 1px solid var(--gold); background: #0A1128; color: var(--gold); font-weight: 600; cursor: pointer; font-size: 14px; }
 
         /* Banner */
-        .store-banner { padding: 70px 20px; border-bottom: 2px solid var(--gold); background: linear-gradient(to bottom, #111D4A, #0A1128); }
-        .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--gold); text-shadow: 2px 2px 5px rgba(0,0,0,0.8); margin-bottom: 15px; }
-        .store-banner p { font-size: 18px; color: #E0E0E0; max-width: 700px; margin: 0 auto; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        .store-banner { padding: 60px 20px; border-bottom: 2px solid var(--gold); background: linear-gradient(to bottom, #111D4A, #0A1128); }
+        .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--gold); text-shadow: 2px 2px 5px rgba(0,0,0,0.8); margin-bottom: 15px; }
+        .store-banner p { font-size: 16px; color: #E0E0E0; max-width: 700px; margin: 0 auto 25px auto; line-height: 1.6; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); }
+        
+        /* Main Hero Order Button */
+        .hero-order-btn { background: var(--gold); color: #0A1128; padding: 12px 30px; font-size: 18px; font-weight: bold; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); text-decoration: none; display: inline-block; }
+        .hero-order-btn:hover { background: #e6c200; transform: translateY(-3px); }
 
         /* Products Section */
-        .container { max-width: 1200px; margin: 50px auto; padding: 0 20px; text-align: left; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--gold); border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 10px; margin-bottom: 40px; text-shadow: 2px 2px 5px rgba(0,0,0,0.8); }
+        .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; text-align: left; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 10px; margin-bottom: 30px; text-shadow: 2px 2px 5px rgba(0,0,0,0.8); }
 
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .product-card { background: #111D4A; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.5); position: relative; text-align: center; }
-        .img-area { width: 100%; height: 250px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; }
-        .product-info { padding: 25px; }
-        .product-title { font-size: 22px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
-        .product-desc { font-size: 15px; color: #FFFFFF; margin-bottom: 15px; line-height: 1.5; }
-        .pricing del { color: #A0AABF; font-size: 18px; margin-right: 10px; }
-        .pricing .new-price { color: var(--gold); font-size: 28px; font-weight: 700; }
+        .img-area { width: 100%; height: 220px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; }
+        .product-info { padding: 20px; }
+        .product-title { font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
+        .product-desc { font-size: 14px; color: #FFFFFF; margin-bottom: 15px; line-height: 1.5; }
+        .pricing del { color: #A0AABF; font-size: 16px; margin-right: 10px; }
+        .pricing .new-price { color: var(--gold); font-size: 24px; font-weight: 700; }
 
-        .buy-now-btn { display: block; width: 100%; padding: 15px; margin-top: 20px; background: var(--green); color: white; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
+        .buy-now-btn { display: block; width: 100%; padding: 12px; margin-top: 20px; background: var(--green); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; box-shadow: 0 4px 15px rgba(37,211,102,0.4); }
         .buy-now-btn:hover { background: #1ebe57; }
 
         /* Reviews Section inside Product Card */
-        .reviews-section { background: rgba(0,0,0,0.2); padding: 15px; margin-top: 20px; border-radius: 8px; text-align: left; }
-        .review-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 10px; }
+        .reviews-section { background: rgba(0,0,0,0.2); padding: 12px; margin-top: 15px; border-radius: 8px; text-align: left; }
+        .review-item { border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px; margin-bottom: 8px; }
         .review-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .stars { color: var(--gold); font-size: 14px; margin-bottom: 5px; }
-        .review-text { font-size: 13px; color: #E0E0E0; font-style: italic; }
-        .reviewer-name { font-size: 12px; color: #A0AABF; font-weight: bold; margin-top: 5px; }
+        .stars { color: var(--gold); font-size: 12px; margin-bottom: 4px; }
+        .review-text { font-size: 12px; color: #E0E0E0; font-style: italic; }
+        .reviewer-name { font-size: 11px; color: #A0AABF; font-weight: bold; margin-top: 4px; }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed; bottom: 20px; right: 20px; background-color: var(--green); color: white;
+            border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;
+            font-size: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1000; text-decoration: none; transition: transform 0.3s;
+        }
+        .floating-whatsapp:hover { transform: scale(1.1); }
 
         /* Custom Order Form Modal */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; }
-        .order-form-box { background: #ffffff; color: #000; padding: 30px; border-radius: 12px; width: 90%; max-width: 400px; text-align: left; position: relative; direction: ltr; }
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: #333; font-weight: bold; }
-        .order-form-box h3 { color: #0A1128; margin-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 24px; }
-        .order-summary { background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 20px; font-size: 14px; font-weight: 600; color: #d32f2f; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 5px; color: #333; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Montserrat', sans-serif; }
-        .submit-order-btn { width: 100%; background: var(--green); color: white; border: none; padding: 15px; font-size: 18px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; padding: 10px; }
+        .order-form-box { background: #ffffff; color: #000; padding: 25px; border-radius: 12px; width: 100%; max-width: 400px; text-align: left; position: relative; direction: ltr; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #333; font-weight: bold; }
+        .order-form-box h3 { color: #0A1128; margin-bottom: 10px; font-family: 'Playfair Display', serif; font-size: 22px; }
+        .order-summary { background: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 14px; font-weight: 600; color: #d32f2f; }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333; }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Montserrat', sans-serif; font-size: 14px; }
+        .submit-order-btn { width: 100%; background: var(--green); color: white; border: none; padding: 12px; font-size: 16px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header { flex-direction: column; text-align: center; gap: 10px; }
+            .store-banner h1 { font-size: 30px; }
+            .store-banner p { font-size: 14px; }
+            .section-title { font-size: 26px; }
+            .product-card { max-width: 100%; margin: 0 auto; }
+            .floating-whatsapp { width: 50px; height: 50px; font-size: 24px; bottom: 15px; right: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -86,6 +108,7 @@
     <div class="store-banner">
         <h1 id="banner-title">Heritage Fragrance Collection</h1>
         <p id="banner-desc">Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
+        <a href="#product-list" class="hero-order-btn" id="hero-order-btn">Order Now</a>
     </div>
 
     <div class="container">
@@ -93,6 +116,10 @@
         <div class="product-grid" id="product-list">
             </div>
     </div>
+
+    <a href="https://wa.me/923162260608" class="floating-whatsapp" target="_blank" title="Contact Us on WhatsApp">
+        📞
+    </a>
 
     <div class="modal-overlay" id="orderModal">
         <div class="order-form-box" id="form-box-direction">
@@ -118,11 +145,11 @@
     </div>
 
     <script>
-        // 1. Language Translations Dictionary
         const translations = {
             en: {
                 bannerTitle: "Heritage Fragrance Collection",
                 bannerDesc: "Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.",
+                heroOrderBtn: "Order Now",
                 sectionTitle: "Our Premium Products",
                 btnText: "🛒 Buy Now (COD)",
                 reviewsText: "Customer Reviews:",
@@ -135,6 +162,7 @@
             ur: {
                 bannerTitle: "نایاب خوشبوؤں کا مجموعہ",
                 bannerDesc: "دنیا کی بہترین خوشبوئیں۔ حفظان صحت کے اصولوں کے مطابق اور مچھروں سے نجات۔",
+                heroOrderBtn: "آرڈر کریں",
                 sectionTitle: "ہماری بہترین مصنوعات",
                 btnText: "🛒 ابھی آرڈر کریں (COD)",
                 reviewsText: "گاہکوں کے تبصرے:",
@@ -147,8 +175,9 @@
             ar: {
                 bannerTitle: "مجموعة العطور التراثية",
                 bannerDesc: "استكشف أرقى العطور في العالم. آمن صحياً، وطارد للبعوض.",
+                heroOrderBtn: "اطلب الآن",
                 sectionTitle: "منتجاتنا الفاخرة",
-                btnText: "🛒 اطلب الآن (الدفع عند الاستلام)",
+                btnText: "🛒 اطلب الآن (COD)",
                 reviewsText: "آراء العملاء:",
                 modalTitle: "أكمل طلبك",
                 labelName: "الاسم الكامل",
@@ -158,14 +187,13 @@
             }
         };
 
-        // 2. Language Change Function
         function changeLanguage() {
             let lang = document.getElementById("langSwitcher").value;
             let t = translations[lang];
 
-            // Change UI Text
             document.getElementById("banner-title").innerText = t.bannerTitle;
             document.getElementById("banner-desc").innerText = t.bannerDesc;
+            document.getElementById("hero-order-btn").innerText = t.heroOrderBtn;
             document.getElementById("section-title").innerText = t.sectionTitle;
             document.getElementById("modal-title").innerText = t.modalTitle;
             document.getElementById("label-name").innerText = t.labelName;
@@ -173,14 +201,12 @@
             document.getElementById("label-address").innerText = t.labelAddress;
             document.getElementById("btn-confirm").innerText = t.btnConfirm;
 
-            // Change Buttons & Review Headings dynamically inside products
             let btns = document.getElementsByClassName("btn-text-span");
             for(let i = 0; i < btns.length; i++){ btns[i].innerText = t.btnText; }
             
             let revs = document.getElementsByClassName("rev-text-span");
             for(let i = 0; i < revs.length; i++){ revs[i].innerText = t.reviewsText; }
 
-            // Change RTL / LTR Direction (Arbic aur Urdu dono ke liye)
             if(lang === 'ur' || lang === 'ar') {
                 document.body.style.direction = "rtl";
                 document.getElementById("form-box-direction").style.direction = "rtl";
@@ -192,7 +218,6 @@
             }
         }
 
-        // 3. Load Products & Reviews
         let defaultProducts = [
             {
                 id: 1, name: "Scented Briquette (12 Pcs Box)", desc: "Oud, Musk, Motia, Loban & Signature Scents. 100% Safe.",
@@ -254,7 +279,6 @@
             document.getElementById("product-list").innerHTML = html;
         }
 
-        // 4. Form Logic
         function openForm(name, price) {
             selectedProduct = name;
             selectedPrice = price;
@@ -281,6 +305,12 @@
             window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`, '_blank');
             closeForm();
         }
+
+        // Smooth scroll for Order Now button
+        document.getElementById('hero-order-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#product-list').scrollIntoView({ behavior: 'smooth' });
+        });
 
         window.onload = loadProducts;
     </script>
