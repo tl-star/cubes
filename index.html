@@ -18,8 +18,6 @@
         .logo-text { color: #0A1128; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; letter-spacing: 1px; }
         .header-actions { display: flex; gap: 15px; align-items: center; margin-top: 5px; }
         .lang-select { padding: 6px 10px; border-radius: 5px; border: 1px solid var(--gold); background: #0A1128; color: var(--gold); font-weight: 600; cursor: pointer; font-size: 14px; }
-        
-        /* Cart Icon */
         .cart-icon-container { position: relative; cursor: pointer; font-size: 24px; color: #0A1128; display: flex; align-items: center; }
         .cart-badge { position: absolute; top: -8px; right: -10px; background: var(--danger); color: white; font-size: 12px; font-weight: bold; padding: 2px 6px; border-radius: 50%; }
 
@@ -28,7 +26,6 @@
         .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--gold); text-shadow: 2px 2px 5px rgba(0,0,0,0.8); margin-bottom: 15px; }
         .store-banner p { font-size: 16px; color: #E0E0E0; max-width: 700px; margin: 0 auto 25px auto; line-height: 1.6; }
         .hero-contact-btn { background: var(--green); color: white; padding: 12px 30px; font-size: 18px; font-weight: bold; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); text-decoration: none; display: inline-block; }
-        .hero-contact-btn:hover { background: #1ebe57; transform: translateY(-3px); }
 
         /* Products Grid */
         .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; text-align: left; }
@@ -36,49 +33,52 @@
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
         
         /* Product Card */
-        .product-card { background: #111D4A; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.5); text-align: center; display: flex; flex-direction: column; }
-        .img-area { width: 100%; height: 200px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; }
+        .product-card { background: #111D4A; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.5); text-align: center; display: flex; flex-direction: column; position: relative; }
+        .img-area { width: 100%; height: 220px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; position: relative; cursor: pointer; overflow: hidden;}
         .img-area img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* Badges */
+        .badge-special { position: absolute; top: 10px; left: 10px; background: #9b59b6; color: white; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; z-index: 10; }
+        .badge-crazy { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; z-index: 10; }
+        
+        /* Out of Stock Overlay */
+        .out-of-stock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--gold); font-weight: bold; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; z-index: 5; transition: 0.3s; }
+        .out-of-stock-overlay:hover { background: rgba(0,0,0,0.8); }
+        .admin-edit-hint { font-size: 12px; color: #ccc; margin-top: 10px; text-transform: none; }
+
         .product-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .product-title { font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
-        .product-desc { font-size: 13px; color: #FFFFFF; margin-bottom: 15px; line-height: 1.4; flex-grow: 1; }
-        .pricing { margin-bottom: 15px; }
+        .product-desc { font-size: 13px; color: #FFFFFF; margin-bottom: 10px; line-height: 1.4; flex-grow: 1; }
+        .pricing { margin-bottom: 10px; }
         .pricing del { color: #A0AABF; font-size: 14px; margin-right: 8px; }
         .pricing .new-price { color: var(--gold); font-size: 22px; font-weight: 700; }
-        .add-cart-btn { background: var(--gold); color: #0A1128; border: none; padding: 10px; width: 100%; font-weight: bold; font-size: 15px; border-radius: 6px; cursor: pointer; transition: 0.2s; margin-bottom: 10px; }
-        .add-cart-btn:hover { background: #e6c200; }
+        
+        .reviews-section { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+        .stars { color: var(--gold); font-size: 14px; margin-bottom: 4px; }
+        .review-text { font-size: 12px; color: #E0E0E0; font-style: italic; }
 
-        /* Coming Soon Box */
-        .coming-soon-box { border: 2px dashed rgba(255,215,0,0.5); background: rgba(17, 29, 74, 0.5); display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 350px; border-radius: 12px; cursor: pointer; transition: 0.3s; text-decoration: none; color: var(--gold); }
-        .coming-soon-box:hover { background: rgba(255,215,0,0.1); border-color: var(--gold); transform: scale(1.02); }
-        .coming-soon-icon { font-size: 40px; margin-bottom: 10px; }
-        .coming-soon-text { font-size: 18px; font-weight: bold; }
+        .add-cart-btn { background: var(--green); color: white; border: none; padding: 12px; width: 100%; font-weight: bold; font-size: 15px; border-radius: 6px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
+        .add-cart-btn:hover { background: #1ebe57; }
+        .add-cart-btn.disabled { background: #555; cursor: not-allowed; box-shadow: none; color: #aaa; }
 
-        /* Cart Sidebar / Modal */
+        /* Auth Modal */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 10px; }
+        .auth-box { background: #ffffff; color: #000; padding: 25px; border-radius: 12px; width: 100%; max-width: 350px; text-align: left; position: relative; direction: ltr; }
+        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #333; font-weight: bold; }
+        .auth-box h3 { color: #0A1128; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Montserrat', sans-serif; font-size: 14px; }
+        .auth-btn { width: 100%; background: #0A1128; color: var(--gold); border: none; padding: 12px; font-size: 16px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+
+        /* Cart Sidebar */
         .cart-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: flex-end; }
         .cart-sidebar { background: #ffffff; color: #333; width: 100%; max-width: 400px; height: 100%; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; direction: ltr; }
         .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); padding-bottom: 15px; margin-bottom: 20px; }
-        .cart-header h2 { font-family: 'Playfair Display', serif; color: #0A1128; margin: 0; }
-        .close-cart { font-size: 30px; cursor: pointer; color: #333; line-height: 1; }
-        
         .cart-items-container { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 10px 0; }
-        .item-details { text-align: left; }
-        .item-name { font-weight: bold; font-size: 14px; color: #0A1128; }
-        .item-price { font-size: 13px; color: var(--danger); }
-        .remove-item { color: #999; cursor: pointer; font-size: 18px; }
-        
-        .cart-total-section { border-top: 2px solid #eee; padding-top: 15px; margin-bottom: 20px; }
-        .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; color: #0A1128; }
-        
-        /* Checkout Form */
-        .checkout-form { background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; }
-        .form-group { margin-bottom: 12px; text-align: left; }
-        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333; }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Montserrat', sans-serif; font-size: 14px; }
-        .submit-order-btn { width: 100%; background: var(--green); color: white; border: none; padding: 15px; font-size: 16px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 10px; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
-
-        @media (max-width: 768px) { header { flex-direction: column; gap: 10px; } }
+        .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; color: #0A1128; margin-bottom: 15px; }
+        .remove-item { color: #e74c3c; cursor: pointer; font-size: 18px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -95,7 +95,7 @@
                 <option value="ar">Arabic (العربية)</option>
             </select>
             <div class="cart-icon-container" onclick="openCart()">
-                🛒 <span id="cart-text" style="font-size: 16px; font-weight: bold; margin-left: 5px;">Cart</span>
+                🛒 <span style="font-size: 16px; font-weight: bold; margin-left: 5px;">Cart</span>
                 <div class="cart-badge" id="cart-count">0</div>
             </div>
         </div>
@@ -104,96 +104,200 @@
     <div class="store-banner">
         <h1 id="banner-title">Heritage Fragrance Collection</h1>
         <p id="banner-desc">Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
-        <a href="https://wa.me/923162260608" class="hero-contact-btn" target="_blank" id="hero-contact-btn">📞 Contact on WhatsApp</a>
+        <a href="https://wa.me/923162260608" class="hero-contact-btn" target="_blank">📞 Contact on WhatsApp</a>
     </div>
 
     <div class="container">
-        <div class="section-title" id="section-title">Our Premium Products</div>
+        <div class="section-title">Our Premium Products</div>
         <div class="product-grid" id="product-list">
             </div>
+    </div>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="auth-box">
+            <span class="close-btn" onclick="closeAuth()">&times;</span>
+            <h3>Admin Login</h3>
+            <div class="form-group">
+                <label>User ID</label>
+                <input type="text" id="admin-user" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="admin-pass" placeholder="Enter password">
+            </div>
+            <button class="auth-btn" onclick="verifyAdmin()">Login to Edit</button>
+        </div>
     </div>
 
     <div class="cart-overlay" id="cartOverlay">
         <div class="cart-sidebar" id="cart-direction-box">
             <div class="cart-header">
-                <h2 id="cart-title">Your Cart</h2>
-                <span class="close-cart" onclick="closeCart()">&times;</span>
+                <h2>Your Cart</h2>
+                <span style="font-size: 30px; cursor: pointer; color: #333;" onclick="closeCart()">&times;</span>
             </div>
-            
-            <div class="cart-items-container" id="cart-items-list">
-                </div>
-            
-            <div class="cart-total-section">
+            <div class="cart-items-container" id="cart-items-list"></div>
+            <div style="border-top: 2px solid #eee; padding-top: 15px; margin-bottom: 20px;">
                 <div class="cart-total">
-                    <span id="txt-total">Total:</span>
+                    <span>Total:</span>
                     <span>Rs. <span id="cart-total-amount">0</span></span>
                 </div>
             </div>
-            
-            <div class="checkout-form">
-                <h4 style="margin-bottom: 10px; color: #0A1128;" id="txt-checkout">Delivery Details</h4>
-                <div class="form-group">
-                    <label id="lbl-name">Full Name</label>
-                    <input type="text" id="cust-name" required>
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
+                <h4 style="margin-bottom: 10px; color: #0A1128;">Delivery Details</h4>
+                <div style="margin-bottom: 12px; text-align: left;">
+                    <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Full Name</label>
+                    <input type="text" id="cust-name" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" required>
                 </div>
-                <div class="form-group">
-                    <label id="lbl-phone">WhatsApp Number</label>
-                    <input type="tel" id="cust-phone" placeholder="03XXXXXXXXX" required>
+                <div style="margin-bottom: 12px; text-align: left;">
+                    <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">WhatsApp Number</label>
+                    <input type="tel" id="cust-phone" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" required>
                 </div>
-                <div class="form-group">
-                    <label id="lbl-address">Complete Address</label>
-                    <textarea id="cust-address" rows="2" required></textarea>
+                <div style="margin-bottom: 12px; text-align: left;">
+                    <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Complete Address</label>
+                    <textarea id="cust-address" rows="2" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" required></textarea>
                 </div>
-                <button class="submit-order-btn" id="btn-confirm" onclick="checkoutOrder()">Send Order via WhatsApp</button>
+                <button onclick="checkoutOrder()" style="width:100%; background:var(--green); color:white; border:none; padding:15px; font-size:16px; font-weight:700; border-radius:8px; cursor:pointer; margin-top:10px;">Send Order</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Language Dict
-        const translations = {
-            en: {
-                bannerTitle: "Heritage Fragrance Collection", bannerDesc: "Explore the world's most unique scents.",
-                heroContact: "📞 Contact on WhatsApp", sectionTitle: "Our Premium Products",
-                addToCart: "🛒 Add to Cart", comingSoon: "Coming Soon", cartTitle: "Your Shopping Cart",
-                txtTotal: "Total:", txtCheckout: "Delivery Details", lblName: "Full Name",
-                lblPhone: "WhatsApp Number", lblAddress: "Complete Address", btnConfirm: "Send Order via WhatsApp", emptyCart: "Your cart is empty."
-            },
-            ur: {
-                bannerTitle: "نایاب خوشبوؤں کا مجموعہ", bannerDesc: "دنیا کی بہترین خوشبوئیں۔",
-                heroContact: "📞 واٹس ایپ پر رابطہ کریں", sectionTitle: "ہماری بہترین مصنوعات",
-                addToCart: "🛒 کارٹ میں شامل کریں", comingSoon: "جلد آ رہا ہے", cartTitle: "آپ کی شاپنگ کارٹ",
-                txtTotal: "کل رقم:", txtCheckout: "ڈیلیوری کی تفصیلات", lblName: "پورا نام",
-                lblPhone: "واٹس ایپ نمبر", lblAddress: "مکمل پتہ", btnConfirm: "آرڈر واٹس ایپ پر بھیجیں", emptyCart: "آپ کی کارٹ خالی ہے۔"
-            },
-            ar: {
-                bannerTitle: "مجموعة العطور التراثية", bannerDesc: "استكشف أرقى العطور في العالم.",
-                heroContact: "📞 تواصل عبر الواتساب", sectionTitle: "منتجاتنا الفاخرة",
-                addToCart: "🛒 أضف إلى السلة", comingSoon: "قريباً", cartTitle: "سلة التسوق الخاصة بك",
-                txtTotal: "المجموع:", txtCheckout: "تفاصيل التوصيل", lblName: "الاسم الكامل",
-                lblPhone: "رقم الواتساب", lblAddress: "العنوان الكامل", btnConfirm: "إرسال الطلب عبر الواتساب", emptyCart: "سلة التسوق فارغة."
-            }
-        };
+        // Data Structure for 8 Fixed Slots
+        const initialGrid = [
+            { id: 1, isActive: true, special: "", name: "Scented Briquette Box", desc: "Oud, Musk, Motia, Loban. 100% Safe.", oldPrice: 1500, price: 1000, img: "" },
+            { id: 2, isActive: true, special: "", name: "Electrical Warmer", desc: "Premium burner for smoke-free aroma.", oldPrice: 3000, price: 2000, img: "" },
+            { id: 3, isActive: false, special: "Gift Pack", name: "Premium Gift Box", desc: "Best for gifting to loved ones.", oldPrice: 2500, price: 2000, img: "" },
+            { id: 4, isActive: false, special: "Crazy Deal", name: "Crazy Deal Bundle", desc: "Limited time offer on full package.", oldPrice: 5000, price: 3500, img: "" },
+            { id: 5, isActive: false, special: "", name: "Product Slot 5", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" },
+            { id: 6, isActive: false, special: "", name: "Product Slot 6", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" },
+            { id: 7, isActive: false, special: "", name: "Product Slot 7", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" },
+            { id: 8, isActive: false, special: "", name: "Product Slot 8", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" }
+        ];
 
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const MAX_BOXES = 8; // Total grid slots
+        let editSlotId = null;
 
+        function renderGrid() {
+            let gridData = JSON.parse(localStorage.getItem("store_grid"));
+            if(!gridData || gridData.length !== 8) {
+                gridData = initialGrid;
+                localStorage.setItem("store_grid", JSON.stringify(gridData));
+            }
+
+            let html = "";
+            gridData.forEach((p) => {
+                let badgeHtml = "";
+                if(p.special === "Gift Pack") badgeHtml = `<div class="badge-special">🎁 Gift Pack</div>`;
+                if(p.special === "Crazy Deal") badgeHtml = `<div class="badge-crazy">🔥 Crazy Deal</div>`;
+                
+                let imgHtml = p.img ? `<img src="${p.img}" alt="${p.name}">` : `<span>[Image Placeholder]</span>`;
+                
+                let outOfStockHtml = p.isActive ? "" : `
+                    <div class="out-of-stock-overlay" onclick="openAuth(${p.id})">
+                        OUT OF STOCK
+                        <span class="admin-hint">Click to Edit</span>
+                    </div>`;
+
+                let btnHtml = p.isActive 
+                    ? `<button class="add-cart-btn" onclick="addToCart('${p.name}', ${p.price})">🛒 Add to Cart / Buy Now</button>`
+                    : `<button class="add-cart-btn disabled" disabled>🚫 Out of Stock</button>`;
+
+                html += `
+                <div class="product-card">
+                    <div class="img-area" onclick="${p.isActive ? '' : `openAuth(${p.id})`}">
+                        ${badgeHtml}
+                        ${imgHtml}
+                        ${outOfStockHtml}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">${p.name}</div>
+                        <div class="product-desc">${p.desc}</div>
+                        <div class="reviews-section">
+                            <div class="stars">★★★★★</div>
+                            <div class="review-text">"Amazing quality and 100% safe to use."</div>
+                        </div>
+                        <div class="pricing">
+                            <del>Rs. ${p.oldPrice}</del> <span class="new-price">Rs. ${p.price}</span>
+                        </div>
+                        ${btnHtml}
+                    </div>
+                </div>`;
+            });
+            document.getElementById("product-list").innerHTML = html;
+        }
+
+        /* Admin Auth Logic */
+        function openAuth(id) {
+            editSlotId = id;
+            document.getElementById("authModal").style.display = "flex";
+        }
+        function closeAuth() {
+            document.getElementById("authModal").style.display = "none";
+            document.getElementById("admin-user").value = "";
+            document.getElementById("admin-pass").value = "";
+        }
+        function verifyAdmin() {
+            let u = document.getElementById("admin-user").value;
+            let p = document.getElementById("admin-pass").value;
+            if(u === "kgf292900" && p === "kgf292900") {
+                sessionStorage.setItem("isAdmin", "true");
+                window.location.href = "admin.html?slot=" + editSlotId;
+            } else {
+                alert("Invalid Credentials! Access Denied.");
+            }
+        }
+
+        /* Cart Logic */
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartUI();
+            openCart();
+        }
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            let listHtml = "";
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += parseInt(item.price);
+                listHtml += `
+                <div class="cart-item">
+                    <div>
+                        <div style="font-weight:bold; font-size:14px;">${item.name}</div>
+                        <div style="font-size:13px; color:#e74c3c;">Rs. ${item.price}</div>
+                    </div>
+                    <div class="remove-item" onclick="removeFromCart(${index})">🗑️</div>
+                </div>`;
+            });
+            document.getElementById('cart-items-list').innerHTML = listHtml;
+            document.getElementById('cart-total-amount').innerText = total;
+        }
+        function openCart() { document.getElementById("cartOverlay").style.display = "flex"; }
+        function closeCart() { document.getElementById("cartOverlay").style.display = "none"; }
+        
+        function checkoutOrder() {
+            if(cart.length === 0) { alert("Cart is empty!"); return; }
+            let name = document.getElementById("cust-name").value;
+            let phone = document.getElementById("cust-phone").value;
+            let addr = document.getElementById("cust-address").value;
+            if(!name || !phone || !addr) { alert("Please fill your details."); return; }
+
+            let orderList = ""; let total = 0;
+            cart.forEach((item, i) => { orderList += `${i+1}. ${item.name} - Rs. ${item.price}\n`; total += parseInt(item.price); });
+
+            let msg = `*🛍️ NEW E-COMMERCE ORDER*\n\n*Cart Items:*\n${orderList}\n*Grand Total: Rs. ${total}*\n\n*Customer Details:*\nName: ${name}\nPhone: ${phone}\nAddress: ${addr}`;
+            window.open(`https://wa.me/923162260608?text=${encodeURIComponent(msg)}`, '_blank');
+            cart = []; localStorage.setItem('cart', JSON.stringify(cart)); updateCartUI(); closeCart();
+        }
+
+        /* Language Swap (Urdu/Ar/En) */
         function changeLanguage() {
             let lang = document.getElementById("langSwitcher").value;
-            let t = translations[lang];
-
-            document.getElementById("banner-title").innerText = t.bannerTitle;
-            document.getElementById("banner-desc").innerText = t.bannerDesc;
-            document.getElementById("hero-contact-btn").innerText = t.heroContact;
-            document.getElementById("section-title").innerText = t.sectionTitle;
-            document.getElementById("cart-title").innerText = t.cartTitle;
-            document.getElementById("txt-total").innerText = t.txtTotal;
-            document.getElementById("txt-checkout").innerText = t.txtCheckout;
-            document.getElementById("lbl-name").innerText = t.lblName;
-            document.getElementById("lbl-phone").innerText = t.lblPhone;
-            document.getElementById("lbl-address").innerText = t.lblAddress;
-            document.getElementById("btn-confirm").innerText = t.btnConfirm;
-
             if(lang === 'ur' || lang === 'ar') {
                 document.body.style.direction = "rtl";
                 document.getElementById("cart-direction-box").style.direction = "rtl";
@@ -203,118 +307,13 @@
                 document.getElementById("cart-direction-box").style.direction = "ltr";
                 document.body.style.fontFamily = "'Montserrat', sans-serif";
             }
-            renderGrid();
-            updateCartUI();
-        }
-
-        // Default products logic
-        let defaultProducts = [
-            { id: 1, name: "Scented Briquette Box", desc: "Oud, Musk, Motia, Loban. 100% Safe.", oldPrice: 1500, price: 1000, img: "" },
-            { id: 2, name: "Electrical Warmer", desc: "Premium burner for smoke-free aroma.", oldPrice: 3000, price: 2000, img: "" }
-        ];
-
-        function renderGrid() {
-            let storedProducts = JSON.parse(localStorage.getItem("store_items"));
-            let products = (storedProducts && storedProducts.length > 0) ? storedProducts : defaultProducts;
-            let currentLang = document.getElementById("langSwitcher").value;
-            let btnText = translations[currentLang].addToCart;
-            let comingText = translations[currentLang].comingSoon;
-
-            let html = "";
-            for(let i=0; i<MAX_BOXES; i++) {
-                if(products[i]) {
-                    let p = products[i];
-                    let imgHtml = p.img ? `<img src="${p.img}" alt="${p.name}">` : `[Product Image]`;
-                    html += `
-                    <div class="product-card">
-                        <div class="img-area">${imgHtml}</div>
-                        <div class="product-info">
-                            <div class="product-title">${p.name}</div>
-                            <div class="product-desc">${p.desc}</div>
-                            <div class="pricing">
-                                <del>Rs. ${p.oldPrice}</del> <span class="new-price">Rs. ${p.price}</span>
-                            </div>
-                            <button class="add-cart-btn" onclick="addToCart('${p.id}', '${p.name}', ${p.price})">${btnText}</button>
-                        </div>
-                    </div>`;
-                } else {
-                    html += `
-                    <a href="admin.html" class="coming-soon-box">
-                        <div class="coming-soon-icon">➕</div>
-                        <div class="coming-soon-text">${comingText}</div>
-                    </a>`;
-                }
-            }
-            document.getElementById("product-list").innerHTML = html;
-        }
-
-        // Cart Logic
-        function addToCart(id, name, price) {
-            cart.push({ id, name, price });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartUI();
-            openCart();
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
-            let currentLang = document.getElementById("langSwitcher").value;
-            let listHtml = "";
-            let total = 0;
-
-            if(cart.length === 0) {
-                listHtml = `<p style="text-align:center; margin-top:20px; color:#666;">${translations[currentLang].emptyCart}</p>`;
+            if(lang === 'ur') {
+                document.getElementById("banner-title").innerText = "نایاب خوشبوؤں کا مجموعہ";
+            } else if (lang === 'ar') {
+                document.getElementById("banner-title").innerText = "مجموعة العطور التراثية";
             } else {
-                cart.forEach((item, index) => {
-                    total += parseInt(item.price);
-                    listHtml += `
-                    <div class="cart-item">
-                        <div class="item-details">
-                            <div class="item-name">${item.name}</div>
-                            <div class="item-price">Rs. ${item.price}</div>
-                        </div>
-                        <div class="remove-item" onclick="removeFromCart(${index})">🗑️</div>
-                    </div>`;
-                });
+                document.getElementById("banner-title").innerText = "Heritage Fragrance Collection";
             }
-            document.getElementById('cart-items-list').innerHTML = listHtml;
-            document.getElementById('cart-total-amount').innerText = total;
-        }
-
-        function openCart() { document.getElementById("cartOverlay").style.display = "flex"; }
-        function closeCart() { document.getElementById("cartOverlay").style.display = "none"; }
-
-        function checkoutOrder() {
-            if(cart.length === 0) { alert("Your cart is empty!"); return; }
-            
-            let name = document.getElementById("cust-name").value;
-            let phone = document.getElementById("cust-phone").value;
-            let address = document.getElementById("cust-address").value;
-            
-            if(!name || !phone || !address) { alert("Please fill your delivery details."); return; }
-
-            let orderList = "";
-            let total = 0;
-            cart.forEach((item, i) => {
-                orderList += `${i+1}. ${item.name} - Rs. ${item.price}\n`;
-                total += parseInt(item.price);
-            });
-
-            let msg = `*🛍️ NEW E-COMMERCE ORDER*\n\n*Cart Items:*\n${orderList}\n*Grand Total: Rs. ${total}*\n\n*Customer Details:*\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
-            let whatsappNum = "923162260608";
-            window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`, '_blank');
-            
-            // Clear cart after order
-            cart = [];
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartUI();
-            closeCart();
         }
 
         window.onload = () => { renderGrid(); updateCartUI(); };
