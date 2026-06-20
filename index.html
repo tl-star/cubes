@@ -9,7 +9,7 @@
         
         * { box-sizing: border-box; margin: 0; padding: 0; }
         :root { --bg-dark: #0A1128; --gold: #FFD700; --text-light: #ffffff; --green: #25D366; --danger: #e74c3c; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; transition: all 0.3s ease; overflow-x: hidden; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; overflow-x: hidden; }
 
         /* Header */
         header { background: #ffffff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); flex-wrap: wrap; }
@@ -18,6 +18,8 @@
         .logo-text { color: #0A1128; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; letter-spacing: 1px; }
         .header-actions { display: flex; gap: 15px; align-items: center; margin-top: 5px; }
         .lang-select { padding: 6px 10px; border-radius: 5px; border: 1px solid var(--gold); background: #0A1128; color: var(--gold); font-weight: 600; cursor: pointer; font-size: 14px; }
+        
+        /* Cart Icon */
         .cart-icon-container { position: relative; cursor: pointer; font-size: 24px; color: #0A1128; display: flex; align-items: center; }
         .cart-badge { position: absolute; top: -8px; right: -10px; background: var(--danger); color: white; font-size: 12px; font-weight: bold; padding: 2px 6px; border-radius: 50%; }
 
@@ -26,59 +28,55 @@
         .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--gold); text-shadow: 2px 2px 5px rgba(0,0,0,0.8); margin-bottom: 15px; }
         .store-banner p { font-size: 16px; color: #E0E0E0; max-width: 700px; margin: 0 auto 25px auto; line-height: 1.6; }
         .hero-contact-btn { background: var(--green); color: white; padding: 12px 30px; font-size: 18px; font-weight: bold; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); text-decoration: none; display: inline-block; }
+        .hero-contact-btn:hover { background: #1ebe57; transform: translateY(-3px); }
 
         /* Products Grid */
         .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; text-align: left; }
         .section-title { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 10px; margin-bottom: 30px; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
         
-        /* Product Card */
+        /* Product Card / Slot */
         .product-card { background: #111D4A; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.5); text-align: center; display: flex; flex-direction: column; position: relative; }
-        .img-area { width: 100%; height: 220px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; position: relative; cursor: pointer; overflow: hidden;}
+        .img-area { width: 100%; height: 200px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; cursor: pointer;}
         .img-area img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* Badges */
-        .badge-special { position: absolute; top: 10px; left: 10px; background: #9b59b6; color: white; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; z-index: 10; }
-        .badge-crazy { position: absolute; top: 10px; left: 10px; background: #e74c3c; color: white; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; z-index: 10; }
-        
-        /* Out of Stock Overlay */
-        .out-of-stock-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; flex-direction: column; justify-content: center; align-items: center; color: var(--gold); font-weight: bold; font-size: 20px; text-transform: uppercase; letter-spacing: 1px; z-index: 5; transition: 0.3s; }
-        .out-of-stock-overlay:hover { background: rgba(0,0,0,0.8); }
-        .admin-edit-hint { font-size: 12px; color: #ccc; margin-top: 10px; text-transform: none; }
-
         .product-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .product-title { font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
-        .product-desc { font-size: 13px; color: #FFFFFF; margin-bottom: 10px; line-height: 1.4; flex-grow: 1; }
-        .pricing { margin-bottom: 10px; }
+        .product-desc { font-size: 13px; color: #FFFFFF; margin-bottom: 15px; line-height: 1.4; flex-grow: 1; }
+        .pricing { margin-bottom: 15px; }
         .pricing del { color: #A0AABF; font-size: 14px; margin-right: 8px; }
         .pricing .new-price { color: var(--gold); font-size: 22px; font-weight: 700; }
+        .add-cart-btn { background: var(--gold); color: #0A1128; border: none; padding: 10px; width: 100%; font-weight: bold; font-size: 15px; border-radius: 6px; cursor: pointer; transition: 0.2s; margin-bottom: 10px; }
         
-        .reviews-section { background: rgba(0,0,0,0.2); padding: 10px; border-radius: 8px; margin-bottom: 15px; }
+        /* Reviews Section inside Product Card */
+        .reviews-section { background: rgba(0,0,0,0.2); padding: 12px; margin-top: 15px; border-radius: 8px; text-align: left; }
         .stars { color: var(--gold); font-size: 14px; margin-bottom: 4px; }
         .review-text { font-size: 12px; color: #E0E0E0; font-style: italic; }
 
-        .add-cart-btn { background: var(--green); color: white; border: none; padding: 12px; width: 100%; font-weight: bold; font-size: 15px; border-radius: 6px; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(37,211,102,0.3); }
-        .add-cart-btn:hover { background: #1ebe57; }
-        .add-cart-btn.disabled { background: #555; cursor: not-allowed; box-shadow: none; color: #aaa; }
+        /* Tags for Special Deals */
+        .special-tag { position: absolute; top: 10px; left: 10px; background: var(--danger); color: white; padding: 4px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; z-index: 10; text-transform: uppercase;}
+        
+        /* Empty / Coming Soon Box Style */
+        .coming-soon-content { color: var(--gold); opacity: 0.7; }
+        .coming-soon-content h3 { font-size: 24px; margin-bottom: 10px; }
+        .coming-soon-content p { font-size: 14px; }
+        .admin-edit-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer; margin-top: 15px; display: inline-block; }
 
-        /* Auth Modal */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 10px; }
-        .auth-box { background: #ffffff; color: #000; padding: 25px; border-radius: 12px; width: 100%; max-width: 350px; text-align: left; position: relative; direction: ltr; }
+        /* Login Modal for Admin Access */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; padding: 10px; }
+        .login-box { background: #ffffff; color: #000; padding: 30px; border-radius: 12px; width: 100%; max-width: 350px; text-align: left; position: relative; }
+        .login-box h3 { color: #0A1128; margin-bottom: 20px; font-family: 'Playfair Display', serif; }
         .close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #333; font-weight: bold; }
-        .auth-box h3 { color: #0A1128; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333; }
-        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-family: 'Montserrat', sans-serif; font-size: 14px; }
-        .auth-btn { width: 100%; background: #0A1128; color: var(--gold); border: none; padding: 12px; font-size: 16px; font-weight: 700; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        .login-submit-btn { width: 100%; background: #0A1128; color: var(--gold); border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; }
 
-        /* Cart Sidebar */
-        .cart-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: flex-end; }
-        .cart-sidebar { background: #ffffff; color: #333; width: 100%; max-width: 400px; height: 100%; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; direction: ltr; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); padding-bottom: 15px; margin-bottom: 20px; }
+        /* Cart Overlay (Sidebar) */
+        .cart-sidebar { display: none; position: fixed; top: 0; right: 0; width: 100%; max-width: 400px; height: 100%; background: #fff; color: #333; padding: 20px; box-shadow: -5px 0 15px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; }
+        .cart-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--gold); padding-bottom: 15px; margin-bottom: 20px; }
         .cart-items-container { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 10px 0; }
-        .cart-total { display: flex; justify-content: space-between; font-size: 18px; font-weight: bold; color: #0A1128; margin-bottom: 15px; }
-        .remove-item { color: #e74c3c; cursor: pointer; font-size: 18px; font-weight: bold; }
+        .cart-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0; }
+        .submit-order-btn { width: 100%; background: var(--green); color: white; padding: 15px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -92,7 +90,6 @@
             <select class="lang-select" id="langSwitcher" onchange="changeLanguage()">
                 <option value="en">English</option>
                 <option value="ur">Urdu (اردو)</option>
-                <option value="ar">Arabic (العربية)</option>
             </select>
             <div class="cart-icon-container" onclick="openCart()">
                 🛒 <span style="font-size: 16px; font-weight: bold; margin-left: 5px;">Cart</span>
@@ -113,141 +110,127 @@
             </div>
     </div>
 
-    <div class="modal-overlay" id="authModal">
-        <div class="auth-box">
-            <span class="close-btn" onclick="closeAuth()">&times;</span>
-            <h3>Admin Login</h3>
+    <div class="modal-overlay" id="loginModal">
+        <div class="login-box">
+            <span class="close-btn" onclick="closeLogin()">&times;</span>
+            <h3>Admin Access Required</h3>
+            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Login to edit Slot <span id="editing-slot-num"></span></p>
             <div class="form-group">
                 <label>User ID</label>
-                <input type="text" id="admin-user" placeholder="Enter username">
+                <input type="text" id="admin-user" placeholder="Enter User ID">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="admin-pass" placeholder="Enter password">
+                <input type="password" id="admin-pass" placeholder="Enter Password">
             </div>
-            <button class="auth-btn" onclick="verifyAdmin()">Login to Edit</button>
+            <button class="login-submit-btn" onclick="verifyAdmin()">Login & Edit</button>
         </div>
     </div>
 
-    <div class="cart-overlay" id="cartOverlay">
-        <div class="cart-sidebar" id="cart-direction-box">
-            <div class="cart-header">
-                <h2>Your Cart</h2>
-                <span style="font-size: 30px; cursor: pointer; color: #333;" onclick="closeCart()">&times;</span>
-            </div>
-            <div class="cart-items-container" id="cart-items-list"></div>
-            <div style="border-top: 2px solid #eee; padding-top: 15px; margin-bottom: 20px;">
-                <div class="cart-total">
-                    <span>Total:</span>
-                    <span>Rs. <span id="cart-total-amount">0</span></span>
-                </div>
-            </div>
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd;">
-                <h4 style="margin-bottom: 10px; color: #0A1128;">Delivery Details</h4>
-                <div style="margin-bottom: 12px; text-align: left;">
-                    <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Full Name</label>
-                    <input type="text" id="cust-name" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" required>
-                </div>
-                <div style="margin-bottom: 12px; text-align: left;">
-                    <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">WhatsApp Number</label>
-                    <input type="tel" id="cust-phone" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" required>
-                </div>
-                <div style="margin-bottom: 12px; text-align: left;">
-                    <label style="display:block; font-size:13px; font-weight:600; margin-bottom:5px;">Complete Address</label>
-                    <textarea id="cust-address" rows="2" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;" required></textarea>
-                </div>
-                <button onclick="checkoutOrder()" style="width:100%; background:var(--green); color:white; border:none; padding:15px; font-size:16px; font-weight:700; border-radius:8px; cursor:pointer; margin-top:10px;">Send Order</button>
-            </div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <span class="close-btn" style="position:static;" onclick="closeCart()">&times;</span>
+        </div>
+        <div class="cart-items-container" id="cart-items-list"></div>
+        <div style="border-top: 2px solid #eee; padding-top: 15px; margin-bottom: 15px; font-weight: bold; font-size: 18px; display:flex; justify-content:space-between;">
+            <span>Total:</span> <span>Rs. <span id="cart-total-amount">0</span></span>
+        </div>
+        
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; text-align: left;">
+            <h4 style="margin-bottom: 10px;">Delivery Details</h4>
+            <div class="form-group"><input type="text" id="cust-name" placeholder="Full Name" required></div>
+            <div class="form-group"><input type="tel" id="cust-phone" placeholder="WhatsApp Number" required></div>
+            <div class="form-group"><textarea id="cust-address" rows="2" placeholder="Complete Address" required></textarea></div>
+            <button class="submit-order-btn" onclick="checkoutOrder()">Send Order via WhatsApp</button>
         </div>
     </div>
 
     <script>
-        // Data Structure for 8 Fixed Slots
-        const initialGrid = [
-            { id: 1, isActive: true, special: "", name: "Scented Briquette Box", desc: "Oud, Musk, Motia, Loban. 100% Safe.", oldPrice: 1500, price: 1000, img: "" },
-            { id: 2, isActive: true, special: "", name: "Electrical Warmer", desc: "Premium burner for smoke-free aroma.", oldPrice: 3000, price: 2000, img: "" },
-            { id: 3, isActive: false, special: "Gift Pack", name: "Premium Gift Box", desc: "Best for gifting to loved ones.", oldPrice: 2500, price: 2000, img: "" },
-            { id: 4, isActive: false, special: "Crazy Deal", name: "Crazy Deal Bundle", desc: "Limited time offer on full package.", oldPrice: 5000, price: 3500, img: "" },
-            { id: 5, isActive: false, special: "", name: "Product Slot 5", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" },
-            { id: 6, isActive: false, special: "", name: "Product Slot 6", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" },
-            { id: 7, isActive: false, special: "", name: "Product Slot 7", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" },
-            { id: 8, isActive: false, special: "", name: "Product Slot 8", desc: "Exciting new product coming soon.", oldPrice: 0, price: 0, img: "" }
+        const TOTAL_SLOTS = 10;
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let editingSlotId = null;
+
+        // Base 10 Slots setup (Default data if nothing is saved)
+        let defaultSlots = [
+            { id: 1, type: 'product', name: "Scented Briquette Box", desc: "Oud, Musk, Motia, Loban. 100% Safe.", oldPrice: 1500, price: 1000, img: "" },
+            { id: 2, type: 'product', name: "Electrical Warmer", desc: "Premium burner for smoke-free aroma.", oldPrice: 3000, price: 2000, img: "" },
+            { id: 3, type: 'empty', tag: 'Crazy Deal' },
+            { id: 4, type: 'empty', tag: 'Gift Pack' },
+            { id: 5, type: 'empty' }, { id: 6, type: 'empty' },
+            { id: 7, type: 'empty' }, { id: 8, type: 'empty' },
+            { id: 9, type: 'empty' }, { id: 10, type: 'empty' }
         ];
 
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let editSlotId = null;
-
         function renderGrid() {
-            let gridData = JSON.parse(localStorage.getItem("store_grid"));
-            if(!gridData || gridData.length !== 8) {
-                gridData = initialGrid;
-                localStorage.setItem("store_grid", JSON.stringify(gridData));
-            }
-
+            // Load slots from LocalStorage or use defaults
+            let savedData = JSON.parse(localStorage.getItem("store_slots"));
+            let slots = (savedData && savedData.length === TOTAL_SLOTS) ? savedData : defaultSlots;
+            
             let html = "";
-            gridData.forEach((p) => {
-                let badgeHtml = "";
-                if(p.special === "Gift Pack") badgeHtml = `<div class="badge-special">🎁 Gift Pack</div>`;
-                if(p.special === "Crazy Deal") badgeHtml = `<div class="badge-crazy">🔥 Crazy Deal</div>`;
+            slots.forEach((slot, index) => {
+                let tagHtml = slot.tag ? `<div class="special-tag">${slot.tag}</div>` : '';
                 
-                let imgHtml = p.img ? `<img src="${p.img}" alt="${p.name}">` : `<span>[Image Placeholder]</span>`;
-                
-                let outOfStockHtml = p.isActive ? "" : `
-                    <div class="out-of-stock-overlay" onclick="openAuth(${p.id})">
-                        OUT OF STOCK
-                        <span class="admin-hint">Click to Edit</span>
+                if (slot.type === 'product') {
+                    // Render Active Product
+                    let imgHtml = slot.img ? `<img src="${slot.img}" alt="${slot.name}">` : `[Image]`;
+                    html += `
+                    <div class="product-card">
+                        ${tagHtml}
+                        <div class="img-area" onclick="openAdminLogin(${slot.id})">${imgHtml}</div>
+                        <div class="product-info">
+                            <div class="product-title">${slot.name}</div>
+                            <div class="product-desc">${slot.desc}</div>
+                            <div class="pricing">
+                                <del>Rs. ${slot.oldPrice}</del> <span class="new-price">Rs. ${slot.price}</span>
+                            </div>
+                            <button class="add-cart-btn" onclick="addToCart('${slot.name}', ${slot.price})">🛒 Add to Cart</button>
+                            <div class="reviews-section">
+                                <div class="stars">★★★★★</div>
+                                <div class="review-text">"Best quality product!"</div>
+                            </div>
+                            <button class="admin-edit-btn" onclick="openAdminLogin(${slot.id})">⚙️ Edit (Admin)</button>
+                        </div>
                     </div>`;
-
-                let btnHtml = p.isActive 
-                    ? `<button class="add-cart-btn" onclick="addToCart('${p.name}', ${p.price})">🛒 Add to Cart / Buy Now</button>`
-                    : `<button class="add-cart-btn disabled" disabled>🚫 Out of Stock</button>`;
-
-                html += `
-                <div class="product-card">
-                    <div class="img-area" onclick="${p.isActive ? '' : `openAuth(${p.id})`}">
-                        ${badgeHtml}
-                        ${imgHtml}
-                        ${outOfStockHtml}
-                    </div>
-                    <div class="product-info">
-                        <div class="product-title">${p.name}</div>
-                        <div class="product-desc">${p.desc}</div>
-                        <div class="reviews-section">
-                            <div class="stars">★★★★★</div>
-                            <div class="review-text">"Amazing quality and 100% safe to use."</div>
+                } else {
+                    // Render Empty / Coming Soon / Out of Stock Box
+                    let statusText = slot.status === 'outofstock' ? 'Out of Stock' : 'Coming Soon';
+                    html += `
+                    <div class="product-card" style="justify-content: center; background: rgba(17,29,74,0.6); border: 2px dashed rgba(255,215,0,0.5);">
+                        ${tagHtml}
+                        <div class="coming-soon-content">
+                            <h3>${statusText}</h3>
+                            <p>Slot #${slot.id}</p>
+                            <button class="admin-edit-btn" style="margin-top: 20px;" onclick="openAdminLogin(${slot.id})">🔒 Add Product (Admin)</button>
                         </div>
-                        <div class="pricing">
-                            <del>Rs. ${p.oldPrice}</del> <span class="new-price">Rs. ${p.price}</span>
-                        </div>
-                        ${btnHtml}
-                    </div>
-                </div>`;
+                    </div>`;
+                }
             });
             document.getElementById("product-list").innerHTML = html;
         }
 
-        /* Admin Auth Logic */
-        function openAuth(id) {
-            editSlotId = id;
-            document.getElementById("authModal").style.display = "flex";
+        // Admin Login Flow
+        function openAdminLogin(slotId) {
+            editingSlotId = slotId;
+            document.getElementById("editing-slot-num").innerText = slotId;
+            document.getElementById("loginModal").style.display = "flex";
         }
-        function closeAuth() {
-            document.getElementById("authModal").style.display = "none";
-            document.getElementById("admin-user").value = "";
-            document.getElementById("admin-pass").value = "";
-        }
+        function closeLogin() { document.getElementById("loginModal").style.display = "none"; }
+
         function verifyAdmin() {
-            let u = document.getElementById("admin-user").value;
-            let p = document.getElementById("admin-pass").value;
-            if(u === "kgf292900" && p === "kgf292900") {
-                sessionStorage.setItem("isAdmin", "true");
-                window.location.href = "admin.html?slot=" + editSlotId;
+            let user = document.getElementById("admin-user").value;
+            let pass = document.getElementById("admin-pass").value;
+            
+            if(user === "kgf292900" && pass === "kgf292900") {
+                // Save target slot ID in storage so Admin page knows which slot to edit
+                sessionStorage.setItem("target_edit_slot", editingSlotId);
+                window.location.href = "admin.html"; // Redirect to admin page
             } else {
-                alert("Invalid Credentials! Access Denied.");
+                alert("Incorrect User ID or Password!");
             }
         }
 
-        /* Cart Logic */
+        // Cart Functions
         function addToCart(name, price) {
             cart.push({ name, price });
             localStorage.setItem('cart', JSON.stringify(cart));
@@ -261,59 +244,33 @@
         }
         function updateCartUI() {
             document.getElementById('cart-count').innerText = cart.length;
-            let listHtml = "";
-            let total = 0;
+            let listHtml = ""; let total = 0;
             cart.forEach((item, index) => {
                 total += parseInt(item.price);
-                listHtml += `
-                <div class="cart-item">
-                    <div>
-                        <div style="font-weight:bold; font-size:14px;">${item.name}</div>
-                        <div style="font-size:13px; color:#e74c3c;">Rs. ${item.price}</div>
-                    </div>
-                    <div class="remove-item" onclick="removeFromCart(${index})">🗑️</div>
+                listHtml += `<div class="cart-item">
+                    <div><b>${item.name}</b><br><span style="color:#e74c3c; font-size:13px;">Rs. ${item.price}</span></div>
+                    <div style="cursor:pointer; color:#999;" onclick="removeFromCart(${index})">🗑️</div>
                 </div>`;
             });
-            document.getElementById('cart-items-list').innerHTML = listHtml;
+            document.getElementById('cart-items-list').innerHTML = listHtml || "<p style='text-align:center; margin-top:20px;'>Cart is empty.</p>";
             document.getElementById('cart-total-amount').innerText = total;
         }
-        function openCart() { document.getElementById("cartOverlay").style.display = "flex"; }
-        function closeCart() { document.getElementById("cartOverlay").style.display = "none"; }
         
+        function openCart() { document.getElementById("cartSidebar").style.display = "flex"; }
+        function closeCart() { document.getElementById("cartSidebar").style.display = "none"; }
+
         function checkoutOrder() {
             if(cart.length === 0) { alert("Cart is empty!"); return; }
             let name = document.getElementById("cust-name").value;
             let phone = document.getElementById("cust-phone").value;
-            let addr = document.getElementById("cust-address").value;
-            if(!name || !phone || !addr) { alert("Please fill your details."); return; }
+            let address = document.getElementById("cust-address").value;
+            if(!name || !phone || !address) { alert("Please fill your delivery details."); return; }
 
             let orderList = ""; let total = 0;
             cart.forEach((item, i) => { orderList += `${i+1}. ${item.name} - Rs. ${item.price}\n`; total += parseInt(item.price); });
-
-            let msg = `*🛍️ NEW E-COMMERCE ORDER*\n\n*Cart Items:*\n${orderList}\n*Grand Total: Rs. ${total}*\n\n*Customer Details:*\nName: ${name}\nPhone: ${phone}\nAddress: ${addr}`;
+            let msg = `*🛍️ NEW E-COMMERCE ORDER*\n\n*Cart Items:*\n${orderList}\n*Grand Total: Rs. ${total}*\n\n*Customer Details:*\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
             window.open(`https://wa.me/923162260608?text=${encodeURIComponent(msg)}`, '_blank');
             cart = []; localStorage.setItem('cart', JSON.stringify(cart)); updateCartUI(); closeCart();
-        }
-
-        /* Language Swap (Urdu/Ar/En) */
-        function changeLanguage() {
-            let lang = document.getElementById("langSwitcher").value;
-            if(lang === 'ur' || lang === 'ar') {
-                document.body.style.direction = "rtl";
-                document.getElementById("cart-direction-box").style.direction = "rtl";
-                document.body.style.fontFamily = "'Amiri', serif";
-            } else {
-                document.body.style.direction = "ltr";
-                document.getElementById("cart-direction-box").style.direction = "ltr";
-                document.body.style.fontFamily = "'Montserrat', sans-serif";
-            }
-            if(lang === 'ur') {
-                document.getElementById("banner-title").innerText = "نایاب خوشبوؤں کا مجموعہ";
-            } else if (lang === 'ar') {
-                document.getElementById("banner-title").innerText = "مجموعة العطور التراثية";
-            } else {
-                document.getElementById("banner-title").innerText = "Heritage Fragrance Collection";
-            }
         }
 
         window.onload = () => { renderGrid(); updateCartUI(); };
