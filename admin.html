@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin · Settings</title>
+    <title>Admin · Orders</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -17,7 +17,7 @@
             padding: 20px;
         }
         .admin-card {
-            max-width: 650px;
+            max-width: 700px;
             width: 100%;
             background: #fff;
             border-radius: 30px;
@@ -27,61 +27,7 @@
         }
         h1 { font-size: 2rem; font-weight: 600; color: #1f1713; }
         .sub { color: #7a685a; margin: 6px 0 20px 0; }
-        .field { margin: 16px 0; }
-        .field label { font-weight: 500; display: block; margin-bottom: 4px; }
-        .field input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #ddd0c4;
-            border-radius: 14px;
-            font-size: 1rem;
-            background: #fcf9f5;
-        }
-        .field input:focus { outline: none; border-color: #7a5f4a; }
-        .btn-primary {
-            background: #2e241f;
-            color: #fff;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 60px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            width: 100%;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        .btn-primary:hover { background: #1f1713; }
-        .btn-secondary {
-            background: #ece3d9;
-            color: #3f342c;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 60px;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 8px;
-            text-align: center;
-            display: inline-block;
-            text-decoration: none;
-        }
-        .btn-secondary:hover { background: #ddd0c4; }
-        .success-msg {
-            background: #d4e0d4;
-            color: #1f5a3a;
-            padding: 12px 18px;
-            border-radius: 14px;
-            margin: 12px 0;
-            display: none;
-        }
-        .back-link { display: block; text-align: center; margin-top: 18px; color: #7a685a; text-decoration: none; }
-        .back-link:hover { color: #2e241f; }
-        .orders-section {
-            margin-top: 30px;
-            border-top: 2px solid #ece3d9;
-            padding-top: 20px;
-        }
-        .orders-section h3 { color: #2e241f; margin-bottom: 10px; }
+        .orders-section { margin-top: 10px; }
         .order-item {
             background: #fcf9f5;
             border: 1px solid #e8dfd6;
@@ -98,112 +44,58 @@
             padding: 8px 20px;
             border-radius: 40px;
             cursor: pointer;
-            margin-top: 6px;
+            margin-top: 10px;
         }
         .clear-btn:hover { background: #c9302c; }
-        .whatsapp-badge {
-            background: #25D366;
-            color: #fff;
-            padding: 6px 14px;
-            border-radius: 40px;
+        .back-link { display: block; text-align: center; margin-top: 18px; color: #7a685a; text-decoration: none; }
+        .back-link:hover { color: #2e241f; }
+        .btn-secondary {
+            background: #ece3d9;
+            color: #3f342c;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            text-align: center;
             display: inline-block;
-            font-size: 0.8rem;
+            text-decoration: none;
         }
+        .btn-secondary:hover { background: #ddd0c4; }
     </style>
 </head>
 <body>
     <div class="admin-card">
-        <h1><i class="fas fa-cog" style="color:#7a5f4a;"></i> Admin Panel</h1>
-        <p class="sub">Set your payment &amp; WhatsApp details</p>
+        <h1><i class="fas fa-box" style="color:#7a5f4a;"></i> Orders</h1>
+        <p class="sub">View all customer orders</p>
 
-        <div class="success-msg" id="successMsg">✅ Settings saved successfully!</div>
-
-        <!-- WhatsApp Number -->
-        <div class="field">
-            <label><i class="fab fa-whatsapp" style="color:#25D366;"></i> Admin WhatsApp Number</label>
-            <input type="text" id="adminWhatsapp" placeholder="923XXXXXXXXX (without +)">
-            <small style="color:#7a685a;font-size:0.75rem;">Orders will be sent to this number via WhatsApp</small>
-        </div>
-
-        <div class="field">
-            <label><i class="fas fa-mobile-alt"></i> EasyPaisa Account</label>
-            <input type="text" id="easyAccount" placeholder="03XX-XXXXXXX">
-        </div>
-        <div class="field">
-            <label><i class="fas fa-mobile-alt"></i> JazzCash Account</label>
-            <input type="text" id="jazzAccount" placeholder="03XX-XXXXXXX">
-        </div>
-        <div class="field">
-            <label><i class="fas fa-university"></i> Bank Account (IBFT)</label>
-            <input type="text" id="bankAccount" placeholder="Bank Name · Account # · IBAN">
-        </div>
-
-        <button class="btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Save Settings</button>
-        <a href="index.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to Store</a>
-
-        <!-- Orders Section -->
         <div class="orders-section">
-            <h3><i class="fas fa-box"></i> Recent Orders</h3>
             <div id="ordersList"></div>
             <button class="clear-btn" onclick="clearOrders()"><i class="fas fa-trash"></i> Clear All Orders</button>
-            <a href="#" class="back-link" onclick="clearStorage()"><i class="fas fa-trash-alt"></i> Reset All Settings</a>
+            <a href="index.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to Store</a>
         </div>
     </div>
 
     <script>
-        function loadSettings() {
-            const saved = localStorage.getItem('paymentSettings');
-            if (saved) {
-                try {
-                    const data = JSON.parse(saved);
-                    document.getElementById('adminWhatsapp').value = data.adminWhatsapp || '';
-                    document.getElementById('easyAccount').value = data.easyPaisa || '';
-                    document.getElementById('jazzAccount').value = data.jazzCash || '';
-                    document.getElementById('bankAccount').value = data.bankAccount || '';
-                } catch(e) {}
-            }
-        }
-
-        function saveSettings() {
-            const settings = {
-                adminWhatsapp: document.getElementById('adminWhatsapp').value,
-                easyPaisa: document.getElementById('easyAccount').value,
-                jazzCash: document.getElementById('jazzAccount').value,
-                bankAccount: document.getElementById('bankAccount').value
-            };
-            localStorage.setItem('paymentSettings', JSON.stringify(settings));
-            const msg = document.getElementById('successMsg');
-            msg.style.display = 'block';
-            setTimeout(() => { msg.style.display = 'none'; }, 3000);
-        }
-
-        function clearStorage() {
-            if (confirm('Clear all settings?')) {
-                localStorage.removeItem('paymentSettings');
-                document.getElementById('adminWhatsapp').value = '';
-                document.getElementById('easyAccount').value = '';
-                document.getElementById('jazzAccount').value = '';
-                document.getElementById('bankAccount').value = '';
-                alert('All settings cleared!');
-            }
-        }
-
         function renderOrders() {
             const orders = JSON.parse(localStorage.getItem('orders') || '[]');
             const container = document.getElementById('ordersList');
             if (orders.length === 0) {
-                container.innerHTML = '<p style="color:#9b8a7b;">No orders yet.</p>';
+                container.innerHTML = '<p style="color:#9b8a7b;text-align:center;padding:20px;">No orders yet.</p>';
                 return;
             }
             container.innerHTML = orders.map((o, i) => `
                 <div class="order-item">
                     <strong>#${i+1}</strong> ${o.product} · ${o.price}<br>
                     <span style="font-size:0.8rem;color:#7a685a;">
-                        ${o.customer.name} · ${o.customer.phone}<br>
-                        ${o.customer.address}<br>
+                        👤 ${o.customer.name} · 📱 ${o.customer.phone}<br>
+                        🏠 ${o.customer.address}<br>
                         ${o.customer.location ? '📍 ' + o.customer.location : ''}
                     </span>
-                    <br><span style="font-size:0.75rem;background:#ece3d9;padding:2px 12px;border-radius:40px;">${o.payment === 'cod' ? 'COD' : 'Online'}</span>
+                    <br><span style="font-size:0.75rem;background:#ece3d9;padding:2px 12px;border-radius:40px;display:inline-block;margin-top:4px;">${o.payment === 'cod' ? '📦 COD' : '💳 Online'}</span>
+                    <span style="font-size:0.7rem;color:#9b8a7b;float:right;">${new Date(o.timestamp).toLocaleString()}</span>
                 </div>
             `).join('');
         }
@@ -215,7 +107,6 @@
             }
         }
 
-        loadSettings();
         renderOrders();
     </script>
 </body>
