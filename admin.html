@@ -3,141 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Store Admin Panel</title>
+    <title>Admin · Payment Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 30px; text-align: center;}
-        .admin-container { background: white; padding: 30px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: left;}
-        h2 { color: #0A1128; border-bottom: 2px solid #FFD700; padding-bottom: 10px; margin-bottom: 20px;}
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; color: #333;}
-        input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        button { background: #0A1128; color: #FFD700; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; margin-top: 10px; }
-        button:hover { background: #111D4A; }
-        .back-link { display: block; text-align: center; margin-top: 20px; color: #0A1128; text-decoration: none; font-weight: bold; padding: 10px; border: 1px solid #0A1128; border-radius: 5px;}
-        .danger-btn { background: #e74c3c; color: white; margin-top: 20px;}
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0ebe5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .admin-card {
+            max-width: 600px;
+            width: 100%;
+            background: #fff;
+            border-radius: 30px;
+            padding: 40px 35px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            border: 1px solid #e8dfd6;
+        }
+        h1 { font-size: 2rem; font-weight: 600; color: #1f1713; }
+        .sub { color: #7a685a; margin: 6px 0 20px 0; }
+        .field { margin: 16px 0; }
+        .field label { font-weight: 500; display: block; margin-bottom: 4px; }
+        .field input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd0c4;
+            border-radius: 14px;
+            font-size: 1rem;
+            background: #fcf9f5;
+        }
+        .field input:focus { outline: none; border-color: #7a5f4a; }
+        .btn-primary {
+            background: #2e241f;
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-primary:hover { background: #1f1713; }
+        .btn-secondary {
+            background: #ece3d9;
+            color: #3f342c;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-secondary:hover { background: #ddd0c4; }
+        .success-msg {
+            background: #d4e0d4;
+            color: #1f5a3a;
+            padding: 12px 18px;
+            border-radius: 14px;
+            margin: 12px 0;
+            display: none;
+        }
+        .back-link { display: block; text-align: center; margin-top: 18px; color: #7a685a; text-decoration: none; }
+        .back-link:hover { color: #2e241f; }
     </style>
 </head>
 <body>
+    <div class="admin-card">
+        <h1><i class="fas fa-cog" style="color:#7a5f4a;"></i> Admin Panel</h1>
+        <p class="sub">Set your payment account details for online orders.</p>
 
-    <div class="admin-container">
-        <h2 id="admin-title">Edit Product Slot</h2>
-        
-        <div class="form-group">
-            <label>Slot Status / Type</label>
-            <select id="p-type" onchange="toggleForm()">
-                <option value="product">Active Product</option>
-                <option value="comingsoon">Coming Soon (Empty)</option>
-                <option value="outofstock">Out of Stock (Empty)</option>
-            </select>
+        <div class="success-msg" id="successMsg">✅ Settings saved successfully!</div>
+
+        <div class="field">
+            <label><i class="fas fa-mobile-alt"></i> EasyPaisa Account</label>
+            <input type="text" id="easyAccount" placeholder="03XX-XXXXXXX">
+        </div>
+        <div class="field">
+            <label><i class="fas fa-mobile-alt"></i> JazzCash Account</label>
+            <input type="text" id="jazzAccount" placeholder="03XX-XXXXXXX">
+        </div>
+        <div class="field">
+            <label><i class="fas fa-university"></i> Bank Account (IBFT)</label>
+            <input type="text" id="bankAccount" placeholder="Bank Name · Account # · IBAN">
         </div>
 
-        <div id="product-details-form">
-            <div class="form-group">
-                <label>Product Name</label>
-                <input type="text" id="p-name">
-            </div>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea id="p-desc" rows="2"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Old Price (Line-cut)</label>
-                <input type="number" id="p-oldprice">
-            </div>
-            <div class="form-group">
-                <label>New Price (Discounted)</label>
-                <input type="number" id="p-price">
-            </div>
-            <div class="form-group">
-                <label>Image File Name (Optional)</label>
-                <input type="text" id="p-img" placeholder="e.g. image1.png">
-            </div>
-        </div>
-
-        <button onclick="saveSlot()">💾 Save Changes to Store</button>
-        <button class="danger-btn" onclick="clearSlot()">🗑️ Clear this Slot (Make Empty)</button>
-        
-        <a href="index.html" class="back-link">🔙 Go Back to Live Store</a>
+        <button class="btn-primary" onclick="saveSettings()"><i class="fas fa-save"></i> Save Settings</button>
+        <a href="index.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to Store</a>
+        <a href="#" class="back-link" onclick="clearStorage()"><i class="fas fa-trash-alt"></i> Reset / Clear All</a>
     </div>
 
     <script>
-        const TOTAL_SLOTS = 10;
-        let slots = JSON.parse(localStorage.getItem("store_slots")) || [];
-        
-        // Ensure slots exist
-        if(slots.length !== TOTAL_SLOTS) {
-            slots = [];
-            for(let i=1; i<=TOTAL_SLOTS; i++) {
-                slots.push({ id: i, type: 'empty' });
+        // Load saved settings
+        function loadSettings() {
+            const saved = localStorage.getItem('paymentSettings');
+            if (saved) {
+                try {
+                    const data = JSON.parse(saved);
+                    document.getElementById('easyAccount').value = data.easyPaisa || '';
+                    document.getElementById('jazzAccount').value = data.jazzCash || '';
+                    document.getElementById('bankAccount').value = data.bankAccount || '';
+                } catch(e) {}
             }
         }
 
-        // Get the slot ID the user clicked on in index.html
-        let targetSlotId = parseInt(sessionStorage.getItem("target_edit_slot")) || 1;
-        let slotIndex = targetSlotId - 1;
-        let currentSlot = slots[slotIndex];
-
-        document.getElementById("admin-title").innerText = `Editing Box / Slot #${targetSlotId}`;
-
-        // Populate form if it's already a product
-        if(currentSlot.type === 'product') {
-            document.getElementById("p-type").value = "product";
-            document.getElementById("p-name").value = currentSlot.name || "";
-            document.getElementById("p-desc").value = currentSlot.desc || "";
-            document.getElementById("p-oldprice").value = currentSlot.oldPrice || "";
-            document.getElementById("p-price").value = currentSlot.price || "";
-            document.getElementById("p-img").value = currentSlot.img || "";
-        } else {
-            document.getElementById("p-type").value = currentSlot.status === 'outofstock' ? "outofstock" : "comingsoon";
-            toggleForm();
+        function saveSettings() {
+            const settings = {
+                easyPaisa: document.getElementById('easyAccount').value,
+                jazzCash: document.getElementById('jazzAccount').value,
+                bankAccount: document.getElementById('bankAccount').value
+            };
+            localStorage.setItem('paymentSettings', JSON.stringify(settings));
+            const msg = document.getElementById('successMsg');
+            msg.style.display = 'block';
+            setTimeout(() => { msg.style.display = 'none'; }, 3000);
         }
 
-        function toggleForm() {
-            let type = document.getElementById("p-type").value;
-            if(type === 'product') {
-                document.getElementById("product-details-form").style.display = "block";
-            } else {
-                document.getElementById("product-details-form").style.display = "none";
+        function clearStorage() {
+            if (confirm('Are you sure you want to clear all payment settings?')) {
+                localStorage.removeItem('paymentSettings');
+                document.getElementById('easyAccount').value = '';
+                document.getElementById('jazzAccount').value = '';
+                document.getElementById('bankAccount').value = '';
+                alert('All settings cleared!');
             }
         }
 
-        function saveSlot() {
-            let type = document.getElementById("p-type").value;
-            
-            if(type === 'product') {
-                let name = document.getElementById("p-name").value;
-                let price = document.getElementById("p-price").value;
-                if(!name || !price) { alert("Name and Price are required for a product!"); return; }
-                
-                slots[slotIndex] = {
-                    ...slots[slotIndex], // keep tags if any
-                    type: 'product',
-                    name: name,
-                    desc: document.getElementById("p-desc").value,
-                    oldPrice: document.getElementById("p-oldprice").value,
-                    price: price,
-                    img: document.getElementById("p-img").value
-                };
-            } else {
-                slots[slotIndex] = {
-                    ...slots[slotIndex],
-                    type: 'empty',
-                    status: type // 'comingsoon' or 'outofstock'
-                };
-            }
-
-            localStorage.setItem("store_slots", JSON.stringify(slots));
-            alert(`Slot #${targetSlotId} successfully updated!`);
-            window.location.href = "index.html";
-        }
-
-        function clearSlot() {
-            if(confirm("Are you sure you want to clear this slot and mark it as 'Coming Soon'?")) {
-                slots[slotIndex] = { ...slots[slotIndex], type: 'empty', status: 'comingsoon' };
-                localStorage.setItem("store_slots", JSON.stringify(slots));
-                window.location.href = "index.html";
-            }
-        }
+        loadSettings();
     </script>
 </body>
 </html>
