@@ -3,145 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secure Admin Panel</title>
+    <title>Store Admin Panel</title>
     <style>
-        body { font-family: sans-serif; background: #f4f4f4; padding: 30px; text-align: center; }
-        .box { background: white; padding: 30px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: left;}
+        body { font-family: sans-serif; background: #f4f4f4; padding: 30px; text-align: center;}
+        .admin-container { background: white; padding: 30px; border-radius: 10px; max-width: 500px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); text-align: left;}
         h2 { color: #0A1128; border-bottom: 2px solid #FFD700; padding-bottom: 10px; margin-bottom: 20px;}
         .form-group { margin-bottom: 15px; }
         label { display: block; font-weight: bold; margin-bottom: 5px; color: #333;}
         input, textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
         button { background: #0A1128; color: #FFD700; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; margin-top: 10px; }
         button:hover { background: #111D4A; }
-        .btn-danger { background: #e74c3c; color: white; margin-top: 15px; }
-        .back-link { display: block; text-align: center; margin-top: 20px; color: #0A1128; font-weight: bold;}
-        
-        #login-screen { display: none; }
-        #admin-panel { display: none; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #0A1128; text-decoration: none; font-weight: bold; padding: 10px; border: 1px solid #0A1128; border-radius: 5px;}
+        .danger-btn { background: #e74c3c; color: white; margin-top: 20px;}
     </style>
 </head>
 <body>
 
-    <div class="box" id="login-screen" style="text-align: center;">
-        <h2>Admin Login required</h2>
-        <div class="form-group"><input type="text" id="l-user" placeholder="Username (kgf292900)"></div>
-        <div class="form-group"><input type="password" id="l-pass" placeholder="Password (kgf292900)"></div>
-        <button onclick="login()">Login</button>
-        <a href="index.html" class="back-link">Return to Store</a>
-    </div>
-
-    <div class="box" id="admin-panel">
-        <h2>Edit Product Slot</h2>
+    <div class="admin-container">
+        <h2 id="admin-title">Edit Product Slot</h2>
         
         <div class="form-group">
-            <label>Select Box / Slot to Edit</label>
-            <select id="slot-select" onchange="loadSlotData()"></select>
-        </div>
-        
-        <div class="form-group">
-            <label>Status</label>
-            <select id="p-status">
-                <option value="true">In Stock (Active Product)</option>
-                <option value="false">Out of Stock (Empty Box)</option>
+            <label>Slot Status / Type</label>
+            <select id="p-type" onchange="toggleForm()">
+                <option value="product">Active Product</option>
+                <option value="comingsoon">Coming Soon (Empty)</option>
+                <option value="outofstock">Out of Stock (Empty)</option>
             </select>
         </div>
 
-        <div class="form-group">
-            <label>Product Name</label>
-            <input type="text" id="p-name">
+        <div id="product-details-form">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" id="p-name">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="p-desc" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Old Price (Line-cut)</label>
+                <input type="number" id="p-oldprice">
+            </div>
+            <div class="form-group">
+                <label>New Price (Discounted)</label>
+                <input type="number" id="p-price">
+            </div>
+            <div class="form-group">
+                <label>Image File Name (Optional)</label>
+                <input type="text" id="p-img" placeholder="e.g. image1.png">
+            </div>
         </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea id="p-desc" rows="2"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Old Price (Line-cut)</label>
-            <input type="number" id="p-oldprice">
-        </div>
-        <div class="form-group">
-            <label>New Price (Discounted)</label>
-            <input type="number" id="p-price">
-        </div>
-        <div class="form-group">
-            <label>Image File Name</label>
-            <input type="text" id="p-img" placeholder="e.g. product2.png">
-        </div>
+
+        <button onclick="saveSlot()">💾 Save Changes to Store</button>
+        <button class="danger-btn" onclick="clearSlot()">🗑️ Clear this Slot (Make Empty)</button>
         
-        <button onclick="saveSlot()">Save Changes</button>
         <a href="index.html" class="back-link">🔙 Go Back to Live Store</a>
     </div>
 
     <script>
-        let gridData = JSON.parse(localStorage.getItem("store_grid"));
+        const TOTAL_SLOTS = 10;
+        let slots = JSON.parse(localStorage.getItem("store_slots")) || [];
+        
+        // Ensure slots exist
+        if(slots.length !== TOTAL_SLOTS) {
+            slots = [];
+            for(let i=1; i<=TOTAL_SLOTS; i++) {
+                slots.push({ id: i, type: 'empty' });
+            }
+        }
 
-        function checkAuth() {
-            if(sessionStorage.getItem("isAdmin") === "true") {
-                document.getElementById("login-screen").style.display = "none";
-                document.getElementById("admin-panel").style.display = "block";
-                initEditor();
+        // Get the slot ID the user clicked on in index.html
+        let targetSlotId = parseInt(sessionStorage.getItem("target_edit_slot")) || 1;
+        let slotIndex = targetSlotId - 1;
+        let currentSlot = slots[slotIndex];
+
+        document.getElementById("admin-title").innerText = `Editing Box / Slot #${targetSlotId}`;
+
+        // Populate form if it's already a product
+        if(currentSlot.type === 'product') {
+            document.getElementById("p-type").value = "product";
+            document.getElementById("p-name").value = currentSlot.name || "";
+            document.getElementById("p-desc").value = currentSlot.desc || "";
+            document.getElementById("p-oldprice").value = currentSlot.oldPrice || "";
+            document.getElementById("p-price").value = currentSlot.price || "";
+            document.getElementById("p-img").value = currentSlot.img || "";
+        } else {
+            document.getElementById("p-type").value = currentSlot.status === 'outofstock' ? "outofstock" : "comingsoon";
+            toggleForm();
+        }
+
+        function toggleForm() {
+            let type = document.getElementById("p-type").value;
+            if(type === 'product') {
+                document.getElementById("product-details-form").style.display = "block";
             } else {
-                document.getElementById("login-screen").style.display = "block";
-                document.getElementById("admin-panel").style.display = "none";
-            }
-        }
-
-        function login() {
-            let u = document.getElementById("l-user").value;
-            let p = document.getElementById("l-pass").value;
-            if(u === "kgf292900" && p === "kgf292900") {
-                sessionStorage.setItem("isAdmin", "true");
-                checkAuth();
-            } else {
-                alert("Invalid Username or Password!");
-            }
-        }
-
-        function initEditor() {
-            let selectHtml = "";
-            gridData.forEach(p => {
-                let badge = p.special ? ` [${p.special}]` : "";
-                selectHtml += `<option value="${p.id}">Box ${p.id} - ${p.name} ${badge}</option>`;
-            });
-            document.getElementById("slot-select").innerHTML = selectHtml;
-
-            // Check URL for specific slot
-            let urlParams = new URLSearchParams(window.location.search);
-            let slotId = urlParams.get('slot');
-            if(slotId) {
-                document.getElementById("slot-select").value = slotId;
-            }
-            loadSlotData();
-        }
-
-        function loadSlotData() {
-            let id = parseInt(document.getElementById("slot-select").value);
-            let p = gridData.find(x => x.id === id);
-            if(p) {
-                document.getElementById("p-status").value = p.isActive.toString();
-                document.getElementById("p-name").value = p.name;
-                document.getElementById("p-desc").value = p.desc;
-                document.getElementById("p-oldprice").value = p.oldPrice;
-                document.getElementById("p-price").value = p.price;
-                document.getElementById("p-img").value = p.img;
+                document.getElementById("product-details-form").style.display = "none";
             }
         }
 
         function saveSlot() {
-            let id = parseInt(document.getElementById("slot-select").value);
-            let index = gridData.findIndex(x => x.id === id);
+            let type = document.getElementById("p-type").value;
             
-            gridData[index].isActive = document.getElementById("p-status").value === "true";
-            gridData[index].name = document.getElementById("p-name").value;
-            gridData[index].desc = document.getElementById("p-desc").value;
-            gridData[index].oldPrice = document.getElementById("p-oldprice").value;
-            gridData[index].price = document.getElementById("p-price").value;
-            gridData[index].img = document.getElementById("p-img").value;
+            if(type === 'product') {
+                let name = document.getElementById("p-name").value;
+                let price = document.getElementById("p-price").value;
+                if(!name || !price) { alert("Name and Price are required for a product!"); return; }
+                
+                slots[slotIndex] = {
+                    ...slots[slotIndex], // keep tags if any
+                    type: 'product',
+                    name: name,
+                    desc: document.getElementById("p-desc").value,
+                    oldPrice: document.getElementById("p-oldprice").value,
+                    price: price,
+                    img: document.getElementById("p-img").value
+                };
+            } else {
+                slots[slotIndex] = {
+                    ...slots[slotIndex],
+                    type: 'empty',
+                    status: type // 'comingsoon' or 'outofstock'
+                };
+            }
 
-            localStorage.setItem("store_grid", JSON.stringify(gridData));
-            alert("Changes Saved Successfully!");
+            localStorage.setItem("store_slots", JSON.stringify(slots));
+            alert(`Slot #${targetSlotId} successfully updated!`);
+            window.location.href = "index.html";
         }
 
-        window.onload = checkAuth;
+        function clearSlot() {
+            if(confirm("Are you sure you want to clear this slot and mark it as 'Coming Soon'?")) {
+                slots[slotIndex] = { ...slots[slotIndex], type: 'empty', status: 'comingsoon' };
+                localStorage.setItem("store_slots", JSON.stringify(slots));
+                window.location.href = "index.html";
+            }
+        }
     </script>
 </body>
 </html>
