@@ -2,278 +2,599 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Scented Briquette | Official Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scented Briquette · Heritage Fragrance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600;700&family=Amiri:wght@400;700&display=swap');
-        
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        :root { --bg-dark: #0A1128; --gold: #FFD700; --text-light: #ffffff; --green: #25D366; --danger: #e74c3c; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-dark); color: var(--text-light); text-align: center; overflow-x: hidden; }
-
-        /* Header */
-        header { background: #ffffff; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; border-bottom: 3px solid var(--gold); flex-wrap: wrap; }
-        .logo-container { display: flex; align-items: center; gap: 10px; }
-        .logo-img { max-height: 50px; width: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-        .logo-text { color: #0A1128; font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; letter-spacing: 1px; }
-        .header-actions { display: flex; gap: 15px; align-items: center; margin-top: 5px; }
-        .lang-select { padding: 6px 10px; border-radius: 5px; border: 1px solid var(--gold); background: #0A1128; color: var(--gold); font-weight: 600; cursor: pointer; font-size: 14px; }
-        
-        /* Cart Icon */
-        .cart-icon-container { position: relative; cursor: pointer; font-size: 24px; color: #0A1128; display: flex; align-items: center; }
-        .cart-badge { position: absolute; top: -8px; right: -10px; background: var(--danger); color: white; font-size: 12px; font-weight: bold; padding: 2px 6px; border-radius: 50%; }
-
-        /* Banner */
-        .store-banner { padding: 60px 20px; border-bottom: 2px solid var(--gold); background: linear-gradient(to bottom, #111D4A, #0A1128); }
-        .store-banner h1 { font-family: 'Playfair Display', serif; font-size: 40px; color: var(--gold); text-shadow: 2px 2px 5px rgba(0,0,0,0.8); margin-bottom: 15px; }
-        .store-banner p { font-size: 16px; color: #E0E0E0; max-width: 700px; margin: 0 auto 25px auto; line-height: 1.6; }
-        .hero-contact-btn { background: var(--green); color: white; padding: 12px 30px; font-size: 18px; font-weight: bold; border: none; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); text-decoration: none; display: inline-block; }
-        .hero-contact-btn:hover { background: #1ebe57; transform: translateY(-3px); }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f5f0eb;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-card {
+            max-width: 1200px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+            padding: 30px 35px;
+            border: 1px solid #e8dfd6;
+        }
+        /* Language Bar */
+        .lang-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid #d0c4b8;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #3f342c;
+            cursor: pointer;
+            background: #fcf9f5;
+            transition: 0.2s;
+        }
+        .lang-btn.active {
+            background: #2e241f;
+            border-color: #2e241f;
+            color: #fff;
+        }
+        .lang-btn:hover { background: #e7dfd6; }
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: #7a685a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        h1 { font-size: 3rem; font-weight: 700; color: #1f1713; }
+        .sub-head {
+            font-size: 1.2rem;
+            color: #5e4d3f;
+            background: #faf5ef;
+            padding: 12px 20px;
+            border-radius: 60px;
+            display: inline-block;
+            margin: 10px 0 20px 0;
+            border-left: 4px solid #dac2b0;
+        }
         /* Products Grid */
-        .container { max-width: 1200px; margin: 50px auto; padding: 0 5%; text-align: left; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); border-bottom: 3px solid var(--gold); display: inline-block; padding-bottom: 10px; margin-bottom: 30px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
-        
-        /* Product Card / Slot */
-        .product-card { background: #111D4A; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,215,0,0.3); box-shadow: 0 5px 20px rgba(0,0,0,0.5); text-align: center; display: flex; flex-direction: column; position: relative; }
-        .img-area { width: 100%; height: 200px; background: #1C2B59; display: flex; align-items: center; justify-content: center; color: #A0AABF; cursor: pointer;}
-        .img-area img { width: 100%; height: 100%; object-fit: cover; }
-        .product-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
-        .product-title { font-size: 18px; font-weight: 700; color: var(--gold); margin-bottom: 10px; }
-        .product-desc { font-size: 13px; color: #FFFFFF; margin-bottom: 15px; line-height: 1.4; flex-grow: 1; }
-        .pricing { margin-bottom: 15px; }
-        .pricing del { color: #A0AABF; font-size: 14px; margin-right: 8px; }
-        .pricing .new-price { color: var(--gold); font-size: 22px; font-weight: 700; }
-        .add-cart-btn { background: var(--gold); color: #0A1128; border: none; padding: 10px; width: 100%; font-weight: bold; font-size: 15px; border-radius: 6px; cursor: pointer; transition: 0.2s; margin-bottom: 10px; }
-        
-        /* Reviews Section inside Product Card */
-        .reviews-section { background: rgba(0,0,0,0.2); padding: 12px; margin-top: 15px; border-radius: 8px; text-align: left; }
-        .stars { color: var(--gold); font-size: 14px; margin-bottom: 4px; }
-        .review-text { font-size: 12px; color: #E0E0E0; font-style: italic; }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        .product-card {
+            background: #fcf9f5;
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #e8dfd6;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.25s;
+            position: relative;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+            border-color: #b7a18c;
+        }
+        .product-card i { font-size: 2.8rem; color: #7a5f4a; margin-bottom: 8px; display: block; }
+        .product-card h3 { font-size: 1.1rem; color: #2b1f19; }
+        .product-card .price { color: #7a5f4a; font-weight: 600; margin: 6px 0; }
+        .product-card .tag {
+            display: inline-block;
+            background: #e2d4c9;
+            padding: 2px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-top: 6px;
+        }
+        .product-card .tag.advance { background: #d4e0d4; color: #1f5a3a; }
+        .product-card .tag.cod { background: #f0e0d0; color: #8a5a3a; }
 
-        /* Tags for Special Deals */
-        .special-tag { position: absolute; top: 10px; left: 10px; background: var(--danger); color: white; padding: 4px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; z-index: 10; text-transform: uppercase;}
-        
-        /* Empty / Coming Soon Box Style */
-        .coming-soon-content { color: var(--gold); opacity: 0.7; }
-        .coming-soon-content h3 { font-size: 24px; margin-bottom: 10px; }
-        .coming-soon-content p { font-size: 14px; }
-        .admin-edit-btn { background: rgba(255,255,255,0.1); border: 1px solid var(--gold); color: var(--gold); padding: 5px 10px; font-size: 12px; border-radius: 4px; cursor: pointer; margin-top: 15px; display: inline-block; }
+        /* Payment Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.45);
+            backdrop-filter: blur(4px);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-overlay.show { display: flex; }
+        .modal {
+            background: #fff;
+            max-width: 550px;
+            width: 92%;
+            border-radius: 30px;
+            padding: 35px 30px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+            animation: fadeIn 0.25s ease;
+        }
+        @keyframes fadeIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+        .modal h2 { font-size: 1.6rem; margin-bottom: 5px; }
+        .modal .product-name { color: #7a5f4a; font-weight: 500; }
+        .modal .divider { border-top: 1px solid #ece3d9; margin: 18px 0; }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 18px;
+            border: 2px solid #ece3d9;
+            border-radius: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .payment-option:hover { border-color: #b7a18c; background: #faf6f0; }
+        .payment-option.selected { border-color: #2e7d5e; background: #f0f7f3; }
+        .payment-option i { font-size: 1.8rem; width: 40px; color: #5e4d3f; }
+        .payment-option .info { flex: 1; }
+        .payment-option .info .label { font-weight: 600; }
+        .payment-option .info .sub { font-size: 0.8rem; color: #7a685a; }
+        .payment-option .radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; }
+        .payment-option.selected .radio { border-color: #2e7d5e; background: #2e7d5e; }
+        .payment-option.selected .radio::after { content: "✓"; color: #fff; font-size: 12px; }
+        .payment-details {
+            background: #f7f2eb;
+            border-radius: 16px;
+            padding: 18px;
+            margin: 15px 0;
+        }
+        .payment-details input, .payment-details select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd0c4;
+            border-radius: 12px;
+            margin: 6px 0;
+            font-size: 1rem;
+            background: #fff;
+        }
+        .btn-primary {
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn-primary:hover { background: #1fbd59; transform: scale(1.01); }
+        .btn-secondary {
+            background: #ece3d9;
+            color: #3f342c;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+        }
+        .btn-secondary:hover { background: #ddd0c4; }
+        .close-modal {
+            float: right;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #7a685a;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+        .close-modal:hover { color: #2e241f; }
+        .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-        /* Login Modal for Admin Access */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999; justify-content: center; align-items: center; padding: 10px; }
-        .login-box { background: #ffffff; color: #000; padding: 30px; border-radius: 12px; width: 100%; max-width: 350px; text-align: left; position: relative; }
-        .login-box h3 { color: #0A1128; margin-bottom: 20px; font-family: 'Playfair Display', serif; }
-        .close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #333; font-weight: bold; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #333; }
-        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-        .login-submit-btn { width: 100%; background: #0A1128; color: var(--gold); border: none; padding: 12px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; }
+        /* RTL for Arabic/Urdu */
+        .lang-ar, .lang-ur {
+            direction: rtl;
+            text-align: right;
+        }
+        .lang-ar .sub-head, .lang-ur .sub-head {
+            border-left: none;
+            border-right: 4px solid #dac2b0;
+            padding-left: 0;
+            padding-right: 20px;
+        }
+        .lang-ar .lang-bar, .lang-ur .lang-bar { justify-content: flex-start; }
+        .lang-ar .badge, .lang-ur .badge { flex-direction: row-reverse; }
 
-        /* Cart Overlay (Sidebar) */
-        .cart-sidebar { display: none; position: fixed; top: 0; right: 0; width: 100%; max-width: 400px; height: 100%; background: #fff; color: #333; padding: 20px; box-shadow: -5px 0 15px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; }
-        .cart-header { display: flex; justify-content: space-between; border-bottom: 2px solid var(--gold); padding-bottom: 15px; margin-bottom: 20px; }
-        .cart-items-container { flex-grow: 1; overflow-y: auto; margin-bottom: 20px; }
-        .cart-item { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 10px 0; }
-        .submit-order-btn { width: 100%; background: var(--green); color: white; padding: 15px; font-size: 16px; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; }
+        @media (max-width: 650px) {
+            .main-card { padding: 18px; }
+            h1 { font-size: 2.2rem; }
+            .row-2 { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+        }
+        @media (max-width: 420px) {
+            .products-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo-container">
-            <img src="cub1.png" alt="Scented Briquette Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/60?text=LOGO'">
-            <div class="logo-text">SCENTED BRIQUETTE</div>
-        </div>
-        <div class="header-actions">
-            <select class="lang-select" id="langSwitcher" onchange="changeLanguage()">
-                <option value="en">English</option>
-                <option value="ur">Urdu (اردو)</option>
-            </select>
-            <div class="cart-icon-container" onclick="openCart()">
-                🛒 <span style="font-size: 16px; font-weight: bold; margin-left: 5px;">Cart</span>
-                <div class="cart-badge" id="cart-count">0</div>
-            </div>
-        </div>
-    </header>
-
-    <div class="store-banner">
-        <h1 id="banner-title">Heritage Fragrance Collection</h1>
-        <p id="banner-desc">Explore the world's most unique scents. Safe for health standards, and repels mosquitoes.</p>
-        <a href="https://wa.me/923162260608" class="hero-contact-btn" target="_blank">📞 Contact on WhatsApp</a>
+<div class="main-card" id="app">
+    <!-- Language Bar -->
+    <div class="lang-bar">
+        <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
+        <button class="lang-btn" data-lang="ar">🇸🇦 العربية</button>
+        <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
     </div>
 
-    <div class="container">
-        <div class="section-title">Our Premium Products</div>
-        <div class="product-grid" id="product-list">
-            </div>
-    </div>
+    <!-- Content -->
+    <div id="contentWrapper">
+        <div class="badge"><i class="fas fa-leaf"></i> <span data-key="badge">Heritage Fragrance Collection</span></div>
+        <h1 data-key="title">SCENTED BRIQUETTE</h1>
+        <div class="sub-head"><i class="fas fa-spa"></i> <span data-key="sub">Explore unique scents · Health safe · Mosquito repellent</span></div>
 
-    <div class="modal-overlay" id="loginModal">
-        <div class="login-box">
-            <span class="close-btn" onclick="closeLogin()">&times;</span>
-            <h3>Admin Access Required</h3>
-            <p style="font-size: 12px; color: #666; margin-bottom: 15px;">Login to edit Slot <span id="editing-slot-num"></span></p>
-            <div class="form-group">
-                <label>User ID</label>
-                <input type="text" id="admin-user" placeholder="Enter User ID">
-            </div>
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" id="admin-pass" placeholder="Enter Password">
-            </div>
-            <button class="login-submit-btn" onclick="verifyAdmin()">Login & Edit</button>
+        <!-- Products -->
+        <div class="products-grid" id="productGrid">
+            <!-- products will be rendered by JS -->
+        </div>
+
+        <!-- Admin Link -->
+        <div style="text-align:center;margin-top:20px;font-size:0.85rem;color:#9b8a7b;">
+            <i class="fas fa-cog"></i> <a href="#" onclick="openAdmin()" style="color:#7a5f4a;text-decoration:none;" data-key="adminLink">Admin Panel (Payment Settings)</a>
         </div>
     </div>
+</div>
 
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h2>Your Cart</h2>
-            <span class="close-btn" style="position:static;" onclick="closeCart()">&times;</span>
+<!-- Payment Modal -->
+<div class="modal-overlay" id="paymentModal">
+    <div class="modal">
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+        <h2 data-key="modalTitle">Payment Options</h2>
+        <p class="product-name" id="modalProductName">—</p>
+        <div class="divider"></div>
+
+        <!-- Payment Method Selection -->
+        <div id="paymentOptions">
+            <div class="payment-option" data-method="cod" onclick="selectPayment('cod')">
+                <i class="fas fa-truck"></i>
+                <div class="info"><div class="label" data-key="codLabel">Cash on Delivery</div><div class="sub" data-key="codSub">Pay when you receive</div></div>
+                <div class="radio"></div>
+            </div>
+            <div class="payment-option" data-method="online" onclick="selectPayment('online')">
+                <i class="fas fa-credit-card"></i>
+                <div class="info"><div class="label" data-key="onlineLabel">Online Payment</div><div class="sub" data-key="onlineSub">EasyPaisa · JazzCash · Bank Card</div></div>
+                <div class="radio"></div>
+            </div>
         </div>
-        <div class="cart-items-container" id="cart-items-list"></div>
-        <div style="border-top: 2px solid #eee; padding-top: 15px; margin-bottom: 15px; font-weight: bold; font-size: 18px; display:flex; justify-content:space-between;">
-            <span>Total:</span> <span>Rs. <span id="cart-total-amount">0</span></span>
+
+        <!-- Online Payment Details (hidden by default) -->
+        <div id="onlineDetails" style="display:none;">
+            <div class="divider"></div>
+            <div class="payment-details">
+                <p style="font-weight:600;margin-bottom:8px;" data-key="paymentMethodTitle">Select Payment Method</p>
+                <select id="paymentMethodSelect" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd0c4;font-size:1rem;">
+                    <option value="easypaisa">EasyPaisa</option>
+                    <option value="jazzcash">JazzCash</option>
+                    <option value="bank">Bank Card / IBFT</option>
+                </select>
+                <div id="accountDetails" style="margin-top:12px;background:#fff;padding:14px;border-radius:12px;border:1px solid #ece3d9;">
+                    <p style="font-size:0.9rem;color:#5e4d3f;" data-key="accountInfo">Account details will appear here (set in Admin)</p>
+                    <div id="adminAccountDisplay" style="font-weight:500;color:#1f1713;margin-top:6px;"></div>
+                </div>
+            </div>
         </div>
-        
-        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #ddd; text-align: left;">
-            <h4 style="margin-bottom: 10px;">Delivery Details</h4>
-            <div class="form-group"><input type="text" id="cust-name" placeholder="Full Name" required></div>
-            <div class="form-group"><input type="tel" id="cust-phone" placeholder="WhatsApp Number" required></div>
-            <div class="form-group"><textarea id="cust-address" rows="2" placeholder="Complete Address" required></textarea></div>
-            <button class="submit-order-btn" onclick="checkoutOrder()">Send Order via WhatsApp</button>
-        </div>
+
+        <div class="divider"></div>
+        <button class="btn-primary" onclick="processOrder()"><i class="fas fa-check"></i> <span data-key="confirmBtn">Confirm Order</span></button>
+        <button class="btn-secondary" onclick="closeModal()" data-key="cancelBtn">Cancel</button>
     </div>
+</div>
 
-    <script>
-        const TOTAL_SLOTS = 10;
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let editingSlotId = null;
+<!-- Admin Modal (for setting payment accounts) -->
+<div class="modal-overlay" id="adminModal">
+    <div class="modal">
+        <button class="close-modal" onclick="closeAdmin()">&times;</button>
+        <h2 data-key="adminTitle">Admin Panel</h2>
+        <p style="color:#5e4d3f;" data-key="adminSub">Set your payment account details below</p>
+        <div class="divider"></div>
+        <div class="payment-details">
+            <label style="font-weight:500;" data-key="easyLabel">EasyPaisa Account</label>
+            <input type="text" id="easyAccount" placeholder="03XX-XXXXXXX" style="margin-bottom:12px;">
+            <label style="font-weight:500;" data-key="jazzLabel">JazzCash Account</label>
+            <input type="text" id="jazzAccount" placeholder="03XX-XXXXXXX" style="margin-bottom:12px;">
+            <label style="font-weight:500;" data-key="bankLabel">Bank Account (IBFT)</label>
+            <input type="text" id="bankAccount" placeholder="Bank Name · Account # · IBAN">
+        </div>
+        <button class="btn-primary" onclick="saveAdminSettings()" style="background:#2e241f;"><i class="fas fa-save"></i> <span data-key="saveBtn">Save Settings</span></button>
+        <button class="btn-secondary" onclick="closeAdmin()" data-key="closeBtn">Close</button>
+    </div>
+</div>
 
-        // Base 10 Slots setup (Default data if nothing is saved)
-        let defaultSlots = [
-            { id: 1, type: 'product', name: "Scented Briquette Box", desc: "Oud, Musk, Motia, Loban. 100% Safe.", oldPrice: 1500, price: 1000, img: "" },
-            { id: 2, type: 'product', name: "Electrical Warmer", desc: "Premium burner for smoke-free aroma.", oldPrice: 3000, price: 2000, img: "" },
-            { id: 3, type: 'empty', tag: 'Crazy Deal' },
-            { id: 4, type: 'empty', tag: 'Gift Pack' },
-            { id: 5, type: 'empty' }, { id: 6, type: 'empty' },
-            { id: 7, type: 'empty' }, { id: 8, type: 'empty' },
-            { id: 9, type: 'empty' }, { id: 10, type: 'empty' }
-        ];
+<script>
+// ==================== TRANSLATIONS ====================
+const translations = {
+    en: {
+        badge: "Heritage Fragrance Collection",
+        title: "SCENTED BRIQUETTE",
+        sub: "Explore unique scents · Health safe · Mosquito repellent",
+        adminLink: "Admin Panel (Payment Settings)",
+        modalTitle: "Payment Options",
+        codLabel: "Cash on Delivery",
+        codSub: "Pay when you receive",
+        onlineLabel: "Online Payment",
+        onlineSub: "EasyPaisa · JazzCash · Bank Card",
+        paymentMethodTitle: "Select Payment Method",
+        accountInfo: "Account details will appear here (set in Admin)",
+        confirmBtn: "Confirm Order",
+        cancelBtn: "Cancel",
+        adminTitle: "Admin Panel",
+        adminSub: "Set your payment account details below",
+        easyLabel: "EasyPaisa Account",
+        jazzLabel: "JazzCash Account",
+        bankLabel: "Bank Account (IBFT)",
+        saveBtn: "Save Settings",
+        closeBtn: "Close",
+        // Products
+        p1: "Sandalwood",
+        p1desc: "Warm & woody · Premium",
+        p2: "Jasmine Bliss",
+        p2desc: "Floral fresh · Calming",
+        p3: "Cedar Forest",
+        p3desc: "Earthy calm · Grounding",
+        p4: "Mint & Eucalyptus",
+        p4desc: "Cool · Mosquito repellent",
+        p5: "Midnight Oud",
+        p5desc: "Deep resin · Luxurious",
+        p6: "Rose & Amber",
+        p6desc: "Romantic · Long lasting"
+    },
+    ar: {
+        badge: "مجموعة العطور التراثية",
+        title: "بريكت معطر",
+        sub: "روائح فريدة · آمن صحياً · طارد للبعوض",
+        adminLink: "لوحة التحكم (إعدادات الدفع)",
+        modalTitle: "خيارات الدفع",
+        codLabel: "الدفع عند الاستلام",
+        codSub: "ادفع عند الاستلام",
+        onlineLabel: "دفع عبر الإنترنت",
+        onlineSub: "إيزي بايسا · جاز كاش · بطاقة بنكية",
+        paymentMethodTitle: "اختر طريقة الدفع",
+        accountInfo: "ستظهر تفاصيل الحساب هنا (ضبط في لوحة التحكم)",
+        confirmBtn: "تأكيد الطلب",
+        cancelBtn: "إلغاء",
+        adminTitle: "لوحة التحكم",
+        adminSub: "أدخل تفاصيل حساب الدفع الخاص بك أدناه",
+        easyLabel: "حساب إيزي بايسا",
+        jazzLabel: "حساب جاز كاش",
+        bankLabel: "حساب بنكي (IBFT)",
+        saveBtn: "حفظ الإعدادات",
+        closeBtn: "إغلاق",
+        p1: "خشب الصندل",
+        p1desc: "دافئ وخشبي · فاخر",
+        p2: "ياسمين سعيد",
+        p2desc: "زهري منعش · مهدئ",
+        p3: "غابة الأرز",
+        p3desc: "ترابي هادئ · متوازن",
+        p4: "نعناع وأوكالبتوس",
+        p4desc: "بارد · طارد للبعوض",
+        p5: "عود منتصف الليل",
+        p5desc: "راتنج عميق · فاخر",
+        p6: "ورد وعنبر",
+        p6desc: "رومانسي · يدوم طويلاً"
+    },
+    ur: {
+        badge: "ہیریٹیج خوشبو کا مجموعہ",
+        title: "خوشبودار بریکٹ",
+        sub: "منفرد خوشبوئیاں · صحت کے لیے محفوظ · مچھر بھگانے والا",
+        adminLink: "ایڈمن پینل (ادائیگی کی ترتیبات)",
+        modalTitle: "ادائیگی کے اختیارات",
+        codLabel: "ڈلیوری پر نقد",
+        codSub: "موصول ہونے پر ادائیگی کریں",
+        onlineLabel: "آن لائن ادائیگی",
+        onlineSub: "ایزی پیسا · جاز کیش · بینک کارڈ",
+        paymentMethodTitle: "ادائیگی کا طریقہ منتخب کریں",
+        accountInfo: "اکاؤنٹ کی تفصیلات یہاں ظاہر ہوں گی (ایڈمن میں سیٹ کریں)",
+        confirmBtn: "آرڈر کی تصدیق کریں",
+        cancelBtn: "منسوخ کریں",
+        adminTitle: "ایڈمن پینل",
+        adminSub: "اپنی ادائیگی کی اکاؤنٹ تفصیلات نیچے درج کریں",
+        easyLabel: "ایزی پیسا اکاؤنٹ",
+        jazzLabel: "جاز کیش اکاؤنٹ",
+        bankLabel: "بینک اکاؤنٹ (IBFT)",
+        saveBtn: "ترتیبات محفوظ کریں",
+        closeBtn: "بند کریں",
+        p1: "چندن",
+        p1desc: "گرم اور لکڑی والا · اعلیٰ",
+        p2: "یاسمین بلس",
+        p2desc: "پھولوں والی تازگی · پرسکون",
+        p3: "دیودار کا جنگل",
+        p3desc: "مٹی والا سکون · زمین سے جڑا",
+        p4: "پودینہ اور یوکلپٹس",
+        p4desc: "ٹھنڈا · مچھر بھگانے والا",
+        p5: "آدھی رات کا عود",
+        p5desc: "گہرا رال · پرتعیش",
+        p6: "گلاب اور عنبر",
+        p6desc: "رومانوی · دیرپا"
+    }
+};
 
-        function renderGrid() {
-            // Load slots from LocalStorage or use defaults
-            let savedData = JSON.parse(localStorage.getItem("store_slots"));
-            let slots = (savedData && savedData.length === TOTAL_SLOTS) ? savedData : defaultSlots;
-            
-            let html = "";
-            slots.forEach((slot, index) => {
-                let tagHtml = slot.tag ? `<div class="special-tag">${slot.tag}</div>` : '';
-                
-                if (slot.type === 'product') {
-                    // Render Active Product
-                    let imgHtml = slot.img ? `<img src="${slot.img}" alt="${slot.name}">` : `[Image]`;
-                    html += `
-                    <div class="product-card">
-                        ${tagHtml}
-                        <div class="img-area" onclick="openAdminLogin(${slot.id})">${imgHtml}</div>
-                        <div class="product-info">
-                            <div class="product-title">${slot.name}</div>
-                            <div class="product-desc">${slot.desc}</div>
-                            <div class="pricing">
-                                <del>Rs. ${slot.oldPrice}</del> <span class="new-price">Rs. ${slot.price}</span>
-                            </div>
-                            <button class="add-cart-btn" onclick="addToCart('${slot.name}', ${slot.price})">🛒 Add to Cart</button>
-                            <div class="reviews-section">
-                                <div class="stars">★★★★★</div>
-                                <div class="review-text">"Best quality product!"</div>
-                            </div>
-                            <button class="admin-edit-btn" onclick="openAdminLogin(${slot.id})">⚙️ Edit (Admin)</button>
-                        </div>
-                    </div>`;
-                } else {
-                    // Render Empty / Coming Soon / Out of Stock Box
-                    let statusText = slot.status === 'outofstock' ? 'Out of Stock' : 'Coming Soon';
-                    html += `
-                    <div class="product-card" style="justify-content: center; background: rgba(17,29,74,0.6); border: 2px dashed rgba(255,215,0,0.5);">
-                        ${tagHtml}
-                        <div class="coming-soon-content">
-                            <h3>${statusText}</h3>
-                            <p>Slot #${slot.id}</p>
-                            <button class="admin-edit-btn" style="margin-top: 20px;" onclick="openAdminLogin(${slot.id})">🔒 Add Product (Admin)</button>
-                        </div>
-                    </div>`;
-                }
-            });
-            document.getElementById("product-list").innerHTML = html;
-        }
+// ==================== PRODUCT DATA ====================
+const products = [
+    { id: 1, key: 'p1', descKey: 'p1desc', icon: 'fa-fire', price: 'PKR 1,499', type: 'both' },
+    { id: 2, key: 'p2', descKey: 'p2desc', icon: 'fa-water', price: 'PKR 1,299', type: 'both' },
+    { id: 3, key: 'p3', descKey: 'p3desc', icon: 'fa-tree', price: 'PKR 1,799', type: 'advance' },
+    { id: 4, key: 'p4', descKey: 'p4desc', icon: 'fa-seedling', price: 'PKR 1,599', type: 'both' },
+    { id: 5, key: 'p5', descKey: 'p5desc', icon: 'fa-moon', price: 'PKR 2,199', type: 'advance' },
+    { id: 6, key: 'p6', descKey: 'p6desc', icon: 'fa-rose', price: 'PKR 1,899', type: 'cod' }
+];
 
-        // Admin Login Flow
-        function openAdminLogin(slotId) {
-            editingSlotId = slotId;
-            document.getElementById("editing-slot-num").innerText = slotId;
-            document.getElementById("loginModal").style.display = "flex";
-        }
-        function closeLogin() { document.getElementById("loginModal").style.display = "none"; }
+// ==================== STATE ====================
+let currentLang = 'en';
+let selectedProduct = null;
+let selectedPayment = null;
+let adminSettings = {
+    easyPaisa: '',
+    jazzCash: '',
+    bankAccount: ''
+};
 
-        function verifyAdmin() {
-            let user = document.getElementById("admin-user").value;
-            let pass = document.getElementById("admin-pass").value;
-            
-            if(user === "kgf292900" && pass === "kgf292900") {
-                // Save target slot ID in storage so Admin page knows which slot to edit
-                sessionStorage.setItem("target_edit_slot", editingSlotId);
-                window.location.href = "admin.html"; // Redirect to admin page
-            } else {
-                alert("Incorrect User ID or Password!");
-            }
-        }
+// Load admin settings from localStorage
+function loadAdminSettings() {
+    const saved = localStorage.getItem('paymentSettings');
+    if (saved) {
+        try {
+            adminSettings = JSON.parse(saved);
+            document.getElementById('easyAccount').value = adminSettings.easyPaisa || '';
+            document.getElementById('jazzAccount').value = adminSettings.jazzCash || '';
+            document.getElementById('bankAccount').value = adminSettings.bankAccount || '';
+        } catch(e) {}
+    }
+}
 
-        // Cart Functions
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartUI();
-            openCart();
-        }
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            updateCartUI();
-        }
-        function updateCartUI() {
-            document.getElementById('cart-count').innerText = cart.length;
-            let listHtml = ""; let total = 0;
-            cart.forEach((item, index) => {
-                total += parseInt(item.price);
-                listHtml += `<div class="cart-item">
-                    <div><b>${item.name}</b><br><span style="color:#e74c3c; font-size:13px;">Rs. ${item.price}</span></div>
-                    <div style="cursor:pointer; color:#999;" onclick="removeFromCart(${index})">🗑️</div>
-                </div>`;
-            });
-            document.getElementById('cart-items-list').innerHTML = listHtml || "<p style='text-align:center; margin-top:20px;'>Cart is empty.</p>";
-            document.getElementById('cart-total-amount').innerText = total;
-        }
-        
-        function openCart() { document.getElementById("cartSidebar").style.display = "flex"; }
-        function closeCart() { document.getElementById("cartSidebar").style.display = "none"; }
+function saveAdminSettings() {
+    adminSettings.easyPaisa = document.getElementById('easyAccount').value;
+    adminSettings.jazzCash = document.getElementById('jazzAccount').value;
+    adminSettings.bankAccount = document.getElementById('bankAccount').value;
+    localStorage.setItem('paymentSettings', JSON.stringify(adminSettings));
+    alert('Settings saved!');
+    closeAdmin();
+    updateAccountDisplay();
+}
 
-        function checkoutOrder() {
-            if(cart.length === 0) { alert("Cart is empty!"); return; }
-            let name = document.getElementById("cust-name").value;
-            let phone = document.getElementById("cust-phone").value;
-            let address = document.getElementById("cust-address").value;
-            if(!name || !phone || !address) { alert("Please fill your delivery details."); return; }
+function updateAccountDisplay() {
+    const method = document.getElementById('paymentMethodSelect')?.value || 'easypaisa';
+    const display = document.getElementById('adminAccountDisplay');
+    if (method === 'easypaisa') display.textContent = adminSettings.easyPaisa || '❌ Not set in Admin';
+    else if (method === 'jazzcash') display.textContent = adminSettings.jazzCash || '❌ Not set in Admin';
+    else if (method === 'bank') display.textContent = adminSettings.bankAccount || '❌ Not set in Admin';
+}
 
-            let orderList = ""; let total = 0;
-            cart.forEach((item, i) => { orderList += `${i+1}. ${item.name} - Rs. ${item.price}\n`; total += parseInt(item.price); });
-            let msg = `*🛍️ NEW E-COMMERCE ORDER*\n\n*Cart Items:*\n${orderList}\n*Grand Total: Rs. ${total}*\n\n*Customer Details:*\nName: ${name}\nPhone: ${phone}\nAddress: ${address}`;
-            window.open(`https://wa.me/923162260608?text=${encodeURIComponent(msg)}`, '_blank');
-            cart = []; localStorage.setItem('cart', JSON.stringify(cart)); updateCartUI(); closeCart();
-        }
+// ==================== LANGUAGE ====================
+function setLanguage(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
 
-        window.onload = () => { renderGrid(); updateCartUI(); };
-    </script>
+    const wrapper = document.getElementById('contentWrapper');
+    wrapper.classList.remove('lang-ar', 'lang-ur');
+    if (lang === 'ar') wrapper.classList.add('lang-ar');
+    if (lang === 'ur') wrapper.classList.add('lang-ur');
+
+    // Update text
+    const t = translations[lang];
+    document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // Re-render products
+    renderProducts();
+}
+
+// ==================== RENDER PRODUCTS ====================
+function renderProducts() {
+    const grid = document.getElementById('productGrid');
+    const t = translations[currentLang];
+    grid.innerHTML = '';
+    products.forEach(p => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <i class="fas ${p.icon}"></i>
+            <h3>${t[p.key] || p.key}</h3>
+            <p style="font-size:0.85rem;color:#7a685a;">${t[p.descKey] || ''}</p>
+            <div class="price">${p.price}</div>
+            <span class="tag ${p.type === 'advance' ? 'advance' : 'cod'}">${p.type === 'advance' ? '💳 Advance' : p.type === 'cod' ? '📦 COD' : '💳 / 📦'}</span>
+        `;
+        card.onclick = () => openPayment(p);
+        grid.appendChild(card);
+    });
+}
+
+// ==================== PAYMENT MODAL ====================
+function openPayment(product) {
+    selectedProduct = product;
+    selectedPayment = null;
+    document.getElementById('modalProductName').textContent = `${translations[currentLang][product.key] || product.key} — ${product.price}`;
+    document.getElementById('paymentModal').classList.add('show');
+    document.getElementById('onlineDetails').style.display = 'none';
+    document.querySelectorAll('.payment-option').forEach(el => el.classList.remove('selected'));
+    updateAccountDisplay();
+}
+
+function selectPayment(method) {
+    selectedPayment = method;
+    document.querySelectorAll('.payment-option').forEach(el => {
+        el.classList.toggle('selected', el.dataset.method === method);
+    });
+    document.getElementById('onlineDetails').style.display = method === 'online' ? 'block' : 'none';
+    if (method === 'online') updateAccountDisplay();
+}
+
+function closeModal() {
+    document.getElementById('paymentModal').classList.remove('show');
+}
+
+function processOrder() {
+    if (!selectedPayment) {
+        alert(translations[currentLang].cancelBtn === 'Cancel' ? 'Please select a payment method.' : 'براہ کرم ادائیگی کا طریقہ منتخب کریں۔');
+        return;
+    }
+    const t = translations[currentLang];
+    const productName = t[selectedProduct.key] || selectedProduct.key;
+    if (selectedPayment === 'cod') {
+        alert(`✅ Order confirmed for ${productName} (Cash on Delivery).`);
+    } else {
+        const method = document.getElementById('paymentMethodSelect').value;
+        let account = '';
+        if (method === 'easypaisa') account = adminSettings.easyPaisa || 'Not set';
+        else if (method === 'jazzcash') account = adminSettings.jazzCash || 'Not set';
+        else if (method === 'bank') account = adminSettings.bankAccount || 'Not set';
+        alert(`✅ Order confirmed for ${productName} (Online Payment).\nMethod: ${method.toUpperCase()}\nAccount: ${account}\n\nPlease send payment and share screenshot.`);
+    }
+    closeModal();
+}
+
+// ==================== ADMIN ====================
+function openAdmin() {
+    loadAdminSettings();
+    document.getElementById('adminModal').classList.add('show');
+}
+function closeAdmin() {
+    document.getElementById('adminModal').classList.remove('show');
+}
+
+// ==================== EVENT LISTENERS ====================
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.onclick = () => setLanguage(btn.dataset.lang);
+});
+
+document.getElementById('paymentMethodSelect')?.addEventListener('change', updateAccountDisplay);
+
+// ==================== INIT ====================
+loadAdminSettings();
+setLanguage('en');
+renderProducts();
+</script>
 </body>
 </html>
