@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خوشبودار بریکٹ · ہیریٹیج خوشبو</title>
+    <title>خوشبودار بریکٹ · سینٹڈ بریکٹ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,6 +24,44 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.08);
             padding: 30px 35px;
             border: 1px solid #e8dfd6;
+        }
+
+        /* ====== COMPANY HEADER ====== */
+        .company-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ece3d9;
+        }
+        .company-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .company-logo i {
+            font-size: 2.2rem;
+            color: #2e7d5e;
+        }
+        .company-logo h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f1713;
+            letter-spacing: 1px;
+        }
+        .company-logo .tagline {
+            font-size: 0.75rem;
+            color: #7a685a;
+            font-weight: 400;
+            display: block;
+            margin-top: -2px;
+        }
+        .company-logo .brand {
+            color: #2e7d5e;
+            font-weight: 300;
         }
 
         /* ====== NEWS TICKER ====== */
@@ -442,11 +480,14 @@
             .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
             .outoforder-grid { grid-template-columns: 1fr 1fr; }
             .social-icon { width: 48px; height: 48px; font-size: 1.3rem; }
+            .company-logo h2 { font-size: 1.1rem; }
+            .company-logo i { font-size: 1.6rem; }
         }
         @media (max-width: 420px) {
             .products-grid { grid-template-columns: 1fr; }
             .outoforder-grid { grid-template-columns: 1fr; }
             .social-icon { width: 44px; height: 44px; font-size: 1.1rem; }
+            .company-header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
@@ -454,6 +495,17 @@
 
 <div class="main-card" id="app">
     
+    <!-- ====== COMPANY HEADER ====== -->
+    <div class="company-header">
+        <div class="company-logo">
+            <i class="fas fa-fire"></i>
+            <div>
+                <h2>سینٹڈ بریکٹ <span class="brand">· Scented Briquette</span></h2>
+                <span class="tagline">خوشبوؤں کا خزینہ · Heritage Fragrance Collection</span>
+            </div>
+        </div>
+    </div>
+
     <!-- ====== NEWS TICKER ====== -->
     <div class="ticker-wrapper" id="tickerWrapper">
         <div class="ticker-track" id="tickerTrack"></div>
@@ -974,7 +1026,7 @@ function renderTicker() {
     const defaultMessages = [
         { 
             icon: 'fa-fire', 
-            text: 'اپنی تمام تر تقریبات کے ماحول کو معطر کرنے کے لیے رابطہ کریں' 
+            text: 'سینٹڈ بریکٹ · اپنی تمام تر تقریبات کے ماحول کو معطر کرنے کے لیے رابطہ کریں' 
         },
         { 
             icon: 'fa-clock', 
@@ -1238,7 +1290,6 @@ function adminLogin() {
     if (username === 'admin' && password === storedPassword) {
         closeAdminLogin();
         openAdminPanel();
-        // Load current ticker text into textarea
         loadTickerIntoTextArea();
     } else {
         alert('❌ غلط صارف نام یا پاسورڈ۔');
@@ -1257,8 +1308,8 @@ function loadTickerIntoTextArea() {
             }
         } catch(e) {}
     }
-    // Default text
-    textarea.value = `اپنی تمام تر تقریبات کے ماحول کو معطر کرنے کے لیے رابطہ کریں
+    // Default text with company name
+    textarea.value = `سینٹڈ بریکٹ · اپنی تمام تر تقریبات کے ماحول کو معطر کرنے کے لیے رابطہ کریں
 رقبہ: 2000 گز · 5 سے 8 گھنٹے انڈور · 5 گھنٹے کھلی فضاء میں
 نتائج کی گارنٹی · فی تقریب: 15,000 روپے
 ابھی رابطہ کریں: +92 316 2260608
@@ -1358,7 +1409,7 @@ function confirmOrder() {
     if (!selectedPayment) { alert('براہ کرم ادائیگی کا طریقہ منتخب کریں۔'); return; }
     
     const productName = selectedProduct.key || selectedProduct.name;
-    let message = `🛒 *نیا آرڈر*\n\n📦 پروڈکٹ: ${productName}\n💰 قیمت: ${selectedProduct.price}\n👤 گاہک: ${name}\n📱 فون: ${phone}\n🏠 پتہ: ${address}\n📍 لوکیشن: ${location || 'فراہم نہیں'}\n💳 ادائیگی: ${selectedPayment === 'cod' ? 'ڈلیوری پر نقد' : 'آن لائن ادائیگی'}`;
+    let message = `🛒 *نیا آرڈر - سینٹڈ بریکٹ*\n\n📦 پروڈکٹ: ${productName}\n💰 قیمت: ${selectedProduct.price}\n👤 گاہک: ${name}\n📱 فون: ${phone}\n🏠 پتہ: ${address}\n📍 لوکیشن: ${location || 'فراہم نہیں'}\n💳 ادائیگی: ${selectedPayment === 'cod' ? 'ڈلیوری پر نقد' : 'آن لائن ادائیگی'}`;
     
     if (selectedPayment === 'online') {
         const method = document.getElementById('paymentMethodSelect').value;
