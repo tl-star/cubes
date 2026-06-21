@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin · Orders</title>
+    <title>ایڈمن · آرڈرز</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -41,14 +41,15 @@
             background: #d9534f;
             color: #fff;
             border: none;
-            padding: 8px 20px;
-            border-radius: 40px;
+            padding: 12px 20px;
+            border-radius: 60px;
             cursor: pointer;
-            margin-top: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: 0.2s;
         }
         .clear-btn:hover { background: #c9302c; }
-        .back-link { display: block; text-align: center; margin-top: 18px; color: #7a685a; text-decoration: none; }
-        .back-link:hover { color: #2e241f; }
         .btn-secondary {
             background: #ece3d9;
             color: #3f342c;
@@ -62,19 +63,148 @@
             text-align: center;
             display: inline-block;
             text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
         }
         .btn-secondary:hover { background: #ddd0c4; }
+        .btn-dark {
+            background: #2e241f;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .btn-dark:hover { background: #1f1713; }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .btn-group .btn-secondary,
+        .btn-group .btn-dark,
+        .btn-group .clear-btn {
+            flex: 1;
+            min-width: 150px;
+            margin-top: 0;
+        }
+        .no-orders {
+            color: #9b8a7b;
+            text-align: center;
+            padding: 30px;
+            font-size: 1.1rem;
+        }
+        .order-count {
+            background: #2e241f;
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            margin-left: 10px;
+        }
+        .order-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .order-payment {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            background: #ece3d9;
+            margin-top: 4px;
+        }
+        .order-payment.cod { background: #d4e0d4; color: #1f5a3a; }
+        .order-payment.online { background: #d4d4e0; color: #2a2a5a; }
+        .order-time {
+            font-size: 0.7rem;
+            color: #9b8a7b;
+        }
+        .order-customer {
+            font-size: 0.8rem;
+            color: #7a685a;
+            line-height: 1.6;
+        }
+        .form-group { margin: 14px 0; }
+        .form-group label { font-weight: 500; display: block; margin-bottom: 4px; color: #2e241f; }
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd0c4;
+            border-radius: 14px;
+            font-size: 1rem;
+            background: #fcf9f5;
+        }
+        .form-group input:focus { outline: none; border-color: #7a5f4a; }
+        .password-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #ece3d9;
+        }
+        .password-section h3 {
+            color: #2e241f;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        @media (max-width: 500px) {
+            .admin-card { padding: 20px; }
+            .btn-group { flex-direction: column; }
+            .btn-group .btn-secondary,
+            .btn-group .btn-dark,
+            .btn-group .clear-btn {
+                min-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="admin-card">
-        <h1><i class="fas fa-box" style="color:#7a5f4a;"></i> Orders</h1>
-        <p class="sub">View all customer orders</p>
+        <h1><i class="fas fa-box" style="color:#7a5f4a;"></i> آرڈرز</h1>
+        <p class="sub">تمام گاہکوں کے آرڈرز دیکھیں</p>
 
         <div class="orders-section">
             <div id="ordersList"></div>
-            <button class="clear-btn" onclick="clearOrders()"><i class="fas fa-trash"></i> Clear All Orders</button>
-            <a href="index.html" class="btn-secondary"><i class="fas fa-arrow-left"></i> Back to Store</a>
+            
+            <div class="btn-group">
+                <button class="clear-btn" onclick="clearOrders()"><i class="fas fa-trash"></i> تمام آرڈرز حذف کریں</button>
+            </div>
+            
+            <div class="btn-group" style="margin-top:10px;">
+                <a href="index.html" class="btn-secondary"><i class="fas fa-store"></i> اسٹور پر واپس جائیں</a>
+                <a href="#" onclick="openSocialSettingsFromAdmin()" class="btn-dark"><i class="fas fa-share-alt"></i> سوشل سیٹنگز</a>
+            </div>
+        </div>
+
+        <!-- ====== PASSWORD CHANGE IN ADMIN PAGE ====== -->
+        <div class="password-section">
+            <h3><i class="fas fa-key" style="color:#7a5f4a;"></i> پاسورڈ تبدیل کریں</h3>
+            <div class="form-group">
+                <label>موجودہ پاسورڈ</label>
+                <input type="password" id="adminCurrentPassword" placeholder="موجودہ پاسورڈ درج کریں">
+            </div>
+            <div class="form-group">
+                <label>نیا پاسورڈ</label>
+                <input type="password" id="adminNewPassword" placeholder="نیا پاسورڈ (کم از کم 6 حروف)">
+            </div>
+            <div class="form-group">
+                <label>نیا پاسورڈ کی تصدیق</label>
+                <input type="password" id="adminConfirmPassword" placeholder="نیا پاسورڈ دوبارہ درج کریں">
+            </div>
+            <button onclick="changeAdminPassword()" class="btn-dark" style="margin-top:0;">
+                <i class="fas fa-save"></i> پاسورڈ تبدیل کریں
+            </button>
         </div>
     </div>
 
@@ -83,28 +213,74 @@
             const orders = JSON.parse(localStorage.getItem('orders') || '[]');
             const container = document.getElementById('ordersList');
             if (orders.length === 0) {
-                container.innerHTML = '<p style="color:#9b8a7b;text-align:center;padding:20px;">No orders yet.</p>';
+                container.innerHTML = '<div class="no-orders">📭 ابھی تک کوئی آرڈر نہیں</div>';
                 return;
             }
             container.innerHTML = orders.map((o, i) => `
                 <div class="order-item">
-                    <strong>#${i+1}</strong> ${o.product} · ${o.price}<br>
-                    <span style="font-size:0.8rem;color:#7a685a;">
+                    <div class="order-meta">
+                        <strong>#${i+1}</strong>
+                        <span class="order-time">${new Date(o.timestamp).toLocaleString()}</span>
+                    </div>
+                    <div style="font-weight:600;margin:4px 0;">${o.product} · ${o.price}</div>
+                    <div class="order-customer">
                         👤 ${o.customer.name} · 📱 ${o.customer.phone}<br>
-                        🏠 ${o.customer.address}<br>
-                        ${o.customer.location ? '📍 ' + o.customer.location : ''}
-                    </span>
-                    <br><span style="font-size:0.75rem;background:#ece3d9;padding:2px 12px;border-radius:40px;display:inline-block;margin-top:4px;">${o.payment === 'cod' ? '📦 COD' : '💳 Online'}</span>
-                    <span style="font-size:0.7rem;color:#9b8a7b;float:right;">${new Date(o.timestamp).toLocaleString()}</span>
+                        🏠 ${o.customer.address}
+                        ${o.customer.location ? `<br>📍 ${o.customer.location}` : ''}
+                    </div>
+                    <span class="order-payment ${o.payment === 'cod' ? 'cod' : 'online'}">${o.payment === 'cod' ? '📦 ڈلیوری پر نقد' : '💳 آن لائن'}</span>
                 </div>
             `).join('');
         }
 
         function clearOrders() {
-            if (confirm('Delete all orders?')) {
+            if (confirm('تمام آرڈرز حذف کریں؟')) {
                 localStorage.removeItem('orders');
                 renderOrders();
             }
+        }
+
+        function openSocialSettingsFromAdmin() {
+            window.open('index.html', '_blank');
+            setTimeout(() => {
+                alert('براہ کرم index.html میں "سوشل سیٹنگز" پر کلک کریں۔');
+            }, 500);
+        }
+
+        // ==================== CHANGE PASSWORD FROM ADMIN PAGE ====================
+        function changeAdminPassword() {
+            const current = document.getElementById('adminCurrentPassword')?.value;
+            const newPass = document.getElementById('adminNewPassword')?.value;
+            const confirmPass = document.getElementById('adminConfirmPassword')?.value;
+            
+            if (!current || !newPass || !confirmPass) {
+                alert('براہ کرم تمام فیلڈز پُر کریں۔');
+                return;
+            }
+            
+            const storedPassword = localStorage.getItem('adminPassword') || 'admin123';
+            
+            if (current !== storedPassword) {
+                alert('❌ موجودہ پاسورڈ غلط ہے۔');
+                return;
+            }
+            
+            if (newPass.length < 6) {
+                alert('❌ نیا پاسورڈ کم از کم 6 حروف کا ہونا چاہیے۔');
+                return;
+            }
+            
+            if (newPass !== confirmPass) {
+                alert('❌ نیا پاسورڈ اور تصدیق مماثل نہیں۔');
+                return;
+            }
+            
+            localStorage.setItem('adminPassword', newPass);
+            alert('✅ پاسورڈ کامیابی سے تبدیل ہو گیا!');
+            
+            document.getElementById('adminCurrentPassword').value = '';
+            document.getElementById('adminNewPassword').value = '';
+            document.getElementById('adminConfirmPassword').value = '';
         }
 
         renderOrders();
