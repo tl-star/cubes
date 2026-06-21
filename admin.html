@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ایڈمن · آرڈرز</title>
+    <title>ایڈمن · آرڈرز · سینٹڈ بریکٹ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
@@ -25,7 +25,27 @@
             box-shadow: 0 30px 60px rgba(0,0,0,0.08);
             border: 1px solid #e8dfd6;
         }
-        h1 { font-size: 2rem; font-weight: 600; color: #1f1713; }
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+        .brand-header i {
+            font-size: 2rem;
+            color: #2e7d5e;
+        }
+        .brand-header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1f1713;
+        }
+        .brand-header .brand-sub {
+            font-size: 0.7rem;
+            color: #7a685a;
+            display: block;
+            margin-top: -2px;
+        }
         .sub { color: #7a685a; margin: 6px 0 20px 0; }
         .orders-section { margin-top: 10px; }
         .order-item {
@@ -103,14 +123,6 @@
             padding: 30px;
             font-size: 1.1rem;
         }
-        .order-count {
-            background: #2e241f;
-            color: #fff;
-            padding: 2px 12px;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            margin-left: 10px;
-        }
         .order-meta {
             display: flex;
             justify-content: space-between;
@@ -166,12 +178,20 @@
             .btn-group .clear-btn {
                 min-width: 100%;
             }
+            .brand-header h1 { font-size: 1.3rem; }
+            .brand-header i { font-size: 1.5rem; }
         }
     </style>
 </head>
 <body>
     <div class="admin-card">
-        <h1><i class="fas fa-box" style="color:#7a5f4a;"></i> آرڈرز</h1>
+        <div class="brand-header">
+            <i class="fas fa-fire"></i>
+            <div>
+                <h1>سینٹڈ بریکٹ</h1>
+                <span class="brand-sub">Scented Briquette · آرڈر مینجمنٹ</span>
+            </div>
+        </div>
         <p class="sub">تمام گاہکوں کے آرڈرز دیکھیں</p>
 
         <div class="orders-section">
@@ -247,7 +267,6 @@
             }, 500);
         }
 
-        // ==================== CHANGE PASSWORD FROM ADMIN PAGE ====================
         function changeAdminPassword() {
             const current = document.getElementById('adminCurrentPassword')?.value;
             const newPass = document.getElementById('adminNewPassword')?.value;
