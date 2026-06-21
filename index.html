@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ur">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scented Briquette · Heritage Fragrance</title>
+    <title>خوشبودار بریکٹ · ہیریٹیج خوشبو</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,7 +13,7 @@
             padding: 20px;
             min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
         }
         .main-card {
@@ -25,6 +25,73 @@
             padding: 30px 35px;
             border: 1px solid #e8dfd6;
         }
+
+        /* ====== NEWS TICKER ====== */
+        .ticker-wrapper {
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1410 0%, #2e241f 100%);
+            color: #fff;
+            padding: 14px 0;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid #4a3a32;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        .ticker-wrapper::before,
+        .ticker-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 60px;
+            z-index: 2;
+            pointer-events: none;
+        }
+        .ticker-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, #2e241f, transparent);
+        }
+        .ticker-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, #2e241f, transparent);
+        }
+        .ticker-track {
+            display: flex;
+            white-space: nowrap;
+            animation: tickerScroll 30s linear infinite;
+            width: max-content;
+        }
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 40px;
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            color: #f0e8e0;
+            direction: rtl;
+        }
+        .ticker-item i {
+            color: #25D366;
+            font-size: clamp(1rem, 1.5vw, 1.3rem);
+        }
+        .ticker-item .separator {
+            color: #5a4a42;
+            font-size: 1.5rem;
+            margin: 0 10px;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ====== LANG BAR ====== */
         .lang-bar {
             display: flex;
             justify-content: flex-end;
@@ -46,6 +113,7 @@
         }
         .lang-btn.active { background: #2e241f; border-color: #2e241f; color: #fff; }
         .lang-btn:hover { background: #e7dfd6; }
+
         .badge { display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: #7a685a; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
         h1 { font-size: 3rem; font-weight: 700; color: #1f1713; }
         .sub-head {
@@ -56,8 +124,10 @@
             border-radius: 60px;
             display: inline-block;
             margin: 10px 0 20px 0;
-            border-left: 4px solid #dac2b0;
+            border-right: 4px solid #dac2b0;
         }
+
+        /* ====== PRODUCTS ====== */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -72,7 +142,6 @@
             text-align: center;
             cursor: pointer;
             transition: 0.25s;
-            position: relative;
         }
         .product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.06); border-color: #b7a18c; }
         .product-card i { font-size: 2.8rem; color: #7a5f4a; margin-bottom: 8px; display: block; }
@@ -88,9 +157,8 @@
         }
         .product-card .tag.advance { background: #d4e0d4; color: #1f5a3a; }
         .product-card .tag.cod { background: #f0e0d0; color: #8a5a3a; }
-        .product-card .tag.outofstock { background: #f0d0d0; color: #8a3a3a; }
 
-        /* Out of Order Boxes */
+        /* ====== OUT OF ORDER ====== */
         .outoforder-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -105,24 +173,14 @@
             text-align: center;
             cursor: pointer;
             transition: 0.3s;
-            position: relative;
         }
         .outoforder-box:hover {
             background: #ede0d6;
             transform: scale(1.02);
             border-color: #b7a18c;
         }
-        .outoforder-box .icon {
-            font-size: 2.5rem;
-            color: #b07f64;
-            margin-bottom: 10px;
-            display: block;
-        }
-        .outoforder-box h4 {
-            color: #5e3d2e;
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
+        .outoforder-box .icon { font-size: 2.5rem; color: #b07f64; margin-bottom: 10px; display: block; }
+        .outoforder-box h4 { color: #5e3d2e; font-size: 1.1rem; margin-bottom: 5px; }
         .outoforder-box .status {
             display: inline-block;
             background: #d9534f;
@@ -134,24 +192,82 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .outoforder-box .status.added {
-            background: #2e7d5e;
-        }
-        .outoforder-box .click-hint {
-            font-size: 0.7rem;
-            color: #9b8a7b;
-            margin-top: 8px;
-        }
-        .outoforder-box .add-icon {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 0.8rem;
-            color: #7a685a;
-            opacity: 0.5;
-        }
+        .outoforder-box .status.added { background: #2e7d5e; }
+        .outoforder-box .click-hint { font-size: 0.7rem; color: #9b8a7b; margin-top: 8px; }
+        .outoforder-box .add-icon { float: right; font-size: 0.8rem; color: #7a685a; opacity: 0.5; }
 
-        /* Modal */
+        /* ====== SOCIAL FOOTER ====== */
+        .social-footer {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #ece3d9;
+            text-align: center;
+        }
+        .social-footer .heading {
+            font-size: 0.9rem;
+            color: #7a685a;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+        }
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #f5f0eb;
+            color: #3f342c;
+            font-size: 1.6rem;
+            text-decoration: none;
+            transition: 0.3s ease;
+            border: 1px solid #e0d5cc;
+            position: relative;
+        }
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        .social-icon .tooltip {
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            background: #1f1713;
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: 0.2s;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        .social-icon:hover .tooltip { opacity: 1; }
+        
+        .social-icon.whatsapp:hover { background: #25D366; color: #fff; border-color: #25D366; }
+        .social-icon.email:hover { background: #D14836; color: #fff; border-color: #D14836; }
+        .social-icon.facebook:hover { background: #1877F2; color: #fff; border-color: #1877F2; }
+        .social-icon.instagram:hover { background: #E4405F; color: #fff; border-color: #E4405F; }
+        .social-icon.twitter:hover { background: #000; color: #fff; border-color: #000; }
+        .social-icon.linkedin:hover { background: #0A66C2; color: #fff; border-color: #0A66C2; }
+        .social-icon.youtube:hover { background: #FF0000; color: #fff; border-color: #FF0000; }
+        .social-icon.tiktok:hover { background: #000; color: #fff; border-color: #000; }
+        .social-icon.pinterest:hover { background: #BD081C; color: #fff; border-color: #BD081C; }
+        .social-icon.snapchat:hover { background: #FFFC00; color: #000; border-color: #FFFC00; }
+        .social-icon.telegram:hover { background: #26A5E4; color: #fff; border-color: #26A5E4; }
+        .social-icon.github:hover { background: #181717; color: #fff; border-color: #181717; }
+        .social-icon.disabled { opacity: 0.3; cursor: default; }
+        .social-icon.disabled:hover { transform: none; box-shadow: none; }
+
+        /* ====== MODALS ====== */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -188,7 +304,6 @@
             line-height: 1;
         }
         .close-modal:hover { color: #2e241f; }
-
         .form-group { margin: 14px 0; }
         .form-group label { font-weight: 500; display: block; margin-bottom: 4px; color: #2e241f; }
         .form-group input, .form-group textarea, .form-group select {
@@ -200,24 +315,6 @@
             background: #fcf9f5;
         }
         .form-group input:focus, .form-group textarea:focus { outline: none; border-color: #7a5f4a; }
-        .form-group .map-helper {
-            background: #eef3f7;
-            padding: 12px 16px;
-            border-radius: 14px;
-            font-size: 0.9rem;
-            color: #1f4a6e;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        .form-group .map-helper a {
-            color: #1a6bb0;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .form-group .map-helper a:hover { text-decoration: underline; }
-        .form-group .map-helper i { font-size: 1.4rem; }
         .form-group .location-btns {
             display: flex;
             gap: 10px;
@@ -233,11 +330,19 @@
             font-size: 0.85rem;
             transition: 0.2s;
         }
-        .form-group .location-btns button:hover {
-            background: #e7dfd6;
-            border-color: #b7a18c;
+        .form-group .location-btns button:hover { background: #e7dfd6; border-color: #b7a18c; }
+        .form-group .map-helper {
+            background: #eef3f7;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.9rem;
+            color: #1f4a6e;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 6px;
         }
-
         .payment-option {
             display: flex;
             align-items: center;
@@ -258,21 +363,13 @@
         .payment-option .radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ccc; display: flex; align-items: center; justify-content: center; }
         .payment-option.selected .radio { border-color: #2e7d5e; background: #2e7d5e; }
         .payment-option.selected .radio::after { content: "✓"; color: #fff; font-size: 12px; }
-
         .payment-details {
             background: #f7f2eb;
             border-radius: 16px;
             padding: 18px;
             margin: 15px 0;
         }
-        .payment-details select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #ddd0c4;
-            border-radius: 12px;
-            font-size: 1rem;
-            background: #fff;
-        }
+        .payment-details select { width: 100%; padding: 12px 14px; border: 1px solid #ddd0c4; border-radius: 12px; font-size: 1rem; background: #fff; }
         .btn-primary {
             background: #25D366;
             color: #fff;
@@ -300,6 +397,9 @@
             cursor: pointer;
             width: 100%;
             margin-top: 8px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
         .btn-secondary:hover { background: #ddd0c4; }
         .btn-dark {
@@ -315,388 +415,288 @@
             transition: 0.2s;
         }
         .btn-dark:hover { background: #1f1713; }
-
-        .lang-ar, .lang-ur { direction: rtl; text-align: right; }
-        .lang-ar .sub-head, .lang-ur .sub-head { border-left: none; border-right: 4px solid #dac2b0; padding-left: 0; padding-right: 20px; }
-        .lang-ar .lang-bar, .lang-ur .lang-bar { justify-content: flex-start; }
-        .lang-ar .badge, .lang-ur .badge { flex-direction: row-reverse; }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #25D366;
+        .btn-success {
+            background: #2e7d5e;
             color: #fff;
-            border-radius: 50px;
-            padding: 14px 22px;
-            font-size: 1rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
-            text-decoration: none;
-            z-index: 100;
             border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
             cursor: pointer;
+            transition: 0.2s;
         }
-        .whatsapp-float i { font-size: 1.8rem; }
-        .whatsapp-float:hover { background: #1fbd59; transform: scale(1.02); }
+        .btn-success:hover { background: #1f5a3a; }
+
+        .lang-ur { direction: rtl; text-align: right; }
+        .lang-ar { direction: rtl; text-align: right; }
+        .lang-ur .sub-head, .lang-ar .sub-head { border-right: 4px solid #dac2b0; padding-right: 20px; border-left: none; }
+        .lang-ur .lang-bar, .lang-ar .lang-bar { justify-content: flex-start; }
+        .lang-en .sub-head { border-left: 4px solid #dac2b0; padding-left: 20px; border-right: none; }
+        .lang-en .lang-bar { justify-content: flex-end; }
 
         @media (max-width: 650px) {
             .main-card { padding: 18px; }
             h1 { font-size: 2.2rem; }
             .products-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
             .outoforder-grid { grid-template-columns: 1fr 1fr; }
+            .social-icon { width: 48px; height: 48px; font-size: 1.3rem; }
         }
         @media (max-width: 420px) {
             .products-grid { grid-template-columns: 1fr; }
             .outoforder-grid { grid-template-columns: 1fr; }
+            .social-icon { width: 44px; height: 44px; font-size: 1.1rem; }
         }
     </style>
 </head>
 <body>
 
 <div class="main-card" id="app">
-    <!-- Language Bar -->
-    <div class="lang-bar">
-        <button class="lang-btn active" data-lang="en">🇬🇧 English</button>
-        <button class="lang-btn" data-lang="ar">🇸🇦 العربية</button>
-        <button class="lang-btn" data-lang="ur">🇵🇰 اردو</button>
+    
+    <!-- ====== NEWS TICKER ====== -->
+    <div class="ticker-wrapper" id="tickerWrapper">
+        <div class="ticker-track" id="tickerTrack"></div>
     </div>
 
-    <!-- Content -->
-    <div id="contentWrapper">
-        <div class="badge"><i class="fas fa-leaf"></i> <span data-key="badge">Heritage Fragrance Collection</span></div>
-        <h1 data-key="title">SCENTED BRIQUETTE</h1>
-        <div class="sub-head"><i class="fas fa-spa"></i> <span data-key="sub">Explore unique scents · Health safe · Mosquito repellent</span></div>
+    <!-- ====== LANGUAGE BAR ====== -->
+    <div class="lang-bar">
+        <button class="lang-btn active" data-lang="ur">🇵🇰 اردو</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 English</button>
+        <button class="lang-btn" data-lang="ar">🇸🇦 العربية</button>
+    </div>
 
-        <!-- Active Products -->
-        <h3 style="margin-bottom:10px;color:#2e241f;" data-key="activeProducts">✨ Available Products</h3>
+    <!-- ====== CONTENT ====== -->
+    <div id="contentWrapper" class="lang-ur">
+        <div class="badge"><i class="fas fa-leaf"></i> <span data-key="badge">ہیریٹیج خوشبو کا مجموعہ</span></div>
+        <h1 data-key="title">خوشبودار بریکٹ</h1>
+        <div class="sub-head"><i class="fas fa-spa"></i> <span data-key="sub">منفرد خوشبوئیاں · صحت کے لیے محفوظ · مچھر بھگانے والا</span></div>
+
+        <h3 style="margin-bottom:10px;color:#2e241f;" data-key="activeProducts">✨ دستیاب مصنوعات</h3>
         <div class="products-grid" id="productGrid"></div>
 
-        <!-- Out of Order Boxes -->
-        <h3 style="margin-top:30px;margin-bottom:10px;color:#7a5f4a;" data-key="outoforderTitle">📦 Coming Soon / Out of Stock</h3>
-        <div class="outoforder-grid" id="outoforderGrid">
-            <!-- will be rendered by JS -->
-        </div>
+        <h3 style="margin-top:30px;margin-bottom:10px;color:#7a5f4a;" data-key="outoforderTitle">📦 جلد آئے گا / اسٹاک ختم</h3>
+        <div class="outoforder-grid" id="outoforderGrid"></div>
 
-        <div style="text-align:center;margin-top:20px;font-size:0.85rem;color:#9b8a7b;">
-            <i class="fas fa-cog"></i> <a href="#" onclick="openAdminLogin()" style="color:#7a5f4a;text-decoration:none;" data-key="adminLink">Admin Panel</a>
+        <div style="text-align:center;margin-top:20px;font-size:0.85rem;color:#9b8a7b;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+            <span><i class="fas fa-cog"></i> <a href="#" onclick="openAdminLogin()" style="color:#7a5f4a;text-decoration:none;" data-key="adminLink">ایڈمن پینل</a></span>
+            <span><i class="fas fa-share-alt"></i> <a href="#" onclick="openSocialSettings()" style="color:#7a5f4a;text-decoration:none;" data-key="socialLink">سوشل سیٹنگز</a></span>
+            <span><i class="fas fa-box"></i> <a href="admin.html" style="color:#7a5f4a;text-decoration:none;" data-key="ordersLink">آرڈر دیکھیں</a></span>
         </div>
+    </div>
+
+    <!-- ====== SOCIAL FOOTER ====== -->
+    <div class="social-footer" id="socialFooter">
+        <div class="heading"><span data-key="socialHeading">📱 ہم سے رابطہ کریں</span></div>
+        <div class="social-icons" id="socialIcons"></div>
     </div>
 </div>
 
-<!-- ========== WHATSAPP FLOATING BUTTON ========== -->
-<a href="#" class="whatsapp-float" id="whatsappFloat" target="_blank">
-    <i class="fab fa-whatsapp"></i> <span data-key="whatsappFloat">Chat on WhatsApp</span>
-</a>
+<!-- ========== MODALS ========== -->
 
-<!-- ========== ADMIN LOGIN MODAL ========== -->
+<!-- Admin Login Modal -->
 <div class="modal-overlay" id="adminLoginModal">
     <div class="modal">
         <button class="close-modal" onclick="closeAdminLogin()">&times;</button>
-        <h2 data-key="adminLoginTitle">🔐 Admin Login</h2>
-        <p style="color:#7a685a;" data-key="adminLoginSub">Enter credentials to manage products</p>
+        <h2 data-key="adminLoginTitle">🔐 ایڈمن لاگ ان</h2>
+        <p style="color:#7a685a;" data-key="adminLoginSub">مصنوعات کو منظم کرنے کے لیے درج کریں</p>
         <div class="divider"></div>
         <div class="form-group">
-            <label data-key="usernameLabel">Username</label>
+            <label data-key="usernameLabel">صارف کا نام</label>
             <input type="text" id="loginUsername" placeholder="admin">
         </div>
         <div class="form-group">
-            <label data-key="passwordLabel">Password</label>
+            <label data-key="passwordLabel">پاس ورڈ</label>
             <input type="password" id="loginPassword" placeholder="••••••••">
         </div>
-        <button class="btn-dark" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> <span data-key="loginBtn">Login</span></button>
-        <button class="btn-secondary" onclick="closeAdminLogin()" data-key="cancelBtn">Cancel</button>
+        <button class="btn-dark" onclick="adminLogin()"><i class="fas fa-sign-in-alt"></i> <span data-key="loginBtn">لاگ ان</span></button>
+        <button class="btn-secondary" onclick="closeAdminLogin()" data-key="cancelBtn">منسوخ</button>
     </div>
 </div>
 
-<!-- ========== ADMIN PANEL MODAL (Add Product) ========== -->
+<!-- Admin Panel Modal -->
 <div class="modal-overlay" id="adminPanelModal">
     <div class="modal">
         <button class="close-modal" onclick="closeAdminPanel()">&times;</button>
-        <h2><i class="fas fa-cog" style="color:#7a5f4a;"></i> <span data-key="adminPanelTitle">Admin Panel</span></h2>
-        <p style="color:#7a685a;" data-key="adminPanelSub">Add a new product to an "Out of Order" box</p>
+        <h2><i class="fas fa-cog" style="color:#7a5f4a;"></i> <span data-key="adminPanelTitle">ایڈمن پینل</span></h2>
+        <p style="color:#7a685a;" data-key="adminPanelSub">مصنوعات، ٹکر اور پاسورڈ کا نظم کریں</p>
         <div class="divider"></div>
         
+        <!-- ====== PRODUCT MANAGEMENT ====== -->
+        <h3 style="color:#2e241f;margin-bottom:10px;"><i class="fas fa-box"></i> پروڈکٹ مینجمنٹ</h3>
         <div class="form-group">
-            <label data-key="prodNameLabel">Product Name</label>
-            <input type="text" id="newProductName" placeholder="e.g. Lavender Bliss">
+            <label data-key="prodNameLabel">پروڈکٹ کا نام</label>
+            <input type="text" id="newProductName" placeholder="مثال: لیوینڈر بلیس">
         </div>
         <div class="form-group">
-            <label data-key="prodDescLabel">Description</label>
-            <input type="text" id="newProductDesc" placeholder="e.g. Calming & relaxing">
+            <label data-key="prodDescLabel">تفصیل</label>
+            <input type="text" id="newProductDesc" placeholder="مثال: پرسکون اور آرام دہ">
         </div>
         <div class="form-group">
-            <label data-key="prodPriceLabel">Price</label>
+            <label data-key="prodPriceLabel">قیمت</label>
             <input type="text" id="newProductPrice" placeholder="PKR 1,999">
         </div>
         <div class="form-group">
-            <label data-key="prodIconLabel">Icon (FontAwesome)</label>
+            <label data-key="prodIconLabel">آئیکن (FontAwesome)</label>
             <select id="newProductIcon">
-                <option value="fa-fire">🔥 Fire</option>
-                <option value="fa-water">💧 Water</option>
-                <option value="fa-tree">🌳 Tree</option>
-                <option value="fa-seedling">🌱 Seedling</option>
-                <option value="fa-moon">🌙 Moon</option>
-                <option value="fa-rose">🌹 Rose</option>
-                <option value="fa-leaf">🍃 Leaf</option>
-                <option value="fa-star">⭐ Star</option>
-                <option value="fa-gem">💎 Gem</option>
-                <option value="fa-crown">👑 Crown</option>
+                <option value="fa-fire">🔥 آگ</option>
+                <option value="fa-water">💧 پانی</option>
+                <option value="fa-tree">🌳 درخت</option>
+                <option value="fa-seedling">🌱 پودا</option>
+                <option value="fa-moon">🌙 چاند</option>
+                <option value="fa-rose">🌹 گلاب</option>
+                <option value="fa-leaf">🍃 پتی</option>
+                <option value="fa-star">⭐ ستارہ</option>
+                <option value="fa-gem">💎 جواہر</option>
+                <option value="fa-crown">👑 تاج</option>
             </select>
         </div>
         <div class="form-group">
-            <label data-key="prodTypeLabel">Payment Type</label>
+            <label data-key="prodTypeLabel">ادائیگی کی قسم</label>
             <select id="newProductType">
-                <option value="both">💳 / 📦 Both</option>
-                <option value="advance">💳 Advance Only</option>
-                <option value="cod">📦 COD Only</option>
+                <option value="both">💳 / 📦 دونوں</option>
+                <option value="advance">💳 پیشگی ادائیگی</option>
+                <option value="cod">📦 ڈلیوری پر نقد</option>
             </select>
         </div>
         <div class="form-group">
-            <label data-key="prodBoxLabel">Select Box to Replace</label>
-            <select id="newProductBox">
-                <option value="0">Box 1</option>
-                <option value="1">Box 2</option>
-                <option value="2">Box 3</option>
-                <option value="3">Box 4</option>
-            </select>
+            <label data-key="prodBoxLabel">باکس منتخب کریں</label>
+            <select id="newProductBox"></select>
         </div>
+        <button class="btn-primary" onclick="addProductFromAdmin()" style="background:#2e241f;margin-bottom:15px;">
+            <i class="fas fa-plus"></i> <span data-key="addProductBtn">پروڈکٹ شامل کریں</span>
+        </button>
         
-        <button class="btn-primary" onclick="addProductFromAdmin()" style="background:#2e241f;"><i class="fas fa-plus"></i> <span data-key="addProductBtn">Add Product</span></button>
-        <button class="btn-secondary" onclick="closeAdminPanel()" data-key="closeBtn">Close</button>
+        <!-- ====== TICKER EDITOR ====== -->
+        <div class="divider"></div>
+        <h3 style="color:#2e241f;margin-bottom:10px;"><i class="fas fa-scroll"></i> ٹکر ایڈیٹر</h3>
+        <p style="color:#7a685a;font-size:0.85rem;margin-bottom:10px;">
+            ہر لائن پر ایک پیغام لکھیں۔ ایموجی خودکار طور پر ڈیٹیکٹ ہو جائیں گے۔
+        </p>
+        <div class="form-group">
+            <label>ٹکر کا متن (ہر لائن پر ایک پیغام)</label>
+            <textarea id="tickerTextArea" rows="6" placeholder="🔥 خوشبودار بریکٹ — ہر تقریب کو خاص بنائیں
+📞 ابھی رابطہ کریں: +92 316 2260608
+⭐ نتائج کی گارنٹی · فی تقریب: 15,000 روپے" style="width:100%;padding:12px;border:1px solid #ddd0c4;border-radius:14px;background:#fcf9f5;font-family:inherit;"></textarea>
+        </div>
+        <button class="btn-success" onclick="updateTickerFromAdmin()" style="margin-bottom:15px;">
+            <i class="fas fa-sync"></i> ٹکر اپڈیٹ کریں
+        </button>
+        
+        <!-- ====== PASSWORD CHANGE ====== -->
+        <div class="divider"></div>
+        <h3 style="color:#2e241f;margin-bottom:10px;"><i class="fas fa-key"></i> پاسورڈ تبدیل کریں</h3>
+        <div class="form-group">
+            <label>موجودہ پاسورڈ</label>
+            <input type="password" id="currentPassword" placeholder="موجودہ پاسورڈ درج کریں">
+        </div>
+        <div class="form-group">
+            <label>نیا پاسورڈ</label>
+            <input type="password" id="newPassword" placeholder="نیا پاسورڈ (کم از کم 6 حروف)">
+        </div>
+        <div class="form-group">
+            <label>نیا پاسورڈ کی تصدیق</label>
+            <input type="password" id="confirmPassword" placeholder="نیا پاسورڈ دوبارہ درج کریں">
+        </div>
+        <button class="btn-dark" onclick="changePassword()">
+            <i class="fas fa-save"></i> پاسورڈ تبدیل کریں
+        </button>
+        
+        <div class="divider"></div>
+        <button class="btn-secondary" onclick="closeAdminPanel()" data-key="closeBtn">بند کریں</button>
     </div>
 </div>
 
-<!-- ========== ORDER MODAL ========== -->
+<!-- Social Settings Modal -->
+<div class="modal-overlay" id="socialSettingsModal">
+    <div class="modal">
+        <button class="close-modal" onclick="closeSocialSettings()">&times;</button>
+        <h2><i class="fas fa-share-alt" style="color:#7a5f4a;"></i> <span data-key="socialSettingsTitle">سوشل میڈیا کی ترتیبات</span></h2>
+        <p style="color:#7a685a;" data-key="socialSettingsSub">اپنے سوشل میڈیا لنکس کا نظم کریں</p>
+        <div class="divider"></div>
+        <div id="socialSettingsForm"></div>
+        <button class="btn-dark" onclick="saveSocialSettings()"><i class="fas fa-save"></i> <span data-key="saveBtn">محفوظ کریں</span></button>
+        <button class="btn-secondary" onclick="closeSocialSettings()" data-key="closeBtn">بند کریں</button>
+    </div>
+</div>
+
+<!-- Order Modal -->
 <div class="modal-overlay" id="orderModal">
     <div class="modal">
         <button class="close-modal" onclick="closeOrderModal()">&times;</button>
-        <h2 data-key="modalTitle">Place Your Order</h2>
+        <h2 data-key="modalTitle">اپنا آرڈر دیں</h2>
         <p class="product-name" id="modalProductName">—</p>
         <div class="divider"></div>
-
-        <!-- Customer Details Form -->
         <div class="form-group">
-            <label data-key="nameLabel">Full Name</label>
-            <input type="text" id="custName" placeholder="e.g. Ahmed Khan">
+            <label data-key="nameLabel">مکمل نام</label>
+            <input type="text" id="custName" placeholder="مثال: احمد خان">
         </div>
         <div class="form-group">
-            <label data-key="phoneLabel">Phone Number</label>
+            <label data-key="phoneLabel">فون نمبر</label>
             <input type="text" id="custPhone" placeholder="03XX-XXXXXXX">
         </div>
         <div class="form-group">
-            <label data-key="addressLabel">Delivery Address</label>
-            <textarea id="custAddress" rows="2" placeholder="House #, Street, Area, City"></textarea>
+            <label data-key="addressLabel">پتہ (ڈلیوری ایڈریس)</label>
+            <textarea id="custAddress" rows="2" placeholder="مکمل پتہ"></textarea>
         </div>
         <div class="form-group">
-            <label data-key="locationLabel">📍 Delivery Location</label>
+            <label data-key="locationLabel">📍 ڈلیوری لوکیشن</label>
             <div class="location-btns">
-                <button onclick="getLiveLocation()"><i class="fas fa-location-dot"></i> <span data-key="gpsBtn">GPS Location</span></button>
-                <button onclick="openGoogleMaps()"><i class="fas fa-map"></i> <span data-key="mapBtn">Google Maps</span></button>
+                <button onclick="getLiveLocation()"><i class="fas fa-location-dot"></i> <span data-key="gpsBtn">GPS لوکیشن</span></button>
+                <button onclick="openGoogleMaps()"><i class="fas fa-map"></i> <span data-key="mapBtn">گوگل میپ</span></button>
             </div>
-            <input type="text" id="custLocation" placeholder="Paste Google Maps link or GPS will appear here...">
+            <input type="text" id="custLocation" placeholder="GPS لوکیشن یا گوگل میپ لنک">
             <div class="map-helper" style="margin-top:6px;">
                 <i class="fas fa-info-circle"></i>
-                <span data-key="locationHelp">Click GPS to auto-fetch or paste Google Maps link</span>
+                <span data-key="locationHelp">GPS کلک کریں یا گوگل میپ لنک پیسٹ کریں</span>
             </div>
         </div>
-
         <div class="divider"></div>
-
-        <!-- Payment Selection -->
-        <div data-key="paymentLabel" style="font-weight:500;margin-bottom:6px;">Payment Method</div>
+        <div data-key="paymentLabel" style="font-weight:500;margin-bottom:6px;">ادائیگی کا طریقہ</div>
         <div id="paymentOptions">
             <div class="payment-option" data-method="cod" onclick="selectPayment('cod')">
                 <i class="fas fa-truck"></i>
-                <div class="info"><div class="label" data-key="codLabel">Cash on Delivery</div><div class="sub" data-key="codSub">Pay when you receive</div></div>
+                <div class="info"><div class="label" data-key="codLabel">ڈلیوری پر نقد</div><div class="sub" data-key="codSub">موصول ہونے پر ادائیگی</div></div>
                 <div class="radio"></div>
             </div>
             <div class="payment-option" data-method="online" onclick="selectPayment('online')">
                 <i class="fas fa-credit-card"></i>
-                <div class="info"><div class="label" data-key="onlineLabel">Online Payment</div><div class="sub" data-key="onlineSub">EasyPaisa · JazzCash · Bank Card</div></div>
+                <div class="info"><div class="label" data-key="onlineLabel">آن لائن ادائیگی</div><div class="sub" data-key="onlineSub">ایزی پیسا · جاز کیش · بینک کارڈ</div></div>
                 <div class="radio"></div>
             </div>
         </div>
-
         <div id="onlineDetails" style="display:none;">
             <div class="divider"></div>
             <div class="payment-details">
-                <p style="font-weight:600;margin-bottom:8px;" data-key="paymentMethodTitle">Select Payment Method</p>
+                <p style="font-weight:600;margin-bottom:8px;" data-key="paymentMethodTitle">ادائیگی کا طریقہ منتخب کریں</p>
                 <select id="paymentMethodSelect">
-                    <option value="easypaisa">EasyPaisa</option>
-                    <option value="jazzcash">JazzCash</option>
-                    <option value="bank">Bank Card / IBFT</option>
+                    <option value="easypaisa">ایزی پیسا</option>
+                    <option value="jazzcash">جاز کیش</option>
+                    <option value="bank">بینک کارڈ / IBFT</option>
                 </select>
                 <div style="margin-top:12px;background:#fff;padding:14px;border-radius:12px;border:1px solid #ece3d9;">
-                    <p style="font-size:0.9rem;color:#5e4d3f;" data-key="accountInfo">Account details (set in Admin)</p>
+                    <p style="font-size:0.9rem;color:#5e4d3f;" data-key="accountInfo">اکاؤنٹ کی تفصیلات (ایڈمن میں سیٹ کریں)</p>
                     <div id="adminAccountDisplay" style="font-weight:500;color:#1f1713;margin-top:6px;"></div>
                 </div>
             </div>
         </div>
-
         <div class="divider"></div>
-        <button class="btn-primary" onclick="confirmOrder()"><i class="fas fa-check"></i> <span data-key="confirmBtn">Confirm Order</span></button>
-        <button class="btn-secondary" onclick="closeOrderModal()" data-key="cancelBtn">Cancel</button>
+        <button class="btn-primary" onclick="confirmOrder()"><i class="fas fa-check"></i> <span data-key="confirmBtn">آرڈر کی تصدیق</span></button>
+        <button class="btn-secondary" onclick="closeOrderModal()" data-key="cancelBtn">منسوخ</button>
     </div>
 </div>
 
-<!-- ========== SETTINGS MODAL (for admin to set payment details) ========== -->
-<div class="modal-overlay" id="settingsModal">
-    <div class="modal">
-        <button class="close-modal" onclick="closeSettings()">&times;</button>
-        <h2 data-key="settingsTitle">⚙️ Payment Settings</h2>
-        <p style="color:#7a685a;" data-key="settingsSub">Set your payment account details</p>
-        <div class="divider"></div>
-        <div class="payment-details">
-            <label style="font-weight:500;" data-key="whatsappLabel">📱 Admin WhatsApp Number</label>
-            <input type="text" id="adminWhatsapp" placeholder="923XXXXXXXXX (without +)" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd0c4;margin-bottom:12px;">
-            
-            <label style="font-weight:500;" data-key="easyLabel">EasyPaisa Account</label>
-            <input type="text" id="easyAccount" placeholder="03XX-XXXXXXX" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd0c4;margin-bottom:12px;">
-            
-            <label style="font-weight:500;" data-key="jazzLabel">JazzCash Account</label>
-            <input type="text" id="jazzAccount" placeholder="03XX-XXXXXXX" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd0c4;margin-bottom:12px;">
-            
-            <label style="font-weight:500;" data-key="bankLabel">Bank Account (IBFT)</label>
-            <input type="text" id="bankAccount" placeholder="Bank Name · Account # · IBAN" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd0c4;">
-        </div>
-        <button class="btn-dark" onclick="saveSettings()"><i class="fas fa-save"></i> <span data-key="saveBtn">Save Settings</span></button>
-        <button class="btn-secondary" onclick="closeSettings()" data-key="closeBtn">Close</button>
-    </div>
-</div>
-
+<!-- ========== JAVASCRIPT ========== -->
 <script>
 // ==================== TRANSLATIONS ====================
 const translations = {
-    en: {
-        badge: "Heritage Fragrance Collection",
-        title: "SCENTED BRIQUETTE",
-        sub: "Explore unique scents · Health safe · Mosquito repellent",
-        adminLink: "Admin Panel",
-        whatsappFloat: "Chat on WhatsApp",
-        activeProducts: "✨ Available Products",
-        outoforderTitle: "📦 Coming Soon / Out of Stock",
-        adminLoginTitle: "🔐 Admin Login",
-        adminLoginSub: "Enter credentials to manage products",
-        usernameLabel: "Username",
-        passwordLabel: "Password",
-        loginBtn: "Login",
-        adminPanelTitle: "Admin Panel",
-        adminPanelSub: "Add a new product to an \"Out of Order\" box",
-        prodNameLabel: "Product Name",
-        prodDescLabel: "Description",
-        prodPriceLabel: "Price",
-        prodIconLabel: "Icon (FontAwesome)",
-        prodTypeLabel: "Payment Type",
-        prodBoxLabel: "Select Box to Replace",
-        addProductBtn: "Add Product",
-        settingsTitle: "⚙️ Payment Settings",
-        settingsSub: "Set your payment account details",
-        whatsappLabel: "📱 Admin WhatsApp Number",
-        easyLabel: "EasyPaisa Account",
-        jazzLabel: "JazzCash Account",
-        bankLabel: "Bank Account (IBFT)",
-        saveBtn: "Save Settings",
-        modalTitle: "Place Your Order",
-        nameLabel: "Full Name",
-        phoneLabel: "Phone Number",
-        addressLabel: "Delivery Address",
-        locationLabel: "📍 Delivery Location",
-        gpsBtn: "GPS Location",
-        mapBtn: "Google Maps",
-        locationHelp: "Click GPS to auto-fetch or paste Google Maps link",
-        paymentLabel: "Payment Method",
-        codLabel: "Cash on Delivery",
-        codSub: "Pay when you receive",
-        onlineLabel: "Online Payment",
-        onlineSub: "EasyPaisa · JazzCash · Bank Card",
-        paymentMethodTitle: "Select Payment Method",
-        accountInfo: "Account details (set in Admin)",
-        confirmBtn: "Confirm Order",
-        cancelBtn: "Cancel",
-        closeBtn: "Close",
-        p1: "Sandalwood",
-        p1desc: "Warm & woody · Premium",
-        p2: "Jasmine Bliss",
-        p2desc: "Floral fresh · Calming",
-        p3: "Cedar Forest",
-        p3desc: "Earthy calm · Grounding",
-        p4: "Mint & Eucalyptus",
-        p4desc: "Cool · Mosquito repellent",
-        p5: "Midnight Oud",
-        p5desc: "Deep resin · Luxurious",
-        p6: "Rose & Amber",
-        p6desc: "Romantic · Long lasting"
-    },
-    ar: {
-        badge: "مجموعة العطور التراثية",
-        title: "بريكت معطر",
-        sub: "روائح فريدة · آمن صحياً · طارد للبعوض",
-        adminLink: "لوحة التحكم",
-        whatsappFloat: "تحدث على واتساب",
-        activeProducts: "✨ المنتجات المتاحة",
-        outoforderTitle: "📦 قريباً / نفد من المخزون",
-        adminLoginTitle: "🔐 تسجيل الدخول",
-        adminLoginSub: "أدخل بيانات الاعتماد لإدارة المنتجات",
-        usernameLabel: "اسم المستخدم",
-        passwordLabel: "كلمة المرور",
-        loginBtn: "تسجيل الدخول",
-        adminPanelTitle: "لوحة التحكم",
-        adminPanelSub: "أضف منتجاً جديداً إلى صندوق \"غير متوفر\"",
-        prodNameLabel: "اسم المنتج",
-        prodDescLabel: "الوصف",
-        prodPriceLabel: "السعر",
-        prodIconLabel: "الأيقونة",
-        prodTypeLabel: "نوع الدفع",
-        prodBoxLabel: "اختر المربع",
-        addProductBtn: "إضافة منتج",
-        settingsTitle: "⚙️ إعدادات الدفع",
-        settingsSub: "أدخل تفاصيل حساب الدفع",
-        whatsappLabel: "📱 رقم واتساب المسؤول",
-        easyLabel: "حساب إيزي بايسا",
-        jazzLabel: "حساب جاز كاش",
-        bankLabel: "حساب بنكي",
-        saveBtn: "حفظ الإعدادات",
-        modalTitle: "تقديم طلبك",
-        nameLabel: "الاسم الكامل",
-        phoneLabel: "رقم الهاتف",
-        addressLabel: "عنوان التوصيل",
-        locationLabel: "📍 موقع التوصيل",
-        gpsBtn: "موقع GPS",
-        mapBtn: "خرائط جوجل",
-        locationHelp: "انقر GPS للحصول التلقائي أو الصق رابط خرائط جوجل",
-        paymentLabel: "طريقة الدفع",
-        codLabel: "الدفع عند الاستلام",
-        codSub: "ادفع عند الاستلام",
-        onlineLabel: "دفع عبر الإنترنت",
-        onlineSub: "إيزي بايسا · جاز كاش · بطاقة بنكية",
-        paymentMethodTitle: "اختر طريقة الدفع",
-        accountInfo: "تفاصيل الحساب (ضبط في لوحة التحكم)",
-        confirmBtn: "تأكيد الطلب",
-        cancelBtn: "إلغاء",
-        closeBtn: "إغلاق",
-        p1: "خشب الصندل",
-        p1desc: "دافئ وخشبي · فاخر",
-        p2: "ياسمين سعيد",
-        p2desc: "زهري منعش · مهدئ",
-        p3: "غابة الأرز",
-        p3desc: "ترابي هادئ · متوازن",
-        p4: "نعناع وأوكالبتوس",
-        p4desc: "بارد · طارد للبعوض",
-        p5: "عود منتصف الليل",
-        p5desc: "راتنج عميق · فاخر",
-        p6: "ورد وعنبر",
-        p6desc: "رومانسي · يدوم طويلاً"
-    },
     ur: {
         badge: "ہیریٹیج خوشبو کا مجموعہ",
         title: "خوشبودار بریکٹ",
         sub: "منفرد خوشبوئیاں · صحت کے لیے محفوظ · مچھر بھگانے والا",
         adminLink: "ایڈمن پینل",
-        whatsappFloat: "واٹس ایپ پر بات کریں",
+        socialLink: "سوشل سیٹنگز",
+        ordersLink: "آرڈر دیکھیں",
         activeProducts: "✨ دستیاب مصنوعات",
         outoforderTitle: "📦 جلد آئے گا / اسٹاک ختم",
         adminLoginTitle: "🔐 ایڈمن لاگ ان",
@@ -705,7 +705,7 @@ const translations = {
         passwordLabel: "پاس ورڈ",
         loginBtn: "لاگ ان",
         adminPanelTitle: "ایڈمن پینل",
-        adminPanelSub: "\"آؤٹ آف آرڈر\" باکس میں نیا پروڈکٹ شامل کریں",
+        adminPanelSub: "مصنوعات، ٹکر اور پاسورڈ کا نظم کریں",
         prodNameLabel: "پروڈکٹ کا نام",
         prodDescLabel: "تفصیل",
         prodPriceLabel: "قیمت",
@@ -713,12 +713,8 @@ const translations = {
         prodTypeLabel: "ادائیگی کی قسم",
         prodBoxLabel: "باکس منتخب کریں",
         addProductBtn: "پروڈکٹ شامل کریں",
-        settingsTitle: "⚙️ ادائیگی کی ترتیبات",
-        settingsSub: "اپنی ادائیگی کی تفصیلات درج کریں",
-        whatsappLabel: "📱 ایڈمن واٹس ایپ نمبر",
-        easyLabel: "ایزی پیسا اکاؤنٹ",
-        jazzLabel: "جاز کیش اکاؤنٹ",
-        bankLabel: "بینک اکاؤنٹ",
+        socialSettingsTitle: "سوشل میڈیا کی ترتیبات",
+        socialSettingsSub: "اپنے سوشل میڈیا لنکس کا نظم کریں",
         saveBtn: "محفوظ کریں",
         modalTitle: "اپنا آرڈر دیں",
         nameLabel: "مکمل نام",
@@ -738,6 +734,7 @@ const translations = {
         confirmBtn: "آرڈر کی تصدیق",
         cancelBtn: "منسوخ",
         closeBtn: "بند کریں",
+        socialHeading: "📱 ہم سے رابطہ کریں",
         p1: "چندن",
         p1desc: "گرم اور لکڑی والا · اعلیٰ",
         p2: "یاسمین بلس",
@@ -750,8 +747,350 @@ const translations = {
         p5desc: "گہرا رال · پرتعیش",
         p6: "گلاب اور عنبر",
         p6desc: "رومانوی · دیرپا"
+    },
+    en: {
+        badge: "Heritage Fragrance Collection",
+        title: "SCENTED BRIQUETTE",
+        sub: "Explore unique scents · Health safe · Mosquito repellent",
+        adminLink: "Admin Panel",
+        socialLink: "Social Settings",
+        ordersLink: "View Orders",
+        activeProducts: "✨ Available Products",
+        outoforderTitle: "📦 Coming Soon / Out of Stock",
+        adminLoginTitle: "🔐 Admin Login",
+        adminLoginSub: "Enter credentials to manage products",
+        usernameLabel: "Username",
+        passwordLabel: "Password",
+        loginBtn: "Login",
+        adminPanelTitle: "Admin Panel",
+        adminPanelSub: "Manage products, ticker and password",
+        prodNameLabel: "Product Name",
+        prodDescLabel: "Description",
+        prodPriceLabel: "Price",
+        prodIconLabel: "Icon (FontAwesome)",
+        prodTypeLabel: "Payment Type",
+        prodBoxLabel: "Select Box to Replace",
+        addProductBtn: "Add Product",
+        socialSettingsTitle: "Social Media Settings",
+        socialSettingsSub: "Manage your social media links",
+        saveBtn: "Save Settings",
+        modalTitle: "Place Your Order",
+        nameLabel: "Full Name",
+        phoneLabel: "Phone Number",
+        addressLabel: "Delivery Address",
+        locationLabel: "📍 Delivery Location",
+        gpsBtn: "GPS Location",
+        mapBtn: "Google Maps",
+        locationHelp: "Click GPS to auto-fetch or paste Google Maps link",
+        paymentLabel: "Payment Method",
+        codLabel: "Cash on Delivery",
+        codSub: "Pay when you receive",
+        onlineLabel: "Online Payment",
+        onlineSub: "EasyPaisa · JazzCash · Bank Card",
+        paymentMethodTitle: "Select Payment Method",
+        accountInfo: "Account details (set in Admin)",
+        confirmBtn: "Confirm Order",
+        cancelBtn: "Cancel",
+        closeBtn: "Close",
+        socialHeading: "📱 Connect With Us",
+        p1: "Sandalwood",
+        p1desc: "Warm & woody · Premium",
+        p2: "Jasmine Bliss",
+        p2desc: "Floral fresh · Calming",
+        p3: "Cedar Forest",
+        p3desc: "Earthy calm · Grounding",
+        p4: "Mint & Eucalyptus",
+        p4desc: "Cool · Mosquito repellent",
+        p5: "Midnight Oud",
+        p5desc: "Deep resin · Luxurious",
+        p6: "Rose & Amber",
+        p6desc: "Romantic · Long lasting"
+    },
+    ar: {
+        badge: "مجموعة العطور التراثية",
+        title: "بريكت معطر",
+        sub: "روائح فريدة · آمن صحياً · طارد للبعوض",
+        adminLink: "لوحة التحكم",
+        socialLink: "إعدادات التواصل",
+        ordersLink: "عرض الطلبات",
+        activeProducts: "✨ المنتجات المتاحة",
+        outoforderTitle: "📦 قريباً / نفد من المخزون",
+        adminLoginTitle: "🔐 تسجيل الدخول",
+        adminLoginSub: "أدخل بيانات الاعتماد لإدارة المنتجات",
+        usernameLabel: "اسم المستخدم",
+        passwordLabel: "كلمة المرور",
+        loginBtn: "تسجيل الدخول",
+        adminPanelTitle: "لوحة التحكم",
+        adminPanelSub: "إدارة المنتجات والعدادات وكلمة المرور",
+        prodNameLabel: "اسم المنتج",
+        prodDescLabel: "الوصف",
+        prodPriceLabel: "السعر",
+        prodIconLabel: "الأيقونة",
+        prodTypeLabel: "نوع الدفع",
+        prodBoxLabel: "اختر المربع",
+        addProductBtn: "إضافة منتج",
+        socialSettingsTitle: "إعدادات وسائل التواصل",
+        socialSettingsSub: "إدارة روابط التواصل الاجتماعي",
+        saveBtn: "حفظ الإعدادات",
+        modalTitle: "تقديم طلبك",
+        nameLabel: "الاسم الكامل",
+        phoneLabel: "رقم الهاتف",
+        addressLabel: "عنوان التوصيل",
+        locationLabel: "📍 موقع التوصيل",
+        gpsBtn: "موقع GPS",
+        mapBtn: "خرائط جوجل",
+        locationHelp: "انقر GPS للحصول التلقائي أو الصق رابط خرائط جوجل",
+        paymentLabel: "طريقة الدفع",
+        codLabel: "الدفع عند الاستلام",
+        codSub: "ادفع عند الاستلام",
+        onlineLabel: "دفع عبر الإنترنت",
+        onlineSub: "إيزي بايسا · جاز كاش · بطاقة بنكية",
+        paymentMethodTitle: "اختر طريقة الدفع",
+        accountInfo: "تفاصيل الحساب (ضبط في لوحة التحكم)",
+        confirmBtn: "تأكيد الطلب",
+        cancelBtn: "إلغاء",
+        closeBtn: "إغلاق",
+        socialHeading: "📱 تواصل معنا",
+        p1: "خشب الصندل",
+        p1desc: "دافئ وخشبي · فاخر",
+        p2: "ياسمين سعيد",
+        p2desc: "زهري منعش · مهدئ",
+        p3: "غابة الأرز",
+        p3desc: "ترابي هادئ · متوازن",
+        p4: "نعناع وأوكالبتوس",
+        p4desc: "بارد · طارد للبعوض",
+        p5: "عود منتصف الليل",
+        p5desc: "راتنج عميق · فاخر",
+        p6: "ورد وعنبر",
+        p6desc: "رومانسي · يدوم طويلاً"
     }
 };
+
+// ==================== SOCIAL MEDIA CONFIG ====================
+const socialPlatforms = [
+    { id: 'whatsapp', icon: 'fab fa-whatsapp', label: 'WhatsApp', color: '#25D366' },
+    { id: 'email', icon: 'fas fa-envelope', label: 'Email', color: '#D14836' },
+    { id: 'facebook', icon: 'fab fa-facebook-f', label: 'Facebook', color: '#1877F2' },
+    { id: 'instagram', icon: 'fab fa-instagram', label: 'Instagram', color: '#E4405F' },
+    { id: 'twitter', icon: 'fab fa-twitter', label: 'Twitter/X', color: '#000' },
+    { id: 'linkedin', icon: 'fab fa-linkedin-in', label: 'LinkedIn', color: '#0A66C2' },
+    { id: 'youtube', icon: 'fab fa-youtube', label: 'YouTube', color: '#FF0000' },
+    { id: 'tiktok', icon: 'fab fa-tiktok', label: 'TikTok', color: '#000' },
+    { id: 'pinterest', icon: 'fab fa-pinterest-p', label: 'Pinterest', color: '#BD081C' },
+    { id: 'snapchat', icon: 'fab fa-snapchat-ghost', label: 'Snapchat', color: '#FFFC00' },
+    { id: 'telegram', icon: 'fab fa-telegram-plane', label: 'Telegram', color: '#26A5E4' },
+    { id: 'github', icon: 'fab fa-github', label: 'GitHub', color: '#181717' }
+];
+
+// ==================== LOAD SOCIAL SETTINGS ====================
+function loadSocialSettings() {
+    const saved = localStorage.getItem('socialSettings');
+    if (saved) {
+        try { return JSON.parse(saved); } catch(e) {}
+    }
+    const defaults = {};
+    socialPlatforms.forEach(p => { defaults[p.id] = { url: '', enabled: true }; });
+    return defaults;
+}
+
+let socialSettings = loadSocialSettings();
+
+function saveSocialSettingsToStorage() {
+    localStorage.setItem('socialSettings', JSON.stringify(socialSettings));
+}
+
+// ==================== RENDER SOCIAL ICONS ====================
+function renderSocialIcons() {
+    const container = document.getElementById('socialIcons');
+    container.innerHTML = '';
+    socialPlatforms.forEach(p => {
+        const setting = socialSettings[p.id] || { url: '', enabled: true };
+        if (!setting.enabled) return;
+        const url = setting.url || '#';
+        const icon = document.createElement('a');
+        icon.className = `social-icon ${p.id}`;
+        icon.href = url;
+        icon.target = '_blank';
+        icon.rel = 'noopener';
+        icon.innerHTML = `<i class="${p.icon}"></i><span class="tooltip">${p.label}</span>`;
+        if (url === '#') icon.classList.add('disabled');
+        container.appendChild(icon);
+    });
+}
+
+// ==================== RENDER SOCIAL SETTINGS FORM ====================
+function renderSocialSettingsForm() {
+    const form = document.getElementById('socialSettingsForm');
+    form.innerHTML = '';
+    socialPlatforms.forEach(p => {
+        const setting = socialSettings[p.id] || { url: '', enabled: true };
+        const div = document.createElement('div');
+        div.className = 'form-group';
+        div.style.borderBottom = '1px solid #ece3d9';
+        div.style.paddingBottom = '12px';
+        div.innerHTML = `
+            <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <i class="${p.icon}" style="font-size:1.4rem;width:30px;color:${p.color};"></i>
+                <label style="font-weight:500;min-width:100px;">${p.label}</label>
+                <input type="url" id="social_${p.id}" placeholder="https://..." value="${setting.url || ''}" style="flex:1;min-width:150px;padding:8px 12px;border:1px solid #ddd0c4;border-radius:10px;background:#fcf9f5;">
+                <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;cursor:pointer;">
+                    <input type="checkbox" id="toggle_${p.id}" ${setting.enabled ? 'checked' : ''}> Active
+                </label>
+            </div>
+        `;
+        form.appendChild(div);
+    });
+}
+
+function saveSocialSettings() {
+    socialPlatforms.forEach(p => {
+        const urlInput = document.getElementById(`social_${p.id}`);
+        const toggleInput = document.getElementById(`toggle_${p.id}`);
+        socialSettings[p.id] = {
+            url: urlInput ? urlInput.value.trim() : '',
+            enabled: toggleInput ? toggleInput.checked : true
+        };
+    });
+    saveSocialSettingsToStorage();
+    renderSocialIcons();
+    alert('✅ سوشل میڈیا سیٹنگز محفوظ ہو گئیں!');
+    closeSocialSettings();
+}
+
+// ==================== OPEN/CLOSE SOCIAL SETTINGS ====================
+function openSocialSettings() {
+    renderSocialSettingsForm();
+    document.getElementById('socialSettingsModal').classList.add('show');
+}
+function closeSocialSettings() {
+    document.getElementById('socialSettingsModal').classList.remove('show');
+}
+
+// ==================== NEWS TICKER ====================
+function renderTicker() {
+    const track = document.getElementById('tickerTrack');
+    
+    // Default Urdu messages
+    const defaultMessages = [
+        { 
+            icon: 'fa-fire', 
+            text: 'اپنی تمام تر تقریبات کے ماحول کو معطر کرنے کے لیے رابطہ کریں' 
+        },
+        { 
+            icon: 'fa-clock', 
+            text: 'رقبہ: 2000 گز · 5 سے 8 گھنٹے انڈور · 5 گھنٹے کھلی فضاء میں' 
+        },
+        { 
+            icon: 'fa-check-circle', 
+            text: 'نتائج کی گارنٹی · فی تقریب: 15,000 روپے' 
+        },
+        { 
+            icon: 'fa-phone', 
+            text: 'ابھی رابطہ کریں: +92 316 2260608' 
+        },
+        { 
+            icon: 'fa-star', 
+            text: 'خوشبودار بریکٹ — ہر تقریب کو خاص بنائیں' 
+        }
+    ];
+    
+    // Check if custom ticker exists
+    let messages = defaultMessages;
+    const customTicker = localStorage.getItem('customTicker');
+    if (customTicker) {
+        try {
+            const parsed = JSON.parse(customTicker);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+                messages = parsed;
+            }
+        } catch(e) {}
+    }
+    
+    // Build ticker HTML
+    let html = '';
+    for (let repeat = 0; repeat < 2; repeat++) {
+        messages.forEach(msg => {
+            html += `
+                <span class="ticker-item">
+                    <i class="fas ${msg.icon}"></i>
+                    ${msg.text}
+                    <span class="separator">✦</span>
+                </span>
+            `;
+        });
+    }
+    track.innerHTML = html;
+}
+
+// ==================== TICKER MANAGEMENT ====================
+function updateTickerFromAdmin() {
+    const text = document.getElementById('tickerTextArea')?.value;
+    if (!text) {
+        alert('براہ کرم ٹکر کا متن درج کریں۔');
+        return;
+    }
+    
+    const lines = text.split('\n').filter(line => line.trim() !== '');
+    const messages = lines.map(line => {
+        let icon = 'fa-star';
+        if (line.includes('🔥')) icon = 'fa-fire';
+        else if (line.includes('📞')) icon = 'fa-phone';
+        else if (line.includes('⏱️')) icon = 'fa-clock';
+        else if (line.includes('✅')) icon = 'fa-check-circle';
+        else if (line.includes('🚚')) icon = 'fa-truck';
+        else if (line.includes('⭐')) icon = 'fa-star';
+        else if (line.includes('🌿')) icon = 'fa-leaf';
+        else if (line.includes('🎁')) icon = 'fa-gift';
+        
+        const cleanText = line.replace(/[🔥📞⏱️✅🚚⭐🌿🎁]/g, '').trim();
+        return { icon, text: cleanText || line };
+    });
+    
+    if (messages.length === 0) {
+        alert('براہ کرم کم از کم ایک پیغام درج کریں۔');
+        return;
+    }
+    
+    localStorage.setItem('customTicker', JSON.stringify(messages));
+    renderTicker();
+    alert('✅ ٹکر کامیابی سے اپڈیٹ ہو گیا!');
+}
+
+// ==================== PASSWORD MANAGEMENT ====================
+function changePassword() {
+    const current = document.getElementById('currentPassword')?.value;
+    const newPass = document.getElementById('newPassword')?.value;
+    const confirmPass = document.getElementById('confirmPassword')?.value;
+    
+    if (!current || !newPass || !confirmPass) {
+        alert('براہ کرم تمام فیلڈز پُر کریں۔');
+        return;
+    }
+    
+    const storedPassword = localStorage.getItem('adminPassword') || 'admin123';
+    
+    if (current !== storedPassword) {
+        alert('❌ موجودہ پاسورڈ غلط ہے۔');
+        return;
+    }
+    
+    if (newPass.length < 6) {
+        alert('❌ نیا پاسورڈ کم از کم 6 حروف کا ہونا چاہیے۔');
+        return;
+    }
+    
+    if (newPass !== confirmPass) {
+        alert('❌ نیا پاسورڈ اور تصدیق مماثل نہیں۔');
+        return;
+    }
+    
+    localStorage.setItem('adminPassword', newPass);
+    alert('✅ پاسورڈ کامیابی سے تبدیل ہو گیا!');
+    
+    document.getElementById('currentPassword').value = '';
+    document.getElementById('newPassword').value = '';
+    document.getElementById('confirmPassword').value = '';
+}
 
 // ==================== PRODUCT DATA ====================
 let products = [
@@ -763,15 +1102,13 @@ let products = [
     { id: 6, key: 'p6', descKey: 'p6desc', icon: 'fa-rose', price: 'PKR 1,899', type: 'cod' }
 ];
 
-// Out of Order boxes (will be replaced by admin)
 let outoforderBoxes = [
-    { id: 0, name: 'Box 1', icon: 'fa-box', status: 'outofstock' },
-    { id: 1, name: 'Box 2', icon: 'fa-box', status: 'outofstock' },
-    { id: 2, name: 'Box 3', icon: 'fa-box', status: 'outofstock' },
-    { id: 3, name: 'Box 4', icon: 'fa-box', status: 'outofstock' }
+    { id: 0, name: 'باکس ۱', icon: 'fa-box', status: 'outofstock' },
+    { id: 1, name: 'باکس ۲', icon: 'fa-box', status: 'outofstock' },
+    { id: 2, name: 'باکس ۳', icon: 'fa-box', status: 'outofstock' },
+    { id: 3, name: 'باکس ۴', icon: 'fa-box', status: 'outofstock' }
 ];
 
-// Load custom products from localStorage
 function loadCustomProducts() {
     const saved = localStorage.getItem('customProducts');
     if (saved) {
@@ -782,16 +1119,12 @@ function loadCustomProducts() {
         } catch(e) {}
     }
 }
-
 function saveCustomProducts() {
-    localStorage.setItem('customProducts', JSON.stringify({
-        products: products,
-        boxes: outoforderBoxes
-    }));
+    localStorage.setItem('customProducts', JSON.stringify({ products, boxes: outoforderBoxes }));
 }
 
 // ==================== STATE ====================
-let currentLang = 'en';
+let currentLang = 'ur';
 let selectedProduct = null;
 let selectedPayment = null;
 let adminSettings = {
@@ -801,61 +1134,33 @@ let adminSettings = {
     bankAccount: ''
 };
 
-// Load admin settings
 function loadAdminSettings() {
     const saved = localStorage.getItem('paymentSettings');
     if (saved) { try { adminSettings = JSON.parse(saved); } catch(e) {} }
-    document.getElementById('adminWhatsapp').value = adminSettings.adminWhatsapp || '';
-    document.getElementById('easyAccount').value = adminSettings.easyPaisa || '';
-    document.getElementById('jazzAccount').value = adminSettings.jazzCash || '';
-    document.getElementById('bankAccount').value = adminSettings.bankAccount || '';
-    updateWhatsappButton();
 }
-
-function saveSettings() {
-    adminSettings.adminWhatsapp = document.getElementById('adminWhatsapp').value;
-    adminSettings.easyPaisa = document.getElementById('easyAccount').value;
-    adminSettings.jazzCash = document.getElementById('jazzAccount').value;
-    adminSettings.bankAccount = document.getElementById('bankAccount').value;
-    localStorage.setItem('paymentSettings', JSON.stringify(adminSettings));
-    updateWhatsappButton();
-    alert('Settings saved!');
-    closeSettings();
-}
-
-function updateWhatsappButton() {
-    const btn = document.getElementById('whatsappFloat');
-    if (adminSettings.adminWhatsapp) {
-        btn.href = `https://wa.me/${adminSettings.adminWhatsapp}`;
-        btn.style.display = 'flex';
-    } else {
-        btn.href = '#';
-        btn.style.display = 'none';
-    }
-}
-
 function updateAccountDisplay() {
     const method = document.getElementById('paymentMethodSelect')?.value || 'easypaisa';
     const display = document.getElementById('adminAccountDisplay');
-    if (method === 'easypaisa') display.textContent = adminSettings.easyPaisa || '❌ Not set in Admin';
-    else if (method === 'jazzcash') display.textContent = adminSettings.jazzCash || '❌ Not set in Admin';
-    else if (method === 'bank') display.textContent = adminSettings.bankAccount || '❌ Not set in Admin';
+    if (method === 'easypaisa') display.textContent = adminSettings.easyPaisa || '❌ سیٹ نہیں';
+    else if (method === 'jazzcash') display.textContent = adminSettings.jazzCash || '❌ سیٹ نہیں';
+    else if (method === 'bank') display.textContent = adminSettings.bankAccount || '❌ سیٹ نہیں';
 }
 
 // ==================== LANGUAGE ====================
 function setLanguage(lang) {
     currentLang = lang;
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
+    document.querySelector(`.lang-btn[data-lang="${lang}"]`)?.classList.add('active');
+    
     const wrapper = document.getElementById('contentWrapper');
-    wrapper.classList.remove('lang-ar', 'lang-ur');
-    if (lang === 'ar') wrapper.classList.add('lang-ar');
-    if (lang === 'ur') wrapper.classList.add('lang-ur');
+    wrapper.className = 'lang-' + lang;
+    
     const t = translations[lang];
     document.querySelectorAll('[data-key]').forEach(el => {
         const key = el.getAttribute('data-key');
-        if (t[key] !== undefined) el.textContent = t[key];
+        if (t && t[key] !== undefined) el.textContent = t[key];
     });
+    
     renderProducts();
     renderOutOfOrder();
 }
@@ -873,34 +1178,33 @@ function renderProducts() {
             <h3>${t[p.key] || p.key}</h3>
             <p style="font-size:0.85rem;color:#7a685a;">${t[p.descKey] || ''}</p>
             <div class="price">${p.price}</div>
-            <span class="tag ${p.type === 'advance' ? 'advance' : p.type === 'cod' ? 'cod' : ''}">${p.type === 'advance' ? '💳 Advance' : p.type === 'cod' ? '📦 COD' : '💳 / 📦'}</span>
+            <span class="tag ${p.type === 'advance' ? 'advance' : p.type === 'cod' ? 'cod' : ''}">${p.type === 'advance' ? '💳 پیشگی' : p.type === 'cod' ? '📦 ڈلیوری پر نقد' : '💳 / 📦'}</span>
         `;
         card.onclick = () => openOrderModal(p);
         grid.appendChild(card);
     });
 }
 
-// ==================== RENDER OUT OF ORDER BOXES ====================
+// ==================== RENDER OUT OF ORDER ====================
 function renderOutOfOrder() {
     const grid = document.getElementById('outoforderGrid');
-    const t = translations[currentLang];
     grid.innerHTML = '';
     outoforderBoxes.forEach((box, index) => {
         const div = document.createElement('div');
         div.className = 'outoforder-box';
         const isCustom = box.customProduct !== undefined;
+        const statusText = isCustom ? '✅ دستیاب' : '🚫 آرڈر سے باہر';
         div.innerHTML = `
             <span class="add-icon"><i class="fas fa-plus-circle"></i></span>
             <span class="icon"><i class="fas ${box.icon || 'fa-box'}"></i></span>
             <h4>${isCustom ? box.customProduct.name : box.name}</h4>
             ${isCustom ? `<p style="font-size:0.8rem;color:#7a685a;">${box.customProduct.desc || ''}</p>` : ''}
             ${isCustom ? `<div style="font-weight:600;color:#2e7d5e;margin:4px 0;">${box.customProduct.price || ''}</div>` : ''}
-            <span class="status ${isCustom ? 'added' : ''}">${isCustom ? '✅ Available' : '🚫 Out of Order'}</span>
-            <div class="click-hint">${isCustom ? '🛒 Click to order' : '👆 Click to add product'}</div>
+            <span class="status ${isCustom ? 'added' : ''}">${statusText}</span>
+            <div class="click-hint">${isCustom ? '🛒 آرڈر کریں' : '👆 پروڈکٹ شامل کریں'}</div>
         `;
         div.onclick = () => {
             if (isCustom) {
-                // If product is added, open order modal
                 openOrderModal({
                     key: box.customProduct.name,
                     descKey: box.customProduct.desc || '',
@@ -910,7 +1214,6 @@ function renderOutOfOrder() {
                     isCustom: true
                 });
             } else {
-                // Open admin login
                 openAdminLogin();
             }
         };
@@ -924,41 +1227,59 @@ function openAdminLogin() {
     document.getElementById('loginUsername').value = '';
     document.getElementById('loginPassword').value = '';
 }
-
 function closeAdminLogin() {
     document.getElementById('adminLoginModal').classList.remove('show');
 }
-
 function adminLogin() {
     const username = document.getElementById('loginUsername').value;
     const password = document.getElementById('loginPassword').value;
-    // Default credentials: admin / admin123
-    if (username === 'admin' && password === 'admin123') {
+    const storedPassword = localStorage.getItem('adminPassword') || 'admin123';
+    
+    if (username === 'admin' && password === storedPassword) {
         closeAdminLogin();
         openAdminPanel();
+        // Load current ticker text into textarea
+        loadTickerIntoTextArea();
     } else {
-        alert('❌ Invalid username or password. Try: admin / admin123');
+        alert('❌ غلط صارف نام یا پاسورڈ۔');
     }
+}
+
+function loadTickerIntoTextArea() {
+    const textarea = document.getElementById('tickerTextArea');
+    const customTicker = localStorage.getItem('customTicker');
+    if (customTicker) {
+        try {
+            const messages = JSON.parse(customTicker);
+            if (Array.isArray(messages) && messages.length > 0) {
+                textarea.value = messages.map(msg => msg.text).join('\n');
+                return;
+            }
+        } catch(e) {}
+    }
+    // Default text
+    textarea.value = `اپنی تمام تر تقریبات کے ماحول کو معطر کرنے کے لیے رابطہ کریں
+رقبہ: 2000 گز · 5 سے 8 گھنٹے انڈور · 5 گھنٹے کھلی فضاء میں
+نتائج کی گارنٹی · فی تقریب: 15,000 روپے
+ابھی رابطہ کریں: +92 316 2260608
+خوشبودار بریکٹ — ہر تقریب کو خاص بنائیں`;
 }
 
 // ==================== ADMIN PANEL ====================
 function openAdminPanel() {
-    // Populate box dropdown
     const select = document.getElementById('newProductBox');
     select.innerHTML = '';
     outoforderBoxes.forEach((box, i) => {
         const option = document.createElement('option');
         option.value = i;
-        option.textContent = `${box.name} ${box.customProduct ? '(✅ Added)' : '(🚫 Empty)'}`;
+        option.textContent = `${box.name} ${box.customProduct ? '(✅ شامل)' : '(🚫 خالی)'}`;
         select.appendChild(option);
     });
     document.getElementById('adminPanelModal').classList.add('show');
 }
-
 function closeAdminPanel() {
     document.getElementById('adminPanelModal').classList.remove('show');
 }
-
 function addProductFromAdmin() {
     const name = document.getElementById('newProductName').value.trim();
     const desc = document.getElementById('newProductDesc').value.trim();
@@ -966,53 +1287,34 @@ function addProductFromAdmin() {
     const icon = document.getElementById('newProductIcon').value;
     const type = document.getElementById('newProductType').value;
     const boxIndex = parseInt(document.getElementById('newProductBox').value);
-
-    if (!name || !price) {
-        alert('Please enter product name and price.');
-        return;
-    }
-
-    // Update the box
-    outoforderBoxes[boxIndex].customProduct = {
-        name: name,
-        desc: desc,
-        price: price,
-        type: type
-    };
+    if (!name || !price) { alert('براہ کرم پروڈکٹ کا نام اور قیمت درج کریں۔'); return; }
+    outoforderBoxes[boxIndex].customProduct = { name, desc, price, type };
     outoforderBoxes[boxIndex].icon = icon;
     outoforderBoxes[boxIndex].name = name;
-
     saveCustomProducts();
     renderOutOfOrder();
     closeAdminPanel();
-    alert('✅ Product added successfully!');
-    
-    // Clear form
+    alert('✅ پروڈکٹ کامیابی سے شامل ہو گئی!');
     document.getElementById('newProductName').value = '';
     document.getElementById('newProductDesc').value = '';
     document.getElementById('newProductPrice').value = '';
 }
 
-// ==================== LOCATION FUNCTIONS ====================
+// ==================== LOCATION ====================
 function getLiveLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
-            function(position) {
-                const lat = position.coords.latitude;
-                const lng = position.coords.longitude;
-                const mapLink = `https://www.google.com/maps?q=${lat},${lng}`;
-                document.getElementById('custLocation').value = mapLink;
-                alert('✅ Location captured! Check the field above.');
+            (pos) => {
+                document.getElementById('custLocation').value = 
+                    `https://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                alert('✅ لوکیشن حاصل کر لی گئی!');
             },
-            function(error) {
-                alert('❌ Unable to get location. Please allow location access or enter manually.');
-            }
+            () => alert('❌ براہ کرم لوکیشن کی اجازت دیں۔')
         );
     } else {
-        alert('❌ Geolocation is not supported by this browser.');
+        alert('❌ یہ براؤزر لوکیشن سپورٹ نہیں کرتا۔');
     }
 }
-
 function openGoogleMaps() {
     window.open('https://www.google.com/maps', '_blank');
 }
@@ -1021,7 +1323,6 @@ function openGoogleMaps() {
 function openOrderModal(product) {
     selectedProduct = product;
     selectedPayment = null;
-    const t = translations[currentLang];
     document.getElementById('modalProductName').textContent = `${product.key || product.name} — ${product.price}`;
     document.getElementById('orderModal').classList.add('show');
     document.getElementById('onlineDetails').style.display = 'none';
@@ -1032,7 +1333,6 @@ function openOrderModal(product) {
     document.getElementById('custLocation').value = '';
     updateAccountDisplay();
 }
-
 function selectPayment(method) {
     selectedPayment = method;
     document.querySelectorAll('.payment-option').forEach(el => {
@@ -1041,36 +1341,8 @@ function selectPayment(method) {
     document.getElementById('onlineDetails').style.display = method === 'online' ? 'block' : 'none';
     if (method === 'online') updateAccountDisplay();
 }
-
 function closeOrderModal() {
     document.getElementById('orderModal').classList.remove('show');
-}
-
-// ==================== SEND ORDER TO WHATSAPP ====================
-function sendOrderToWhatsApp(orderDetails) {
-    let message = `🛒 *NEW ORDER* 🛒\n\n`;
-    message += `📦 *Product:* ${orderDetails.product}\n`;
-    message += `💰 *Price:* ${orderDetails.price}\n`;
-    message += `👤 *Customer:* ${orderDetails.customer.name}\n`;
-    message += `📱 *Phone:* ${orderDetails.customer.phone}\n`;
-    message += `🏠 *Address:* ${orderDetails.customer.address}\n`;
-    message += `📍 *Location:* ${orderDetails.customer.location || 'Not provided'}\n`;
-    message += `💳 *Payment:* ${orderDetails.payment === 'cod' ? 'Cash on Delivery' : 'Online Payment'}`;
-    
-    if (orderDetails.payment === 'online') {
-        message += `\n🔹 *Method:* ${orderDetails.onlineMethod.toUpperCase()}`;
-        let account = '';
-        if (orderDetails.onlineMethod === 'easypaisa') account = adminSettings.easyPaisa || 'Not set';
-        else if (orderDetails.onlineMethod === 'jazzcash') account = adminSettings.jazzCash || 'Not set';
-        else if (orderDetails.onlineMethod === 'bank') account = adminSettings.bankAccount || 'Not set';
-        message += `\n🏦 *Account:* ${account}`;
-    }
-    
-    message += `\n\n⏰ *Time:* ${new Date().toLocaleString()}`;
-    
-    const encoded = encodeURIComponent(message);
-    const url = `https://wa.me/${adminSettings.adminWhatsapp}?text=${encoded}`;
-    window.open(url, '_blank');
 }
 
 // ==================== CONFIRM ORDER ====================
@@ -1079,34 +1351,26 @@ function confirmOrder() {
     const phone = document.getElementById('custPhone').value.trim();
     const address = document.getElementById('custAddress').value.trim();
     const location = document.getElementById('custLocation').value.trim();
-
     if (!name || !phone || !address) {
-        alert('Please fill in all required fields (Name, Phone, Address).');
+        alert('براہ کرم تمام ضروری فیلڈز پُر کریں۔');
         return;
     }
-
-    if (!selectedPayment) {
-        alert('Please select a payment method.');
-        return;
-    }
-
-    if (!adminSettings.adminWhatsapp) {
-        alert('Admin WhatsApp number not set. Please contact admin.');
-        return;
-    }
-
-    const t = translations[currentLang];
-    const productName = selectedProduct.key || selectedProduct.name;
+    if (!selectedPayment) { alert('براہ کرم ادائیگی کا طریقہ منتخب کریں۔'); return; }
     
-    const orderData = {
-        product: productName,
-        price: selectedProduct.price,
-        customer: { name, phone, address, location },
-        payment: selectedPayment,
-        onlineMethod: selectedPayment === 'online' ? document.getElementById('paymentMethodSelect').value : null
-    };
-
-    // Save to localStorage
+    const productName = selectedProduct.key || selectedProduct.name;
+    let message = `🛒 *نیا آرڈر*\n\n📦 پروڈکٹ: ${productName}\n💰 قیمت: ${selectedProduct.price}\n👤 گاہک: ${name}\n📱 فون: ${phone}\n🏠 پتہ: ${address}\n📍 لوکیشن: ${location || 'فراہم نہیں'}\n💳 ادائیگی: ${selectedPayment === 'cod' ? 'ڈلیوری پر نقد' : 'آن لائن ادائیگی'}`;
+    
+    if (selectedPayment === 'online') {
+        const method = document.getElementById('paymentMethodSelect').value;
+        message += `\n🔹 طریقہ: ${method.toUpperCase()}`;
+        let acc = '';
+        if (method === 'easypaisa') acc = adminSettings.easyPaisa || 'سیٹ نہیں';
+        else if (method === 'jazzcash') acc = adminSettings.jazzCash || 'سیٹ نہیں';
+        else if (method === 'bank') acc = adminSettings.bankAccount || 'سیٹ نہیں';
+        message += `\n🏦 اکاؤنٹ: ${acc}`;
+    }
+    message += `\n\n⏰ وقت: ${new Date().toLocaleString()}`;
+    
     const orders = JSON.parse(localStorage.getItem('orders') || '[]');
     orders.push({
         product: productName,
@@ -1116,19 +1380,11 @@ function confirmOrder() {
         timestamp: new Date().toISOString()
     });
     localStorage.setItem('orders', JSON.stringify(orders));
-
-    sendOrderToWhatsApp(orderData);
-    alert(`✅ Order confirmed for ${productName}!\n\n📱 Order details have been sent to admin on WhatsApp.`);
+    
+    const url = `https://wa.me/${adminSettings.adminWhatsapp || '923000000000'}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+    alert('✅ آرڈر کی تصدیق ہو گئی!');
     closeOrderModal();
-}
-
-// ==================== SETTINGS MODAL ====================
-function openSettings() {
-    loadAdminSettings();
-    document.getElementById('settingsModal').classList.add('show');
-}
-function closeSettings() {
-    document.getElementById('settingsModal').classList.remove('show');
 }
 
 // ==================== EVENTS ====================
@@ -1140,7 +1396,10 @@ document.getElementById('paymentMethodSelect')?.addEventListener('change', updat
 // ==================== INIT ====================
 loadCustomProducts();
 loadAdminSettings();
-setLanguage('en');
+socialSettings = loadSocialSettings();
+renderTicker();
+renderSocialIcons();
+setLanguage('ur');
 renderProducts();
 renderOutOfOrder();
 </script>
